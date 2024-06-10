@@ -1,6 +1,6 @@
-import OauthSignIn from "@/components/form/AuthForm/SignUp/Google";
-import SignUpPage from "@/components/form/AuthForm/SignUp/SignUpForm";
-import SignUpForm from "@/components/form/SignUpForm";
+
+import SignUpPage from "@/components/form/AuthForm/SignUp/SignUpOrg";
+
 import { SignUp } from "@clerk/nextjs";
 
 export default function Page() {

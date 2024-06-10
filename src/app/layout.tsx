@@ -5,7 +5,8 @@ import {
   SignInButton,
   SignedIn,
   SignedOut,
-  UserButton
+  UserButton,
+  UserProfile
 } from '@clerk/nextjs'
 
 import "@/styles/globals.css";
@@ -41,6 +42,7 @@ export default function RootLayout({
         </SignedOut>
         <SignedIn>
           <UserButton/>
+
         </SignedIn>
         {children}
         </body>

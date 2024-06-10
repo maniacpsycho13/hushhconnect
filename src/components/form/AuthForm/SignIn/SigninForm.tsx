@@ -80,7 +80,7 @@ export default function SignInPage() {
                       <div className="grid grid-cols-2 gap-x-4 mt-[22px]">
                       <Clerk.Connection name="github" asChild>
                         <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading} className='h-14 px-[45px] py-[18px] bg-white rounded-[10px] border border-zinc-300 flex-col justify-center items-center gap-2.5 inline-flex'>
-                          <Clerk.Loading scope="provider:github">
+                          <Clerk.Loading scope="provider:apple">
                             {(isLoading) =>
                               isLoading ? (
                                 <Icons.spinner className="size-4 animate-spin" />

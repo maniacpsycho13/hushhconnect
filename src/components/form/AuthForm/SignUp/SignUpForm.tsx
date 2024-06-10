@@ -26,14 +26,14 @@ export default function SignUpPage() {
                     <div className="grid grid-cols-2 gap-x-4">
                       <Clerk.Connection name="github" asChild>
                         <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading}>
-                          <Clerk.Loading scope="provider:github">
+                          <Clerk.Loading scope="provider:apple">
                             {(isLoading) =>
                               isLoading ? (
                                 <Icons.spinner className="size-4 animate-spin" />
                               ) : (
                                 <>
-                                  <Icons.gitHub className="mr-2 size-4" />
-                                  GitHub
+                                  <Icons.apple className="mr-2 size-4" />
+                                  Apple
                                 </>
                               )
                             }
