@@ -8,32 +8,85 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { Back, Star, apple, google, phone } from '../../../../../public/login';
 
 export default function SignInPage() {
   return (
-    <div className="grid w-full grow items-center px-4 sm:justify-center">
+    <div className="w-full h-full px-6 py-4">
+      
       <SignIn.Root>
         <Clerk.Loading>
           {(isGlobalLoading) => (
             <>
               <SignIn.Step name="start">
-                <Card className="w-full sm:w-96">
+                <Card className="">
                   <CardHeader>
-                    <CardTitle>Sign in to Acme Co</CardTitle>
-                    <CardDescription>Welcome back! Please sign in to continue</CardDescription>
+                    <div className=''>
+                      <div className='flex justify-between '>
+                        <Image src={Back} alt='backicon'></Image>
+                        <Image src={Star} alt='star'></Image>
+                      </div>
+                    </div>
+                    {/* <CardTitle>Sign in to Acme Co</CardTitle>
+                    <CardDescription>Welcome back! Please sign in to continue</CardDescription> */}
+                    <div className='text-[30px] font-bold text-black mt-[40px]'>Login in</div>
                   </CardHeader>
-                  <CardContent className="grid gap-y-4">
-                    <div className="grid grid-cols-2 gap-x-4">
+                  <CardContent className=" w-full">
+                    
+                    {/* <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
+                      or
+                    </p> */}
+                    <Clerk.Field name="identifier" className="mt-[38px]">
+                      <Clerk.Label asChild>
+                        <Label className='text-black text-sm font-normal leading-[17.50px]'>Email address</Label>
+                      </Clerk.Label>
+                      <div className='mt-[6px]'>
+                      <Clerk.Input type="email" required asChild className='px-4 py-[24px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex'>
+                        <Input />
+                      </Clerk.Input>
+                      </div>
+                     <div className='mt-[22px]'>
+                     <Clerk.Label asChild>
+                        <Label className='mt-[22px] text-black text-sm font-normal leading-[17.50px]'>Password</Label>
+                      </Clerk.Label>
+                      <div className='mt-[6px] '>
+                      <Clerk.Input type="password" required asChild className='px-4 py-[24px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex '>
+                        <Input />
+                      </Clerk.Input>
+                      
+                      </div>
+                     </div>
+                      <div className="grid w-full mt-[38px]">
+                      <SignIn.Action submit asChild>
+                        <Button disabled={isGlobalLoading} className='h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight'>
+                          <Clerk.Loading>
+                            {(isLoading) => {
+                              return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Log in';
+                            }}
+                          </Clerk.Loading>
+                        </Button>
+                      </SignIn.Action>
+
+                      <div className='flex items-center justify-between mt-[38px] '>
+                        <div className="w-[35%] h-[0px] border border-zinc-300"></div>
+                        <div className="text-black/opacity-70 text-sm font-normal  leading-[17.50px]">Or Login with</div>
+                        <div className="w-[35%] h-[0px] border border-zinc-300"></div>
+
+                      </div>
+
+                      
+                    </div>
+                      <div className="grid grid-cols-2 gap-x-4 mt-[22px]">
                       <Clerk.Connection name="github" asChild>
-                        <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading}>
+                        <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading} className='h-14 px-[45px] py-[18px] bg-white rounded-[10px] border border-zinc-300 flex-col justify-center items-center gap-2.5 inline-flex'>
                           <Clerk.Loading scope="provider:github">
                             {(isLoading) =>
                               isLoading ? (
                                 <Icons.spinner className="size-4 animate-spin" />
                               ) : (
                                 <>
-                                  <Icons.gitHub className="mr-2 size-4" />
-                                  GitHub
+                                  <Image src={apple} alt='apple'></Image>
                                 </>
                               )
                             }
@@ -41,15 +94,15 @@ export default function SignInPage() {
                         </Button>
                       </Clerk.Connection>
                       <Clerk.Connection name="google" asChild>
-                        <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading}>
+                        <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading} className='h-14 px-[45px] py-[18px] bg-white rounded-[10px] border border-zinc-300 flex-col justify-center items-center gap-2.5 inline-flex'
+                        >
                           <Clerk.Loading scope="provider:google">
                             {(isLoading) =>
                               isLoading ? (
                                 <Icons.spinner className="size-4 animate-spin" />
                               ) : (
                                 <>
-                                  <Icons.google className="mr-2 size-4" />
-                                  Google
+                                  <Image src={google} alt='apple'></Image>
                                 </>
                               )
                             }
@@ -57,35 +110,36 @@ export default function SignInPage() {
                         </Button>
                       </Clerk.Connection>
                     </div>
-                    <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
-                      or
-                    </p>
-                    <Clerk.Field name="identifier" className="space-y-2">
-                      <Clerk.Label asChild>
-                        <Label>Email address</Label>
-                      </Clerk.Label>
-                      <Clerk.Input type="email" required asChild>
-                        <Input />
-                      </Clerk.Input>
+                    
+                    <div className='w-full mt-[22px]'>
+                    <Clerk.Connection name="google" asChild>
+                        <Button size="sm" variant="outline" type="button" disabled={isGlobalLoading} className='h-14 w-full py-[17px] bg-white rounded-[10px] border border-zinc-300 flex-col justify-center items-center gap-2.5 inline-flex'
+                        >
+                          <Clerk.Loading scope="provider:google">
+                            {(isLoading) =>
+                              isLoading ? (
+                                <Icons.spinner className="size-4 animate-spin" />
+                              ) : (
+                                <div className='flex gap-[15px] '>
+                                  <Image src={phone} alt='apple'></Image>
+                                  <div className="text-black text-base font-semibold  leading-tight">Continue with Phone</div>
+                                </div>
+                              )
+                            }
+                          </Clerk.Loading>
+                        </Button>
+                    </Clerk.Connection>
+                    </div>
+                    <div className='mt-[43px] flex justify-center'>
+                      <Button variant="link"  asChild >
+                        <Link href="/sign-up" className='text-[14px] font-[400]'>Don&apos;t have an account ? <span className='text-[14px] font-semibold mx-[2px]'>Sign up</span></Link>
+                      </Button> 
+                    </div>
                       <Clerk.FieldError className="block text-sm text-destructive" />
                     </Clerk.Field>
                   </CardContent>
                   <CardFooter>
-                    <div className="grid w-full gap-y-4">
-                      <SignIn.Action submit asChild>
-                        <Button disabled={isGlobalLoading}>
-                          <Clerk.Loading>
-                            {(isLoading) => {
-                              return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Continue';
-                            }}
-                          </Clerk.Loading>
-                        </Button>
-                      </SignIn.Action>
-
-                      <Button variant="link" size="sm" asChild>
-                        <Link href="/sign-up">Don&apos;t have an account? Sign up</Link>
-                      </Button>
-                    </div>
+                    
                   </CardFooter>
                 </Card>
               </SignIn.Step>
@@ -126,7 +180,7 @@ export default function SignInPage() {
 
               <SignIn.Step name="verifications">
                 <SignIn.Strategy name="password">
-                  <Card className="w-full sm:w-96">
+                  <Card className="w-full ">
                     <CardHeader>
                       <CardTitle>Check your email</CardTitle>
                       <CardDescription>Enter the verification code sent to your email</CardDescription>
@@ -167,20 +221,26 @@ export default function SignInPage() {
                 </SignIn.Strategy>
 
                 <SignIn.Strategy name="email_code">
-                  <Card className="w-full sm:w-96">
+                  <Card className="w-full ">
                     <CardHeader>
-                      <CardTitle>Check your email</CardTitle>
-                      <CardDescription>Enter the verification code sent to your email</CardDescription>
-                      <p className="text-sm text-muted-foreground">
-                        Welcome back <SignIn.SafeIdentifier />
+                    <div className='flex justify-between '>
+                        <Image src={Back} alt='backicon'></Image>
+                        <Image src={Star} alt='star'></Image>
+                      </div>
+                      <CardTitle><div className=" text-black text-3xl font-bold mt-[40px] leading-[39px]">Please check your email</div></CardTitle>
+                      {/* <CardDescription>Enter the verification code sent to your email</CardDescription> */}
+                      <p className=" text-muted-foreground text-center">
+                        <span className='text-black/opacity-70 text-base font-normal leading-tight'>We’ve sent a code to</span> 
+                        <div className='text-black text-base font-medium  leading-tight'><SignIn.SafeIdentifier /></div>
                       </p>
                     </CardHeader>
-                    <CardContent className="grid gap-y-4">
+                    <div className='mt-[75px]'>
+                    <CardContent className="grid ">
                       <Clerk.Field name="email_code">
-                        <Clerk.Label className="sr-only">
+                        {/* <Clerk.Label className="sr-only">
                           Email verification code
-                        </Clerk.Label>
-                        <div className="grid gap-y-2 items-center justify-center">
+                        </Clerk.Label> */}
+                        <div className="griditems-center justify-center">
                           <div className="flex justify-center text-center">
                             <Clerk.Input
                               type="otp"
@@ -190,7 +250,7 @@ export default function SignInPage() {
                                 return (
                                   <div
                                     data-status={status}
-                                    className="relative flex h-9 w-9 items-center justify-center border-y border-r border-input text-sm shadow-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md data-[status=selected]:ring-1 data-[status=selected]:ring-ring data-[status=cursor]:ring-1 data-[status=cursor]:ring-ring"
+                                    className="p-6 rounded-[15px] border border-zinc-300"
                                   >
                                     {value}
                                   </div>
@@ -199,45 +259,52 @@ export default function SignInPage() {
                             />
                           </div>
                           <Clerk.FieldError className="block text-sm text-destructive text-center" />
-                          <SignIn.Action
-                            asChild
-                            resend
-                            className="text-muted-foreground"
-                            fallback={({ resendableAfter }) => (
-                              <Button variant="link" size="sm" disabled>
-                                Didn&apos;t recieve a code? Resend (
-                                <span className="tabular-nums">
-                                  {resendableAfter}
-                                </span>
-                                )
-                              </Button>
-                            )}
-                          >
-                            <Button variant="link" size="sm">
-                              Didn&apos;t recieve a code? Resend
-                            </Button>
-                          </SignIn.Action>
                         </div>
                       </Clerk.Field>
                     </CardContent>
+                    </div>
                     <CardFooter>
-                      <div className="grid w-full gap-y-4">
+                      <div className="grid w-full mt-[38px]">
                         <SignIn.Action submit asChild>
-                          <Button disabled={isGlobalLoading}>
+                          <Button disabled={isGlobalLoading} className='h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold leading-tight'>
                             <Clerk.Loading>
                               {(isLoading) => {
-                                return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Continue';
+                                return isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Verify';
                               }}
                             </Clerk.Loading>
                           </Button>
                         </SignIn.Action>
-                        <SignIn.Action navigate="choose-strategy" asChild>
+                        {/* <SignIn.Action navigate="choose-strategy" asChild>
                           <Button size="sm" variant="link">
                             Use another method
                           </Button>
-                        </SignIn.Action>
+                        </SignIn.Action> */}
                       </div>
+
+                      
                     </CardFooter>
+
+                    <div className='text-center mt-[38px]'>
+                          <SignIn.Action
+                            asChild
+                            resend
+                            className=""
+                            fallback={({ resendableAfter }) => (
+                              <Button variant="link"  disabled >
+                               <div className="text-black text-base font-semibold  leading-tight ">Send code again</div>
+                                <span className="text-black text-base font-normal  leading-tight ml-[3px]">
+                                  00:{resendableAfter}
+                                </span>
+                                
+                              </Button>
+                            )}
+                          >
+                            <Button variant="link" >
+                            <div className="text-black text-base font-semibold  leading-tight text-center">Didn&apos;t recieve a code? Resend</div>
+                              
+                            </Button>
+                          </SignIn.Action>
+                          </div>
                   </Card>
                 </SignIn.Strategy>
               </SignIn.Step>
