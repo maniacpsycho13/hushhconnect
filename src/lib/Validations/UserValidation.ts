@@ -1,3 +1,4 @@
+import { platform } from "os";
 import * as z from "zod";
 
 
@@ -46,3 +47,20 @@ export const UserValidation = z.object({
       .min(3, { message: "Minimum 3 characters." })
       .max(1000, { message: "Maximum 1000 caracters." }),
   })
+
+  export const SocialMediaValidation = z.array(
+    z.object({
+      platform: z.string(),
+      url: z.string(),
+    })
+  );
+  
+  export const SocialValidation=z.object(
+    {
+      instagram: z.string().url(),
+      twitter: z.string().url(),
+      facebook: z.string().url(),
+      linkedin: z.string().url(),
+      youtube: z.string().url(),
+    }
+  )

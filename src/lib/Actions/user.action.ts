@@ -3,7 +3,7 @@ import { db } from "@/lib/db"
 
 import { revalidatePath } from "next/cache";
 import * as z from 'zod';
-import { BasicDetailsValidation, ProfilePicValidation, UsernameValidation } from "../Validations/UserValidation";
+import { BasicDetailsValidation, ProfilePicValidation, SocialMediaValidation, SocialValidation, UsernameValidation } from "../Validations/UserValidation";
 import { currentUser } from "@clerk/nextjs/server";
 
 export const getUserbyEmail =async (email : string )=>{
@@ -98,6 +98,54 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
 }
 
 
+export async function socialupdate(values: z.infer<typeof SocialValidation>, id: string | null, pathname: string) {
+    if(!id){
+        return {error:"Not Logged In"}
+    }
+    const validated = SocialValidation.safeParse(values);
+    if(!validated.success){
+        return {error:"Invalid Fields"}
+    }
+    const { instagram,twitter,facebook,linkedin, youtube } =validated.data
+    // const existingToken =await getVerificationTokenByToken(token);
+
+    // if(!existingToken){
+    //     return {error:"Invalid Token"}  
+    // }
+
+    // const hasexpired=new Date(existingToken.expires) < new Date();
+    // if(hasexpired){
+    //     return {error:"Token Expired"}
+    // }
+    //console.log(id);
+    
+    const existingUser=await getUserbyId(id);
+  
+    if(!existingUser){
+        return {error:"User Does Not Exist"}
+    }
+
+    await db.socialMedia.deleteMany({ where: { userId: id } });
+
+    const socialMediaData = [
+        { platform: 'instagram', url: instagram, userId: id },
+        { platform: 'twitter', url: twitter, userId: id },
+        { platform: 'facebook', url: facebook, userId: id },
+        { platform: 'linkedin', url: linkedin, userId: id },
+        { platform: 'youtube', url: youtube, userId: id },
+      ];
+    
+
+    await db.socialMedia.createMany({ data: socialMediaData });
+    
+    
+
+  
+    revalidatePath(pathname);
+    return {success:"Social Media Added"}
+}
+
+
 
 
 
@@ -188,3 +236,4 @@ export async function whetherboarded(id: string | null) {
     }
     return false;
 }
+
