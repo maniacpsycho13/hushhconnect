@@ -34,6 +34,9 @@ model SocialMedia {
   id       String   @id @default(cuid())
   platform String
   url      String
-  userId   String
-  user     User     @relation(fields: [userId], references: [id])
+  userId   String   @map("user_id")
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
 }
+
