@@ -9,9 +9,26 @@ import { Label } from '@/components/ui/label';
 import { Icons } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { Back, Star, apple, google, phone } from '../../../../../public/login';
+import { Back, Star, apple, closeeye, eye, google, openeye, phone } from '../../../../../public/login';
+import { useState } from 'react';
 
 export default function SignInPage() {
+
+
+  const [type, setType] = useState ('password');
+  const [icon,setIcon]= useState (closeeye);
+
+  
+  const handleToggle = () => {
+    if (type === 'text') {
+      setType('password');
+      setIcon(closeeye);
+    } else {
+      setType('text');
+      setIcon(openeye);
+    }
+  };
+
   return (
     <div className="w-full h-full px-6 py-4">
       
@@ -41,22 +58,26 @@ export default function SignInPage() {
                       <Clerk.Label asChild>
                         <Label className='text-black text-sm font-normal leading-[17.50px]'>Email address</Label>
                       </Clerk.Label>
-                      <div className='mt-[6px]'>
+                      <div className='mt-[6px] flex '>
                       <Clerk.Input type="email" required asChild className='px-4 py-[24px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex'>
                         <Input />
                       </Clerk.Input>
                       </div>
-                     <div className='mt-[22px]'>
-                     <Clerk.Label asChild>
+                      <div className='flex flex-col w-full '>
+                      <Clerk.Label asChild>
                         <Label className='mt-[22px] text-black text-sm font-normal leading-[17.50px]'>Password</Label>
                       </Clerk.Label>
-                      <div className='mt-[6px] '>
-                      <Clerk.Input type="password" required asChild className='px-4 py-[24px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex '>
+                     <div className='mt-[22px] w-full h-12 bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex'>
+                     
+                      <div className='flex align-center justify-center w-full pr-4 h-full'>
+                      <Clerk.Input type={type} required asChild className=' w-full border-none h-full'>
                         <Input />
                       </Clerk.Input>
+                      <div className=' flex items-center' onClick={handleToggle}><Image src={icon} alt='closeeye' className=''></Image></div>
                       
                       </div>
                      </div>
+                      </div>
                       <div className="grid w-full mt-[38px]">
                       <SignIn.Action submit asChild>
                         <Button disabled={isGlobalLoading} className='h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight'>
