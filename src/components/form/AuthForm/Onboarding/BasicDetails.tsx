@@ -1,0 +1,217 @@
+"use client"
+
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { useState, useTransition } from "react"
+import { date, set, z } from "zod"
+
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+import { Calendar as CalendarIcon } from "lucide-react"
+import { format } from "date-fns"
+import { toast } from "@/components/ui/use-toast"
+import { cn } from "@/lib/utils"
+// import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+
+import { Input } from "@/components/ui/input"
+
+
+import Image from "next/image"
+import { BasicDetailsValidation } from "@/lib/Validations/UserValidation"
+import { basicdetailsupdate } from "@/lib/Actions/user.action"
+import { backicon, detail } from "../../../../../public/profilePage"
+import { FormError } from "../form-error"
+import { FormSuccess } from "../form-success"
+
+
+
+
+
+export function BasicDetails({id}:{id:string}) {
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname=usePathname();
+  //const token=searchParams.get('token');
+  const [error , setError] = useState<string | undefined>('')
+  const [success , setSuccess] = useState<string | undefined>('')
+  const [isPending, startTransition] = useTransition()
+  // ...
+  const form=useForm<z.infer<typeof BasicDetailsValidation>>({
+    resolver: zodResolver(BasicDetailsValidation), 
+    defaultValues: {
+      name: "",
+      dob: new Date(),
+      gender: "",
+
+    }
+  })
+
+  enum Gender {
+    MALE="male",
+    FEMALE="female",
+    NOTA="nota"
+  }
+
+  const onSubmit = (values: z.infer<typeof BasicDetailsValidation>) => {
+    setError('');
+    setSuccess('');
+    startTransition(() => {
+      basicdetailsupdate(values,id,pathname).then((data)=>{
+        setError(data?.error);
+        setSuccess(data?.success);
+        if(data?.success){
+            router.push('/onboarding/profilepic');
+        }
+      })
+    })
+    
+    console.log(values)
+    
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+
+        <div  className='bg-white px-4 pt-4'>
+          <div >
+            <Image src={backicon} alt="backicon" ></Image>
+          </div>
+            <div className='mt-[28px]'>
+              <Image src={detail} alt="lock" ></Image>
+
+              <div className="text-gray-900 text-xl font-bold mt-[10px]">Basic Details</div>
+              <div className="w-[328px] text-neutral-500 text-[15px] font-normal leading-tight mt-[8px]">Lorem ipsum dolor sit amet, adipiscing elit, <br/>sed eiusmod tempor incididunt.</div>
+            </div> 
+              
+          </div>
+        
+        <div className="px-4 ">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                
+                <FormControl>
+                  <Input placeholder="First Name" type="text" {...field} disabled={isPending} className="bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />  
+          <div className="py-[10px]">
+            <FormField
+              control={form.control}
+              name="gender"
+              render={({ field }) => (
+                <FormItem>
+                  
+                  <FormControl>
+                    <Input placeholder="Last Name" type="text" {...field} disabled={isPending} className="bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />  
+          </div>
+          <FormField
+            control={form.control}
+            name="dob"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                {/* <FormLabel>Date of birth</FormLabel> */}
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Birthday (mm/dd/yyyy)</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date:Date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                {/* <FormDescription>
+                  Your date of birth is used to calculate your age.
+                </FormDescription> */}
+                {/* <FormMessage /> */}
+              </FormItem>
+            )}
+          />
+          {/* <FormField
+            control={form.control}
+            name="gender"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Gender</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a Gender" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value={Gender.MALE}>Male</SelectItem>
+                    <SelectItem value={Gender.FEMALE}>Female</SelectItem>
+                    <SelectItem value={Gender.NOTA}>Rather not say</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
+        </div>
+        <FormError message={error} />
+        <FormSuccess message={success} />
+        <div className="px-4 pt-[88px]">
+          <Button type="submit" disabled={isPending} className="rounded-[10px] addcolor color-white text-base w-full  h-[54px] text-center text-white font-semibold">Continue</Button>
+        </div>
+      </form>
+    </Form>
+  )
+}
