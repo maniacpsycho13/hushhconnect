@@ -140,7 +140,7 @@ export default function Page() {
             placeholder='email@gmail.com'
             value={emailAddress}
             onChange={(e) => setEmailAddress(e.target.value)}
-            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
+            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border focus:outline-none border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
           />
         </div>
         <div className='flex flex-col mt-[22px] w-full gap-[6px]'>
@@ -154,7 +154,7 @@ export default function Page() {
               value={password}
               placeholder='must be 8 characters'
               onChange={(e) => setPassword(e.target.value)}
-              className='w-full border-none h-full focus:border-none focus-visible:border-none shadow-none'
+              className='w-full border-none h-full focus:border-none focus-visible:border-none shadow-none focus:outline-none'
               />
               <div className=' flex items-center' onClick={handleToggle}><Image src={icon} alt='closeeye' className=''></Image></div>
             </div>
@@ -172,14 +172,14 @@ export default function Page() {
               value={password}
               placeholder='repeat password'
               onChange={(e) => setPassword(e.target.value)}
-              className='w-full border-none h-full focus:border-none focus-visible:border-none shadow-none'
+              className='w-full border-none h-full focus:border-none focus-visible:border-none shadow-none focus:outline-none'
               />
               <div className=' flex items-center' onClick={handleToggle2}><Image src={icon2} alt='closeeye' className=''></Image></div>
             </div>
           </div>
           
         </div>
-
+{/* 
         <div className='mt-[38px] '>
           <div className='flex px-3'>
             <ColorSwitches/>
@@ -197,7 +197,7 @@ export default function Page() {
               <div className="text-black opacity-70 text-sm font-normal leading-[17.50px]">Get a weekly avtivity report via email.</div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div>
           <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[38px]'>Next</button>
         </div>
