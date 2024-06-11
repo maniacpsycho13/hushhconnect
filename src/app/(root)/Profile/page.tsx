@@ -17,7 +17,7 @@ const page = () => {
     <div>
        <div className='bg-white px-6 py-4'>
                 <div className='flex justify-between'>
-                    <Image src={name} alt="user" />
+                <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
                     <div className='flex gap-4'>
                         <Image src={user} alt="user" />
                         <Image src={find} alt="find" />
@@ -29,7 +29,7 @@ const page = () => {
                         <Image src={hushhprofile} alt="profile" className="w-[108.645px] h-[108.645px] rounded-full" />
                         <div className='flex flex-col justify-center items-center'>
                             <h2 className='text-[18px] text-black font-[600]'>Jess Bailey</h2>
-                            <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[400] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E0055F] to-[#2020ED]'>view hushh card</p>
+                            <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[400] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>view hushh card</p>
                         </div>
                     </div>
 
