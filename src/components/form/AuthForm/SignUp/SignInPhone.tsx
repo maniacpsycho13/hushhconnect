@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { Back, Star } from '../../../../../public/login';
 
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -67,36 +69,58 @@ export default function Page() {
 
   if (verifying) {
     return (
-      <>
-        <h1>Verify your phone number</h1>
+      <div className='px-6 py-4'>
+        <div className=''>
+          <div className='flex justify-between '>
+            <Image src={Back} alt='backicon'></Image>
+            <Image src={Star} alt='star'></Image>
+          </div>
+       </div>
+       <div className="text-center text-black text-3xl font-bold mt-[38px] leading-[39px]">Verify your phone number</div>
+
+       <div className="mt-[13px] text-center"><span className="text-black/opacity-70 text-base font-normal  leading-tight">We’ve sent an SMS with an activation code to your phone </span><span className="text-black text-base font-normal leading-tight">+33 2 94 27 84 11</span></div>
+
         <form onSubmit={handleVerification}>
-          <label htmlFor="code">Enter your verification code</label>
+          {/* <label htmlFor="code">Enter your verification code</label> */}
           <input
             value={code}
             id="code"
             name="code"
             onChange={(e) => setCode(e.target.value)}
           />
-          <button type="submit">Verify</button>
+          <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[34px]'>Verify</button>
         </form>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="phone">Enter phone number</label>
-        <input
-          value={phone}
-          id="phone"
-          name="phone"
-          type="tel"
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <button type="submit">Continue</button>
-      </form>
-    </>
+    <div className='px-6 py-4'>
+      <div className=''>
+        <div className='flex justify-between '>
+          <Image src={Back} alt='backicon'></Image>
+          <Image src={Star} alt='star'></Image>
+        </div>
+       </div>
+       <div className=" text-black text-3xl font-bold leading-[39px] mt-[56px]">Sign up</div>
+        
+        <form onSubmit={handleSubmit}>
+          <div className='flex flex-col mt-[15px]'>
+            <label htmlFor="phone" className='text-black text-sm font-normal leading-[17.50px]'>Enter phone number</label>
+            <input
+              value={phone}
+              id="phone"
+              name="phone"
+              type="tel"
+              onChange={(e) => setPhone(e.target.value)}
+              className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
+            />
+            <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[38px]'>Login</button>
+
+            <div className='mt-[46px] text-center'><span className="text-black/opacity-70 text-sm font-normal leading-[17.50px]">Already have an account? </span><span className="text-black text-sm font-semibold leading-[17.50px]">Log in</span></div>
+          </div>
+        </form>
+        </div>
+   
   );
 }

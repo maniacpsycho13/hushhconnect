@@ -3,6 +3,9 @@
 import * as React from 'react';
 import { useSignUp } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { Back, Star } from '../../../../../public/login';
+import Link from 'next/link';
 
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -90,33 +93,58 @@ export default function Page() {
 
   // Display the initial sign-up form to capture the email and password
   return (
-    <>
-      <h1>Sign up</h1>
+    <div className='px-6 py-4'>
+     <div className=''>
+        <div className='flex justify-between '>
+          <Image src={Back} alt='backicon'></Image>
+          <Image src={Star} alt='star'></Image>
+        </div>
+       </div>
+       <div className=" text-black text-3xl font-bold f leading-[39px] mt-[40px]">Sign up</div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Enter email address</label>
+        <div className='mt-[38px] flex flex-col'>
+          <label htmlFor="email" className='text-black text-sm font-normal leading-[17.50px]'>Enter email address</label>
           <input
             id="email"
             type="email"
             name="email"
+            placeholder='email@gmail.com'
             value={emailAddress}
             onChange={(e) => setEmailAddress(e.target.value)}
+            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
           />
         </div>
-        <div>
-          <label htmlFor="password">Enter password</label>
+        <div className='flex flex-col mt-[22px]'>
+          <label htmlFor="password" className='text-black text-sm font-normal leading-[17.50px]'>Create Password</label>
           <input
             id="password"
             type="password"
             name="password"
             value={password}
+            placeholder='must be 8 characters'
             onChange={(e) => setPassword(e.target.value)}
+            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
+          />
+        </div>
+        <div className='flex flex-col mt-[22px]'>
+          <label htmlFor="password" className='text-black text-sm font-normal leading-[17.50px]'>Confirm Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            value={password}
+            placeholder='repeat password'
+            onChange={(e) => setPassword(e.target.value)}
+            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
           />
         </div>
         <div>
-          <button type="submit">Next</button>
+          <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[38px]'>Next</button>
         </div>
+
+        <div className='mt-[38px] text-center'><span className="text-black/opacity-70 text-sm font-normal leading-[17.50px]">Already have an account? </span>
+        <span className="text-black text-sm font-semibold  leading-[17.50px]">Log in</span></div>
       </form>
-    </>
+    </div>
   );
 }
