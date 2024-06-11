@@ -97,7 +97,7 @@ export function BasicDetails({id}:{id:string}) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 
-        <div  className='bg-white px-4 pt-4'>
+        <div  className='bg-white px-6 pt-4'>
           <div >
             <Image src={backicon} alt="backicon" ></Image>
           </div>
@@ -105,12 +105,12 @@ export function BasicDetails({id}:{id:string}) {
               <Image src={detail} alt="lock" ></Image>
 
               <div className="text-gray-900 text-xl font-bold mt-[10px]">Basic Details</div>
-              <div className="w-[328px] text-neutral-500 text-[15px] font-normal leading-tight mt-[8px]">Lorem ipsum dolor sit amet, adipiscing elit, <br/>sed eiusmod tempor incididunt.</div>
+              <div className=" text-neutral-500 text-[15px] font-normal leading-tight mt-[8px]">Lorem ipsum dolor sit amet, adipiscing elit, <br/>sed eiusmod tempor incididunt.</div>
             </div> 
               
           </div>
         
-        <div className="px-4 ">
+        <div className="px-6 ">
           <FormField
             control={form.control}
             name="name"
@@ -118,7 +118,7 @@ export function BasicDetails({id}:{id:string}) {
               <FormItem>
                 
                 <FormControl>
-                  <Input placeholder="First Name" type="text" {...field} disabled={isPending} className="bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none" />
+                  <Input placeholder="First Name" type="text" {...field} disabled={isPending} className=" h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -132,7 +132,7 @@ export function BasicDetails({id}:{id:string}) {
                 <FormItem>
                   
                   <FormControl>
-                    <Input placeholder="Last Name" type="text" {...field} disabled={isPending} className="bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none" />
+                    <Input placeholder="Last Name" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,7 +151,7 @@ export function BasicDetails({id}:{id:string}) {
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none",
+                          "h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight",
                           !field.value && "text-muted-foreground"
                         )}
                       >
@@ -208,8 +208,8 @@ export function BasicDetails({id}:{id:string}) {
         </div>
         <FormError message={error} />
         <FormSuccess message={success} />
-        <div className="px-4 pt-[88px]">
-          <Button type="submit" disabled={isPending} className="rounded-[10px] addcolor color-white text-base w-full  h-[54px] text-center text-white font-semibold">Continue</Button>
+        <div className="px-6 pt-[88px]">
+          <Button type="submit" disabled={isPending} className=" h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight">Continue</Button>
         </div>
       </form>
     </Form>

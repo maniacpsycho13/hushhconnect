@@ -88,7 +88,7 @@ export function UsernameForm({id}:{id:string}) {
               <FormItem>
                 
                 <FormControl>
-                  <Input placeholder="Username" type="text" {...field} disabled={isPending} className="bg-zinc-100 rounded-[14px] border-[3px] text-neutral-500 text-base border-[#92119A]  font-normal p-[1.6rem] w-full focus:border-[#92119A] focus-visible:border-[#92119A] active:border-[#92119A] outline-none" />
+                  <Input placeholder="Username" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -101,7 +101,7 @@ export function UsernameForm({id}:{id:string}) {
         <FormError message={error} />
         <FormSuccess message={success} />
         <div className="px-4 pt-[88px]">
-          <Button type="submit" disabled={isPending} className="rounded-[10px] addcolor color-white text-base w-full  h-[54px] text-center text-white font-semibold">Continue</Button>
+          <Button type="submit" disabled={isPending} className=" h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight">Continue</Button>
         </div>
       </form>
     </Form>
