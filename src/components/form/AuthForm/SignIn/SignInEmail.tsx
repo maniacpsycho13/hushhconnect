@@ -92,14 +92,14 @@ export default function SignInEmail() {
         <div className='mt-[22px] flex flex-col'>
           <label htmlFor="password" className='text-black text-sm font-normal leading-[17.50px]'>Enter password</label>
           <div className='mt-[6px] w-full h-14 bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex'>
-            <div className='flex align-center justify-center w-full pr-4 h-14'>
+            <div className='flex align-center justify-center w-full pr-4 h-full'>
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
                 name="password"
                 type="password"
                 value={password}
-                className=' w-full border-none '
+                className=' w-full border-none h-full px-4 rounded-[10px] file: '
               />
               <div className=' flex items-center' onClick={handleToggle}><Image src={icon} alt='closeeye' className=''></Image></div>
             </div>
