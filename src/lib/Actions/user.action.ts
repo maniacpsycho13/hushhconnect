@@ -119,33 +119,35 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
 
 export async function socialupdate(values: z.infer<typeof SocialValidation>, id: string | null, pathname: string) {
     noStore();
-    if(!id){
-        return {error:"Not Logged In"}
+
+    if (!id) {
+        return { error: "Not Logged In" };
     }
+
     const validated = SocialValidation.safeParse(values);
-    if(!validated.success){
-        return {error:"Invalid Fields"}
-    }
-    const { instagram,twitter,facebook,linkedin, youtube } =validated.data
-    // const existingToken =await getVerificationTokenByToken(token);
-
-    // if(!existingToken){
-    //     return {error:"Invalid Token"}  
-    // }
-
-    // const hasexpired=new Date(existingToken.expires) < new Date();
-    // if(hasexpired){
-    //     return {error:"Token Expired"}
-    // }
-    //console.log(id);
-    
-    const existingUser=await getUserbyId(id);
-  
-    if(!existingUser){
-        return {error:"User Does Not Exist"}
+    if (!validated.success) {
+        return { error: "Invalid Fields" };
     }
 
-    await db.socialMedia.deleteMany({ where: { userId: id } });
+    const { instagram, twitter, facebook, linkedin, youtube } = validated.data;
+
+    // Check if the database client is initialized properly
+    if (!db || !db.socialMedia) {
+        return { error: "Database client is not initialized properly" };
+    }
+
+    const existingUser = await getUserbyId(id);
+    if (!existingUser) {
+        return { error: "User Does Not Exist" };
+    }
+
+    // Delete existing social media entries for the user
+    try {
+        await db.socialMedia.deleteMany({ where: { userId: id } });
+    } catch (error) {
+        console.error("Error deleting existing social media entries:", error);
+        return { error: "Failed to delete existing social media entries" };
+    }
 
     const socialMediaData = [
         { platform: 'instagram', url: instagram, userId: id },
@@ -153,16 +155,18 @@ export async function socialupdate(values: z.infer<typeof SocialValidation>, id:
         { platform: 'facebook', url: facebook, userId: id },
         { platform: 'linkedin', url: linkedin, userId: id },
         { platform: 'youtube', url: youtube, userId: id },
-      ];
-    
+    ];
 
-    await db.socialMedia.createMany({ data: socialMediaData });
-    
-    
+    // Insert new social media entries
+    try {
+        await db.socialMedia.createMany({ data: socialMediaData });
+    } catch (error) {
+        console.error("Error creating new social media entries:", error);
+        return { error: "Failed to create new social media entries" };
+    }
 
-  
     revalidatePath(pathname);
-    return {success:"Social Media Added"}
+    return { success: "Social Media Added" };
 }
 
 
