@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Back, Star, closeeye, openeye } from '../../../../../public/login';
 import Link from 'next/link';
+import { Icons } from '@/components/ui/icons';
 
 export default function SignInEmail() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -15,6 +16,7 @@ export default function SignInEmail() {
 
   const [type, setType] =React.useState ('password');
   const [icon,setIcon]= React.useState (closeeye);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   
   const handleToggle = () => {
@@ -34,7 +36,7 @@ export default function SignInEmail() {
     if (!isLoaded) {
       return;
     }
-
+    setIsLoading(true);
     // Start the sign-in process using the email and password provided
     try {
       const signInAttempt = await signIn.create({
@@ -56,6 +58,8 @@ export default function SignInEmail() {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -80,6 +84,7 @@ export default function SignInEmail() {
               name="email"
               type="email"
               value={email}
+              
               className='  px-4 h-14 bg-white w-full rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex '
             />
           </div>
@@ -101,7 +106,13 @@ export default function SignInEmail() {
           </div>
         </div>
         <div className='mt-[22px] w-full'>
-          <button type="submit" className='h-14 w-full py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight'>Sign in</button>
+          <button 
+            type="submit" 
+            className={`h-14 w-full py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold leading-tight ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={isLoading}
+          >
+            {isLoading ? <Icons.spinner className="size-4 animate-spin" /> : 'Sign in'}
+          </button>
         </div>
       </form>
       <div className='flex items-center justify-between mt-[38px] '>
