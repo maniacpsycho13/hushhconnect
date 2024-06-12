@@ -1,9 +1,7 @@
 import Link from 'next/link'
-import React, { Children } from 'react'
-
-const layout = () => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div >
+    <div>
         <div className='px-6'>
         <div className='flex justify-between items-center'>
         <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div> 
@@ -13,7 +11,7 @@ const layout = () => {
           </div>
         </div>
         </div>
-    <div>{Children}</div>
+    <div>{children}</div>
     </div>
   )
 }
