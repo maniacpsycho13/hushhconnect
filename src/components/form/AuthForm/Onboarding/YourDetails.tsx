@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { Back, Star } from '../../../../../public/login';
+import Link from 'next/link';
 
 const YourDetails = () => {
     const items = ['Business', 'Influencer & Digital Creator', 'Personal', 'Education', 'Entertainment', 'Fashion and Beauty', 'Food & Beverage', 'Government & politics', 'Health & fitness', 'Non-Profit', 'Other', 'Tech', 'Travel'];
@@ -22,7 +23,7 @@ const YourDetails = () => {
     return (
         <div>
             <div className='px-6 py-4'>
-                <Image src={Back} alt='backicon' />
+                <Link href='/username'><Image src={Back} alt='backicon' /></Link>
                 <div className='mt-4'>
                     <div className="text-gray-900 text-xl font-bold text-center">Tell us about yourself</div>
                     <div className="text-center text-neutral-500 text-[15px] font-normal mt-[8px] leading-tight">This will personalize your hushh connect experience.</div>
@@ -59,9 +60,9 @@ const YourDetails = () => {
                 </div>
             </div>
             <div className='w-full px-4 mt-8 py-4'>
-                <div className='w-full h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] flex justify-center items-center gap-2.5 text-white text-base font-semibold'>
+                <Link href={'thanks'}><div className='w-full h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] flex justify-center items-center gap-2.5 text-white text-base font-semibold'>
                     Continue
-                </div>
+                </div></Link>
             </div>
         </div>
     );

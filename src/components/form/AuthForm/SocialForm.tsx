@@ -67,7 +67,7 @@ export function SocialForm({id}:{id:string}) {
         setError(data?.error);
         setSuccess(data?.success);
         if(data?.success){
-            router.push('/onboarding/landing');
+            router.push('/onboarding/profilepic');
         }
       })
     })
@@ -83,8 +83,8 @@ export function SocialForm({id}:{id:string}) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white '>
           <div className="flex justify-between">
-            <Image src={TemplateButton} alt="backicon" ></Image>
-            <p className="text-center text-gray-900 text-[15px] font-medium">Skip</p>
+            <Link href={'template'}><Image src={TemplateButton} alt="backicon" ></Image></Link>
+            <Link href={'profilepic'}><p className="text-center text-gray-900 text-[15px] font-medium">Skip</p></Link>
           </div>
 
           <div className="text-center text-gray-900 text-xl font-bold mt-[31px] ">Let &apos;s make it yours</div>

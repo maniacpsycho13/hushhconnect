@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const page = () => {
@@ -9,7 +10,7 @@ const page = () => {
             <p className=" text-neutral-500 text-[15px] font-normal w-[70%] mt-[12px] leading-tight">Start sharing everything you are, in one simple link.</p>
         </div>
         <div className="w-[328px] h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] justify-center items-center gap-2.5 inline-flex">
-            <div className="text-white text-base font-semibold ">Continue </div>
+            <Link href={'template'}><div className="text-white text-base font-semibold ">Continue </div></Link>
         </div>
     </div>
   )

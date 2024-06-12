@@ -54,7 +54,7 @@ export function UsernameForm({id}:{id:string}) {
         setError(data?.error);
         setSuccess(data?.success);
         if(data?.success){
-            router.push('/onboarding/basicdetails');
+            router.push('/onboarding/yourself');
         }
       })
     })
@@ -68,7 +68,7 @@ export function UsernameForm({id}:{id:string}) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white px-4 pt-4'>
           <div >
-            <Image src={backicon} alt="backicon" ></Image>
+            <Link href={'/basicdetails'}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
 
           <div className='mt-[28px]'>
