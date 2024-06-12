@@ -38,8 +38,10 @@ const LowerNavbar = () => {
         <div className='fixed inset-0 bg-black/80 z-20'>
           <div className='flex flex-col items-center justify-end h-full pb-[2.8rem]'>
             <div className='text-white mb-4 flex gap-[24px] flex-col items-center' >
-              <p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Threads</p>
-              <p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p>
+              <Link href={'/create'}><p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Threads</p></Link>
+              <Link href={'/create'}><p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p></Link>
+              
+              {/* <p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p> */}
             </div>
             <div className='cursor-pointer' onClick={handleToggle}>
               <Image src={CrossColor} alt='close' className='transition-transform duration-1000'></Image>
