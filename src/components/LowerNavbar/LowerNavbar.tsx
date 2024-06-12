@@ -40,7 +40,7 @@ const LowerNavbar = ( { id } : { id : string} ) => {
           <div className='flex flex-col items-center justify-end h-full pb-[2.8rem]'>
             <div className='text-white mb-4 flex gap-[24px] flex-col items-center' >
               <Link href={'/create'}><p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Threads</p></Link>
-              <Link href={'/create'}><p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p></Link>
+              <Link href={'/createproduct'}><p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p></Link>
               
               {/* <p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p> */}
             </div>
