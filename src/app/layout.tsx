@@ -37,13 +37,13 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}>
-        {/* <SignedOut>
+        <SignedOut>
           <SignInButton/>
         </SignedOut>
         <SignedIn>
           <UserButton/>
 
-        </SignedIn> */}
+        </SignedIn>
         {children}
         </body>
      
