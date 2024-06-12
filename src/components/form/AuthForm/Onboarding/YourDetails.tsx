@@ -9,10 +9,10 @@ const YourDetails = () => {
 
     const items2 = ['Fashion & beauty', 'Crafts', 'Designer', 'Model', 'Visual arts', 'Writer', 'Lifestyle', 'Other'];
 
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [selectedItem2, setSelectedItem2] = useState(null);
+    const [selectedItem, setSelectedItem] = useState<number | null>(null);
+    const [selectedItem2, setSelectedItem2] = useState<number | null>(null);
 
-    const handleItemClick = (index, category) => {
+    const handleItemClick = (index : number, category : string) => {
         if (category === 'items') {
             setSelectedItem(index);
         } else {
