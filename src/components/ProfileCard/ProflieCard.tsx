@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, name, shareicon, user} from "@/../public/profile"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from '@/Data/ProfileData'
-import { UserDetails } from '@/app/(root)/Profile/page'
+import { UserDetails } from '@/app/(root)/profile/[id]/page'
 import Link from 'next/link'
 import { facebook, instagram, linkedin, twitter, youtube } from '../../../public/profilePage'
 

@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
-import { find } from '../../../../../public/profile'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs, profileTabshome } from '@/Data/ProfileData'
+import { find } from '../../../../public/profile'
+import DashboardPage from '../dashboard/page'
 
 const page = () => {
   return (
@@ -37,6 +38,7 @@ const page = () => {
               value="threads"
               className='w-full text-light-1'
             >
+                <DashboardPage/>  
             {/* <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}
@@ -49,6 +51,7 @@ const page = () => {
               value="Product"
               className='w-full text-light-1'
             >
+              
               {/* <div><ProductsTab 
                 currentUserId={user.id}
                 accountId={userInfo.id}

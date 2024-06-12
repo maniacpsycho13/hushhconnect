@@ -13,10 +13,13 @@ export type UserDetails={
   socialmedia?:any
 }
 
-export default async function page() {
+export default async function page( {params}:{params : {id : string}} ) {
   const session = await auth();
   if(!session || !session.userId) return null;
-  const user=await getUserbyIdSocial(session.userId);
+  // logic specify user id
+
+
+  const user=await getUserbyIdSocial(params.id);
   console.log(user);
   // console.log(user.socialmedia);
   
