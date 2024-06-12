@@ -4,7 +4,7 @@ import SignInPage from "@/components/form/AuthForm/SignIn/SigninForm";
 import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
-  return<div className="border border-blue-500">
+  return<div className="">
    <SignInEmail />;
    <OauthSignIn />
   </div>
