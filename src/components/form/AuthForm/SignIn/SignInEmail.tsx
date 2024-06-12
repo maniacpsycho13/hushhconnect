@@ -99,7 +99,7 @@ export default function SignInEmail() {
                 name="password"
                 type="password"
                 value={password}
-                className=' w-full border-none h-14'
+                className=' w-full border-none '
               />
               <div className=' flex items-center' onClick={handleToggle}><Image src={icon} alt='closeeye' className=''></Image></div>
             </div>
