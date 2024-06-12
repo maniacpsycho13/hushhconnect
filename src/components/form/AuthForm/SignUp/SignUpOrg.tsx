@@ -55,7 +55,7 @@ export default function SignUpPage() {
                         <Clerk.Connection name="apple" asChild >
                           
                           <Button  variant="outline" type="button" disabled={isGlobalLoading} className=' h-[54px] px-[19px]  bg-white rounded-[28px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex mt-[14px]'>
-                            <Clerk.Loading scope="provider:apple">
+                            <Clerk.Loading scope="provider:apple" >
                               {(isLoading) =>
                                 isLoading ? (
                                   <Icons.spinner className="size-4 animate-spin" />

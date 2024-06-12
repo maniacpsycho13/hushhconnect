@@ -16,8 +16,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { homepage } from "../../public/profilePage";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function page() {
+export default async function page() {
+  const user =await auth();
+  if(user)redirect('/onboarding/username');
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen w-full">
