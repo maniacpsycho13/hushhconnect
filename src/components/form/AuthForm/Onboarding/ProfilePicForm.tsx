@@ -71,7 +71,7 @@ export function ProfilePicForm({id}:{id:string}) {
         setError(data?.error);
         setSuccess(data?.success);
         if(data?.success){
-            router.push('/Profile');
+            router.push(`/profile/${id}`);
         }
       })
     })

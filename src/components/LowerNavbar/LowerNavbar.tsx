@@ -1,10 +1,11 @@
+'use client'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { lowerNav2 } from '../../../public/profilePage'
 import { bell, coloredcircle, community, homeicon, profileicon, CrossColor } from '../../../public/profile' // Assume closeicon is the cross icon image
 import Link from 'next/link'
 
-const LowerNavbar = () => {
+const LowerNavbar = ( { id } : { id : string} ) => {
   // State to manage the toggle
   const [isToggled, setIsToggled] = useState(false);
 
@@ -18,12 +19,12 @@ const LowerNavbar = () => {
       <div className={`w-full flex flex-col fixed bottom-0 z-10`}>
         <Image src={lowerNav2} alt='nav' className='relative shadow-xl w-full'></Image>
         <div className='flex absolute  w-full mt-[1.7rem] px-6 z-10'>
-          <Link href={'/Profile/home'}> <Image src={homeicon} alt='nav' className=''></Image></Link>
+          <Link href={'/home'}> <Image src={homeicon} alt='nav' className=''></Image></Link>
 
           <Image src={bell} alt='nav' className='ml-[16%]'></Image>
           <Image src={community} alt='nav' className='ml-[40%]'></Image>
          <div className='ml-auto'>
-         <Link href={'/Profile'}><Image src={profileicon} alt='nav' className=''></Image></Link>
+         <Link href={'/profile/'+id} className={''}><Image src={profileicon} alt='nav' className=''></Image></Link>
          </div>
         </div>
         <div className='flex absolute justify-center w-full mx-auto mt-[-1.5rem] z-20'>

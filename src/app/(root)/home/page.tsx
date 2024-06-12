@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
-import { find } from '../../../../../public/profile'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs, profileTabshome } from '@/Data/ProfileData'
+import { find } from '../../../../public/profile'
 
 const page = () => {
   return (
