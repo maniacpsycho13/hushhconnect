@@ -65,12 +65,13 @@ function CreatePage() {
           </div>
           {!!fileUrl && (
             <div className="h-[155px] overflow-hidden rounded-md">
-              <AspectRatio ratio={1/1} className="relative h-full">
+              <AspectRatio ratio={16/9} className="w-full h-[155px]   rounded-xl text-black">
                 <Image
                   src={fileUrl}
                   alt="Post preview"
                   fill
                   className="rounded-md object-cover h-full w-full"
+                  style={{ objectFit: 'contain' }}
                 />
               </AspectRatio>
             </div>
@@ -83,18 +84,20 @@ function CreatePage() {
               <FormItem>
                 <FormLabel htmlFor="picture">Picture (Optional)</FormLabel>
                 <FormControl>
-                  <UploadButton
-                  className="w-full h-[155px] bg-zinc-300 opacity-30 rounded-xl text-black"
-                    endpoint="imageUploader"
-                    onClientUploadComplete={(res) => {
-                      form.setValue("fileUrl", res[0].url);
-                      toast.success("Upload complete");
-                    }}
-                    onUploadError={(error: Error) => {
-                      console.error(error);
-                      toast.error("Upload failed");
-                    }}
-                  />
+                  {!fileUrl && ( // Conditionally render the UploadButton based on fileUrl
+                    <UploadButton
+                      className="w-full h-[155px] bg-zinc-300 opacity-30 rounded-xl text-black"
+                      endpoint="imageUploader"
+                      onClientUploadComplete={(res) => {
+                        form.setValue("fileUrl", res[0].url);
+                        toast.success("Upload complete");
+                      }}
+                      onUploadError={(error: Error) => {
+                        console.error(error);
+                        toast.error("Upload failed");
+                      }}
+                    />
+                  )}
                 </FormControl>
                 <FormDescription>
                   Upload a picture to post (Optional).
