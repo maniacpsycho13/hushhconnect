@@ -9,27 +9,20 @@ import Link from 'next/link'
 const page = () => {
   return (
     <div>
-      <div className='px-6 py-4'>
-      <div className='flex justify-between items-center'>
-        <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div> 
-          <div className='flex gap-[26px] pt-[6px]'>
-            <Link href={'thread'}><div className=" text-gray-500 text-sm font-medium  leading-[22.91px] ">Thread</div></Link>
-            <Link href={'product'}><div className=" text-gray-500 text-sm font-medium  leading-[22.91px]">Product</div></Link>
-          </div>
-        </div>
+      {/* <div className='px-6 py-4'>
 
         <div className='mt-4'>
         <Tabs defaultValue='threads' className='w-full'>
            <TabsList className='flex bg-transparent gap-6' >
             {profileTabshome.map((tab) => (
               <TabsTrigger key={tab.label} value={tab.value} className='tab'>
-                {/* <Image
+                <Image
                   src={tab.icon}
                   alt={tab.label}
                   width={24}
                   height={24}
                   className='object-contain max-sm:hidden'
-                /> */}
+                />
                 <p className=''>{tab.label}</p>
 
                 
@@ -43,11 +36,11 @@ const page = () => {
               className='w-full text-light-1'
             >
                 <DashboardPage/>  
-            {/* <ThreadsTab
+            <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}
                 accountType='User'
-              /> */}
+              />
             </TabsContent>
 
             <TabsContent
@@ -56,15 +49,15 @@ const page = () => {
               className='w-full text-light-1'
             >
               
-              {/* <div><ProductsTab 
+              <div><ProductsTab 
                 currentUserId={user.id}
                 accountId={userInfo.id}
-                accountType='User'></ProductsTab></div> */}
+                accountType='User'></ProductsTab></div>
 
             </TabsContent>
         </Tabs>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

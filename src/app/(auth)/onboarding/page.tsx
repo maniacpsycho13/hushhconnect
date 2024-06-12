@@ -5,7 +5,7 @@ export default async function page() {
     <div>
         
         <div>
-           
+
             <div>
                 hry there
             </div>

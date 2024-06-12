@@ -46,13 +46,13 @@ async function Post({ post }: { post: PostWithExtras }) {
         <PostOptions post={post} userId={userId} />
       </div>
 
-      <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
+      <Card className="relative h-[290px] w-full overflow-hidden rounded-none sm:rounded-md">
         {post.fileUrl && (
             <Image
             src={post.fileUrl }
             alt="Post Image"
             fill
-            className="sm:rounded-md object-cover"
+            className="sm:rounded-md object-contain"
             />
         )}
       </Card>
