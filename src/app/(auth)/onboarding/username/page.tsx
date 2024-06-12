@@ -11,7 +11,7 @@ export default async function page() {
   if(!session || !session.userId) return null;
 
   const isboarded :boolean=await whetherboarded(session.userId);
-  if(isboarded) redirect('/landing');
+  if(isboarded) redirect('/Profile');
   return (
     <div>
       <UsernameForm id={session.userId}/>
