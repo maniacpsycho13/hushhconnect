@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const LowerNavbar = () => {
   return (
-    <div className='w-full  flex  flex-col  fixed bottom-0'>
+    <div className='w-full  flex  flex-col  fixed bottom-0 z-[-1]'>
         <Image src={lowerNav2} alt='nav' className='relative shadow-xl w-full'></Image>
         <div className='flex absolute justify-between w-full mt-[1.7rem] px-6 z-10'>
            <Link href={'Profile/home'}> <Image src={homeicon} alt='nav' className=''></Image></Link>

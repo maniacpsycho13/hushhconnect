@@ -24,7 +24,7 @@ const ProfileCard = (props:UserDetails) => {
 
   return (
     <div>
-       <div className='bg-white px-6 py-4'>
+       <div className='bg-zinc-100 px-6 py-4'>
                 <div className='flex justify-between'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
                     <div className='flex gap-4'>
@@ -38,7 +38,7 @@ const ProfileCard = (props:UserDetails) => {
                         <Image src={props.profilePic || hushhprofile} alt="profile" width={108.645} height={108.645} className="w-[108.645px] h-[108.645px] rounded-full" />
                         <div className='flex flex-col justify-center items-center'>
                             <h2 className='text-[18px] text-black font-[600] inline'>{props.name}{props.lastname}</h2>
-                            <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[400] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>view hushh card</p>
+                            <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[600] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>view hushh card</p>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@ const ProfileCard = (props:UserDetails) => {
                      </div> */}
 
 {/* ------------------------------------------------------------------------------------------------------------ */}
-<div className='mt-[16.14px]'>
+      <div className='mt-[16.14px]'>
         <Tabs defaultValue='threads' className='w-full'>
            <TabsList className='flex bg-transparent gap-[10px]' >
             {profileTabs.map((tab) => (
@@ -138,10 +138,10 @@ const ProfileCard = (props:UserDetails) => {
                 </div>
             </div>
 
-            <div className={`fixed inset-0 bg-black bg-opacity-80 backdrop-blur-[7.20px] flex items-end transition-transform duration-300 ${showCard ? 'translate-y-0' : 'translate-y-full'}`}>
+            <div className={`fixed inset-0 bg-black bg-opacity-80 backdrop-blur-[7.20px] flex items-end transition-transform duration-300 z-100 ${showCard ? 'translate-y-0' : 'translate-y-full'}`}>
                 <div className='w-full shadow-lg rounded-t-lg'>
                     <div className='px-[14px]'>
-                        <div className="w-full h-2 bg-zinc-300 rounded-tl-lg rounded-tr-lg" />
+                        <div className="w-full h-2 bg-zinc-300 rounded-tl-xl rounded-tr-xl" />
                     </div>
                     <div className='px-[13px] py-[14px] border-[1px] border-hidden bg-white rounded-tl-lg rounded-tr-lg h-[432px]'>
                         <div className='flex justify-end'>

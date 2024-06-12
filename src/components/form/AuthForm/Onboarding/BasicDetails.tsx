@@ -161,7 +161,7 @@ export function BasicDetails({id}:{id:string}) {
                         ) : (
                           <span>Birthday (mm/dd/yyyy)</span>
                         )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        <CalendarIcon className="ml-auto h-4 w-4 " />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
