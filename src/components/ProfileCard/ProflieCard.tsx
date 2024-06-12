@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
-import {arrowcircle, find, hushhCard, hushhprofile, name, shareicon, user} from "@/../public/profile"
+import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, name, shareicon, user} from "@/../public/profile"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from '@/Data/ProfileData'
 import { UserDetails } from '@/app/(root)/profile/[id]/page'
@@ -160,6 +160,11 @@ const ProfileCard = (props:UserDetails) => {
                             <div className='absolute top-[24px] right-[26px]'>
                                 <Image src={shareicon} alt="card" className="" />
                             </div>
+                        </div>
+
+                        <div className='flex justify-between px-[22px]'>
+                          <Image src={GoogleWallet} alt='goofle'></Image>
+                          <Image src={AppleWallet} alt='apple'></Image>
                         </div>
                     </div>
                 </div>
