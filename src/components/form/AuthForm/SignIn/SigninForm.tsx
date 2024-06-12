@@ -63,6 +63,10 @@ export default function SignInPage() {
                         <Input />
                       </Clerk.Input>
                       </div>
+                      
+                      </Clerk.Field>
+                      <CardContent className="grid gap-y-4">
+                      <Clerk.Field name="password" className="space-y-2">
                       <div className='flex flex-col w-full '>
                       <Clerk.Label asChild>
                         <Label className='mt-[22px] text-black text-sm font-normal leading-[17.50px]'>Password</Label>
@@ -78,6 +82,9 @@ export default function SignInPage() {
                       </div>
                      </div>
                       </div>
+                        <Clerk.FieldError className="block text-sm text-destructive" />
+                      </Clerk.Field>
+                    </CardContent>
                       <div className="grid w-full mt-[38px]">
                       <SignIn.Action submit asChild>
                         <Button disabled={isGlobalLoading} className='h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight'>
@@ -123,7 +130,7 @@ export default function SignInPage() {
                                 <Icons.spinner className="size-4 animate-spin" />
                               ) : (
                                 <>
-                                  <Image src={google} alt='apple'></Image>
+                                  <Image src={google} alt='google'></Image>
                                 </>
                               )
                             }
@@ -157,7 +164,7 @@ export default function SignInPage() {
                       </Button> 
                     </div>
                       <Clerk.FieldError className="block text-sm text-destructive" />
-                    </Clerk.Field>
+                    
                   </CardContent>
                   <CardFooter>
                     
@@ -200,7 +207,7 @@ export default function SignInPage() {
               </SignIn.Step>
 
               <SignIn.Step name="verifications">
-                <SignIn.Strategy name="password">
+                <SignIn.Strategy name="email_code">
                   <Card className="w-full ">
                     <CardHeader>
                       <CardTitle>Check your email</CardTitle>
@@ -209,17 +216,7 @@ export default function SignInPage() {
                         Welcome back <SignIn.SafeIdentifier />
                       </p>
                     </CardHeader>
-                    <CardContent className="grid gap-y-4">
-                      <Clerk.Field name="password" className="space-y-2">
-                        <Clerk.Label asChild>
-                          <Label>Password</Label>
-                        </Clerk.Label>
-                        <Clerk.Input type="password" asChild>
-                          <Input />
-                        </Clerk.Input>
-                        <Clerk.FieldError className="block text-sm text-destructive" />
-                      </Clerk.Field>
-                    </CardContent>
+                    
                     <CardFooter>
                       <div className="grid w-full gap-y-4">
                         <SignIn.Action submit asChild>
