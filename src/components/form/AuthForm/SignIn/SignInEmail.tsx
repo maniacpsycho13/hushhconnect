@@ -29,7 +29,7 @@ export default function SignInEmail() {
       // and redirect the user
       if (signInAttempt.status === 'complete') {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.push('/');
+        router.push('/onboarding/username');
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
