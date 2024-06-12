@@ -125,26 +125,26 @@ function CreatePage() {
             )}
           />
             {/* convert it for text area */}
-            <FormField
+            {/* <FormField
             control={form.control}
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormControl>
+                <FormControl> */}
                   <Input
                     type="text"
                     id="caption"
                     placeholder="Thread Content"
                     className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight placeholder:opacity-50"
-                    {...field}
+                    // {...field}
                     
                     required
                   />
-                </FormControl>
+                {/* </FormControl>
                 <FormMessage />
-              </FormItem>
-            )}
-          />
+              </FormItem> */}
+            {/* )} */}
+          {/* /> */}
 
           
         </form>

@@ -62,7 +62,7 @@ export default function ColorSwitches() {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<IOSSwitch  defaultChecked />}
+        control={<IOSSwitch />}
         label=""
       />
     </FormGroup>

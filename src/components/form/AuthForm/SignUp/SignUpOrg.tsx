@@ -52,7 +52,7 @@ export default function SignUpPage() {
                             </Clerk.Loading>
                           </Button>
                         </Clerk.Connection>
-                        <Clerk.Connection name="github" asChild >
+                        <Clerk.Connection name="apple" asChild >
                           
                           <Button  variant="outline" type="button" disabled={isGlobalLoading} className=' h-[54px] px-[19px]  bg-white rounded-[28px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex mt-[14px]'>
                             <Clerk.Loading scope="provider:apple">
