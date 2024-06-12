@@ -15,6 +15,7 @@ import community from "./community.svg"
 import homeicon from "./homeicon.svg"
 import profileicon from "./profileicon.svg"
 import coloredcircle from "./coloredcircle.svg"
+import CrossColor from "./CrossColor.svg"
 
 // import homepage from "./HomePage.svg"
 
@@ -51,7 +52,8 @@ export {
     community,
     homeicon,
     profileicon,
-    coloredcircle
+    coloredcircle,
+    CrossColor
 
     // backicon,
     // airplane,
