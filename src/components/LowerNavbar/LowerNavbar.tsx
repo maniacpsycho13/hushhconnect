@@ -17,13 +17,14 @@ const LowerNavbar = () => {
     <div className='h-full'>
       <div className={`w-full flex flex-col fixed bottom-0 z-10`}>
         <Image src={lowerNav2} alt='nav' className='relative shadow-xl w-full'></Image>
-        <div className='flex absolute justify-between w-full mt-[1.7rem] px-6 z-20'>
+        <div className='flex absolute  w-full mt-[1.7rem] px-6 z-10'>
           <Link href={'/Profile/home'}> <Image src={homeicon} alt='nav' className=''></Image></Link>
-          <Link href={'/Profile'}><Image src={profileicon} alt='nav' className=''></Image></Link>
-        </div>
-        <div className='flex absolute justify-between w-full px-24 mt-[1.7rem] z-20'>
-          <Image src={bell} alt='nav' className=''></Image>
-          <Image src={community} alt='nav' className=''></Image>
+
+          <Image src={bell} alt='nav' className='ml-[16%]'></Image>
+          <Image src={community} alt='nav' className='ml-[40%]'></Image>
+         <div className='ml-auto'>
+         <Link href={'/Profile'}><Image src={profileicon} alt='nav' className=''></Image></Link>
+         </div>
         </div>
         <div className='flex absolute justify-center w-full mx-auto mt-[-1.5rem] z-20'>
           <div className='relative cursor-pointer' onClick={handleToggle}>
