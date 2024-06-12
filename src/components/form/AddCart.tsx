@@ -112,13 +112,13 @@ const AddCart = () => {
             <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">
               Add Product
             </div>
-            <div
+            <button
               className="text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0 outline-none cursor-pointer"
               onClick={form.handleSubmit(onSubmit)}
               disabled={isLoading}
             >
               {isLoading ? "Loading..." : "Post"}
-            </div>
+            </button>
           </div>
 
           <FormField
