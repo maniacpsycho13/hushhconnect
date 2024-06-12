@@ -40,9 +40,8 @@ function CreatePage() {
   if (!mount) return null;
 
   return (
-    <div>
-      <h1>Create new post</h1>
-
+    <div className="px-6 py-4">
+      
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async (values) => {
@@ -56,14 +55,22 @@ function CreatePage() {
           })}
           className="space-y-4"
         >
+
+          <div className="flex items-center">
+            <div className=" text-red-500 text-sm font-semibold  leading-[18.42px] flex justify-start">Cancel</div>
+            <div className="mx-auto text-black text-base font-semibold  leading-[18.42px] flex justify-center">Add Thread</div>
+            <Button type="submit" disabled={form.formState.isSubmitting} className=" text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0">
+              Post
+            </Button>
+          </div>
           {!!fileUrl && (
-            <div className="h-96 md:h-[450px] overflow-hidden rounded-md">
-              <AspectRatio ratio={1 / 1} className="relative h-full">
+            <div className="h-[155px] overflow-hidden rounded-md">
+              <AspectRatio ratio={1/1} className="relative h-full">
                 <Image
                   src={fileUrl}
                   alt="Post preview"
                   fill
-                  className="rounded-md object-cover"
+                  className="rounded-md object-cover h-full w-full"
                 />
               </AspectRatio>
             </div>
@@ -77,6 +84,7 @@ function CreatePage() {
                 <FormLabel htmlFor="picture">Picture (Optional)</FormLabel>
                 <FormControl>
                   <UploadButton
+                  className="w-full h-[155px] bg-zinc-300 opacity-30 rounded-xl text-black"
                     endpoint="imageUploader"
                     onClientUploadComplete={(res) => {
                       form.setValue("fileUrl", res[0].url);
@@ -101,12 +109,13 @@ function CreatePage() {
             name="caption"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="caption">Caption</FormLabel>
+                <FormLabel htmlFor="caption">About thread</FormLabel>
                 <FormControl>
                   <Input
                     type="text"
                     id="caption"
-                    placeholder="Write a caption..."
+                    placeholder="Title"
+                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight placeholder:opacity-50"
                     {...field}
                     required
                   />
@@ -115,10 +124,29 @@ function CreatePage() {
               </FormItem>
             )}
           />
+            {/* convert it for text area */}
+            <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    type="text"
+                    id="caption"
+                    placeholder="Thread Content"
+                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight placeholder:opacity-50"
+                    {...field}
+                    
+                    required
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            Create Post
-          </Button>
+          
         </form>
       </Form>
     </div>
