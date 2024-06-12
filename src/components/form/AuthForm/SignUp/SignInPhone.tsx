@@ -113,7 +113,7 @@ export default function Page() {
               name="phone"
               type="tel"
               onChange={(e) => setPhone(e.target.value)}
-              className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
+              className='e-full h-14 mt-[6px] px-4 py-[18px] focus:outline-none bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
             />
             <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[38px]'>Login</button>
 

@@ -1,0 +1,70 @@
+"use client";
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { Back, Star } from '../../../../../public/login';
+
+const YourDetails = () => {
+    const items = ['Business', 'Influencer & Digital Creator', 'Personal', 'Education', 'Entertainment', 'Fashion and Beauty', 'Food & Beverage', 'Government & politics', 'Health & fitness', 'Non-Profit', 'Other', 'Tech', 'Travel'];
+
+    const items2 = ['Fashion & beauty', 'Crafts', 'Designer', 'Model', 'Visual arts', 'Writer', 'Lifestyle', 'Other'];
+
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem2, setSelectedItem2] = useState(null);
+
+    const handleItemClick = (index, category) => {
+        if (category === 'items') {
+            setSelectedItem(index);
+        } else {
+            setSelectedItem2(index);
+        }
+    };
+
+    return (
+        <div>
+            <div className='px-6 py-4'>
+                <Image src={Back} alt='backicon' />
+                <div className='mt-4'>
+                    <div className="text-gray-900 text-xl font-bold text-center">Tell us about yourself</div>
+                    <div className="text-center text-neutral-500 text-[15px] font-normal mt-[8px] leading-tight">This will personalize your hushh connect experience.</div>
+                </div>
+                <div className='mt-[33px]'>
+                    <div className="text-center text-gray-900 text-[15px] font-semibold leading-tight">Select one category that fits for you</div>
+                </div>
+            </div>
+            <div className='flex flex-wrap gap-[8px] px-[16px]'>
+                {items.map((item, index) => (
+                    <button
+                        key={index}
+                        id={`button-${index}`}
+                        className={`px-2.5 py-[3px] ${selectedItem === index ? 'bg-gradient-to-l from-rose-500 to-purple-500 text-white' : 'bg-white'} rounded-[51px] border border-neutral-200 ${selectedItem === index ? 'text-white' : 'text-black'} text-[13px] font-normal leading-snug`}
+                        onClick={() => handleItemClick(index, 'items')}
+                    >
+                        {item}
+                    </button>
+                ))}
+            </div>
+            <div className='px-[16px]'>
+                <div className="mt-[33px] text-center text-gray-900 text-[15px] font-semibold leading-tight">Pick your Influencer & Digital Creator category (optional)</div>
+                <div className='flex flex-wrap gap-[8px] mt-4'>
+                    {items2.map((item, index) => (
+                        <button
+                            key={index}
+                            id={`button-${index}`}
+                            className={`px-2.5 py-[3px] ${selectedItem2 === index ? 'bg-black text-white' : 'bg-white'} rounded-[51px] border border-neutral-200 ${selectedItem2 === index ? 'text-white' : 'text-black'} text-[13px] font-normal leading-snug`}
+                            onClick={() => handleItemClick(index, 'items2')}
+                        >
+                            {item}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className='w-full px-4 mt-8 py-4'>
+                <div className='w-full h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] flex justify-center items-center gap-2.5 text-white text-base font-semibold'>
+                    Continue
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default YourDetails;

@@ -153,7 +153,7 @@ export default function SignInPage() {
                     </div>
                     <div className='mt-[43px] flex justify-center'>
                       <Button variant="link"  asChild >
-                        <Link href="/sign-up" className='text-[14px] font-[400]'>Don&apos;t have an account ? <span className='text-[14px] font-semibold mx-[2px]'>Sign up</span></Link>
+                        <div className='text-[14px] font-[400]'>Don&apos;t have an account ? <Link href={'/sign-up'}><span className='text-[14px] font-semibold mx-[2px]'>Sign up</span></Link></div>
                       </Button> 
                     </div>
                       <Clerk.FieldError className="block text-sm text-destructive" />

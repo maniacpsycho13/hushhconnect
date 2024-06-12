@@ -6,25 +6,27 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Back, Star, closeeye, openeye } from '../../../../../public/login';
 import Link from 'next/link';
-import ColorSwitches from '@/components/Switch/ColorSwitches';
 
 export default function Page() {
+  // Clerk signup hook
   const { isLoaded, signUp, setActive } = useSignUp();
+  // Local state variables
   const [emailAddress, setEmailAddress] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
   const [verifying, setVerifying] = React.useState(false);
   const [code, setCode] = React.useState('');
+  const [passwordError, setPasswordError] = React.useState('');
   const router = useRouter();
 
-  const [type, setType] = React.useState ('password');
-  const [icon,setIcon]= React.useState (closeeye);
-  const [icon2,setIcon2]= React.useState (closeeye);
-  const [type2, setType2] = React.useState ('password');
+  // Password visibility states and toggling functions
+  const [type, setType] = React.useState('password');
+  const [icon, setIcon] = React.useState(closeeye);
+  const [type2, setType2] = React.useState('password');
+  const [icon2, setIcon2] = React.useState(closeeye);
 
-
-
-  
   const handleToggle = () => {
+    // Toggle password visibility
     if (type === 'text') {
       setType('password');
       setIcon(closeeye);
@@ -33,8 +35,10 @@ export default function Page() {
       setIcon(openeye);
     }
   };
+
   const handleToggle2 = () => {
-    if (type === 'text') {
+    // Toggle confirm password visibility
+    if (type2 === 'text') {
       setType2('password');
       setIcon2(closeeye);
     } else {
@@ -43,12 +47,17 @@ export default function Page() {
     }
   };
 
-
   // Handle submission of the sign-up form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!isLoaded) return;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setPasswordError('Passwords do not match');
+      return;
+    }
 
     // Start the sign-up process using the email and password provided
     try {
@@ -88,7 +97,7 @@ export default function Page() {
       // and redirect the user
       if (completeSignUp.status === 'complete') {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.push('/onboarding/username');
+        router.push('/');
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
@@ -104,32 +113,47 @@ export default function Page() {
   // Display the verification form to capture the OTP code
   if (verifying) {
     return (
-      <>
-        <h1>Verify your email</h1>
-        <form onSubmit={handleVerify}>
-          <label id="code">Enter your verification code</label>
-          <input
-            value={code}
-            id="code"
-            name="code"
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <button type="submit">Verify</button>
-        </form>
-      </>
+      <div className='px-6 py-4'>
+        <div className=''>
+        <div className='flex justify-between '>
+          <Link href={'/sign-up'}><Image src={Back} alt='backicon'></Image></Link>
+          <Image src={Star} alt='star'></Image>
+        </div>
+      </div>
+      <div className=" mt-[40px] text-black text-3xl font-bold  leading-[39px]">Please check your email</div>
+      <div className='flex gap-2 pt-[15px]'>
+        <div className='text-black/opacity-70 text-base font-normal leading-tight'> We’ve sent a code to </div>
+        <div className='text-black text-base font-medium leading-tight'>helloworld@gmail.com</div>
+      </div>
+        <div className='w-full mt-[75px]'>
+          <form onSubmit={handleVerify}>
+            <label id="code" className=''>Enter your verification code</label>
+            <input
+              value={code}
+              id="code"
+              name="code"
+              onChange={(e) => setCode(e.target.value)}
+              className='h-14 w-full px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal mt-1 leading-tight placeholder:opacity-50 focus:outline-none'
+            />
+            <div className='mt-[38px]'>
+              <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[38px]'>Verify</button>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 
   // Display the initial sign-up form to capture the email and password
   return (
     <div className='px-6 py-4'>
-     <div className=''>
+      <div className=''>
         <div className='flex justify-between '>
-          <Image src={Back} alt='backicon'></Image>
+        <Link href={'/sign-up'}><Image src={Back} alt='backicon'></Image></Link>
           <Image src={Star} alt='star'></Image>
         </div>
-       </div>
-       <div className=" text-black text-3xl font-bold f leading-[39px] mt-[40px]">Sign up</div>
+      </div>
+      <div className="text-black text-3xl font-bold f leading-[39px] mt-[40px]">Sign up</div>
       <form onSubmit={handleSubmit}>
         <div className='mt-[38px] flex flex-col'>
           <label htmlFor="email" className='text-black text-sm font-normal leading-[17.50px]'>Enter email address</label>
@@ -140,7 +164,7 @@ export default function Page() {
             placeholder='email@gmail.com'
             value={emailAddress}
             onChange={(e) => setEmailAddress(e.target.value)}
-            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border focus:outline-none border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight'
+            className='e-full h-14 mt-[6px] px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex focus:none text-black/opacity-50 text-base font-normal  leading-tight focus:outline-none'
           />
         </div>
         <div className='flex flex-col mt-[22px] w-full gap-[6px]'>
@@ -166,44 +190,25 @@ export default function Page() {
           <div className=' w-full h-14 bg-white rounded-[10px] px-4 py-[18px]  border border-zinc-300 justify-start items-center gap-2.5 inline-flex'>
             <div className='flex align-center justify-center w-full h-full'>
               <input
-              id="password"
+              id="confirmPassword"
               type={type2}
-              name="password"
-              value={password}
+              name="confirmPassword"
+              value={confirmPassword}
               placeholder='repeat password'
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className='w-full border-none h-full focus:border-none focus-visible:border-none shadow-none focus:outline-none'
               />
               <div className=' flex items-center' onClick={handleToggle2}><Image src={icon2} alt='closeeye' className=''></Image></div>
             </div>
           </div>
-          
+          {passwordError && <div className="text-red-500 mt-1">{passwordError}</div>}
         </div>
-{/* 
-        <div className='mt-[38px] '>
-          <div className='flex px-3'>
-            <ColorSwitches/>
-            <div className='flex flex-col'>
-              <div className="text-black text-base font-semibold  leading-tight">Sync receipts</div>
-              <div className="text-black opacity-70 text-sm font-normal leading-[17.50px]">Sync all your receipts from this mail</div>
-            </div>
-          </div>
-
-
-          <div className='flex pt-[18px] px-3'>
-            <ColorSwitches/>
-            <div className='flex flex-col'>
-              <div className="text-black text-base font-semibold  leading-tight">Weekly summary</div>
-              <div className="text-black opacity-70 text-sm font-normal leading-[17.50px]">Get a weekly avtivity report via email.</div>
-            </div>
-          </div>
-        </div> */}
         <div>
           <button type="submit" className=' h-14 w-full py-[17px] bg-gradient-to-r from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex text-center text-white text-base font-semibold  leading-tight mt-[38px]'>Next</button>
         </div>
 
         <div className='mt-[38px] text-center'><span className="text-black/opacity-70 text-sm font-normal leading-[17.50px]">Already have an account? </span>
-        <span className="text-black text-sm font-semibold  leading-[17.50px]">Log in</span></div>
+        <Link href={'/sign-in'}><span className="text-black text-sm font-semibold  leading-[17.50px]">Log in</span></Link></div>
       </form>
     </div>
   );
