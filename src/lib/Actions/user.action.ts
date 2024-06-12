@@ -1,12 +1,14 @@
 'use server'
 import { db } from "@/lib/db"
+import { unstable_noStore as noStore } from 'next/cache'
 
 import { revalidatePath } from "next/cache";
 import * as z from 'zod';
 import { BasicDetailsValidation, ProfilePicValidation, SocialMediaValidation, SocialValidation, UsernameValidation } from "../Validations/UserValidation";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 export const getUserbyEmail =async (email : string )=>{
+    noStore();
     try {
         const user =await db.user.findUnique({where : {email}})
 
@@ -17,12 +19,28 @@ export const getUserbyEmail =async (email : string )=>{
 }
 
 export const getUserbyId = async (id : string )=>{
+    noStore();
     try {
         const user =await db.user.findUnique({where:{id}});
         return user;
     } catch (error) {
         return null;
     }
+}
+
+export const getUserbyIdSocial = async (id : string )=>{
+    noStore();
+    try {
+        const user =await db.user.findUnique({
+                where:{id},
+                include:{
+                    socialMedia:true
+                }
+    });
+        return user;
+    } catch (error) {
+        return null;
+    }   
 }
 // export const usernameupdate = async (username : string , id : string , pathname : string)=>{
 //     try {
@@ -38,6 +56,7 @@ export const getUserbyId = async (id : string )=>{
 // }
 
 export async function usernameupdate(values: z.infer<typeof UsernameValidation>, id: string | null, pathname: string) {
+    noStore();
     if(!id){
         return {error:"Not Logged In"}
     }
@@ -99,6 +118,7 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
 
 
 export async function socialupdate(values: z.infer<typeof SocialValidation>, id: string | null, pathname: string) {
+    noStore();
     if(!id){
         return {error:"Not Logged In"}
     }
@@ -151,6 +171,7 @@ export async function socialupdate(values: z.infer<typeof SocialValidation>, id:
 
 
 export async function basicdetailsupdate(values: z.infer<typeof BasicDetailsValidation>, id: string | null, pathname: string) {
+    noStore();
     if(!id){
         return {error:"Not Logged In"}
     }
@@ -188,6 +209,7 @@ export async function basicdetailsupdate(values: z.infer<typeof BasicDetailsVali
 
 
 export async function profilepicupdate(values: z.infer<typeof ProfilePicValidation>, id: string | null, pathname: string) {
+    noStore();
     if(!id){
         return {error:"Not Logged In"}
     }
@@ -222,6 +244,7 @@ export async function profilepicupdate(values: z.infer<typeof ProfilePicValidati
 
 
 export async function whetherboarded(id: string | null) {
+    noStore();
     if(!id){
         return false;
     }
@@ -237,3 +260,11 @@ export async function whetherboarded(id: string | null) {
     return false;
 }
 
+
+export async function getUserId(){
+    const session = await auth();
+    if(!session || !session.userId) return null;
+    const userid=session.userId
+    if(!userid) return null;
+    return userid
+  }
