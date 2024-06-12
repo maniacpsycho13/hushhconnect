@@ -68,7 +68,7 @@ export default function OauthSignIn() {
   // Render a button for each supported OAuth provider
   // you want to add to your app. This example uses only Google.
   return (
-    <div className='px-6 pb-4'>
+    <div className='px-6 pb-4 mt-[22px]'>
       <div  className="grid grid-cols-2 gap-x-4 ">
         
           <button onClick={() => handleSignIn('oauth_google')} className='h-14 px-[45px] py-[18px] bg-white rounded-[10px] border border-zinc-300 flex-col justify-center items-center gap-2.5 inline-flex'>
