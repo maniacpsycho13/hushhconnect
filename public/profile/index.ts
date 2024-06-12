@@ -10,6 +10,11 @@ import name from "./name.svg"
 import arrowcircle from "./arrowcircle.svg"
 import hushhCard from "./hushhCard.svg"
 import shareicon from "./shareicon.svg"
+import bell from "./bell.svg"
+import community from "./community.svg"
+import homeicon from "./homeicon.svg"
+import profileicon from "./profileicon.svg"
+import coloredcircle from "./coloredcircle.svg"
 
 // import homepage from "./HomePage.svg"
 
@@ -42,6 +47,11 @@ export {
     arrowcircle,
     hushhCard,
     shareicon,
+    bell,
+    community,
+    homeicon,
+    profileicon,
+    coloredcircle
 
     // backicon,
     // airplane,

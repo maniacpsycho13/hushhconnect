@@ -21,6 +21,9 @@ import Tick1 from "./Tick1.svg"
 import Tick2 from "./Tick2.svg"
 import detail from "./detail.svg"
 
+import lowerNav from "./lowerNav.svg"
+import lowerNav2 from "./lowerNav2.svg"
+
 
 
 
@@ -51,7 +54,10 @@ export {
     Tick2, 
     detail,
 
-    homepage
+    homepage,
+
+    lowerNav,
+    lowerNav2
 
     
 }
