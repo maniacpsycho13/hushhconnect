@@ -9,7 +9,7 @@ const page = () => {
             <p className="text-gray-900 text-xl font-bold  leading-[25.20px]">for signing up...</p>
             <p className=" text-neutral-500 text-[15px] font-normal w-[70%] mt-[12px] leading-tight">Start sharing everything you are, in one simple link.</p>
         </div>
-        <div className="w-[328px] h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] justify-center items-center gap-2.5 inline-flex">
+        <div className="w-full h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] justify-center items-center gap-2.5 inline-flex">
             <Link href={'template'}><div className="text-white text-base font-semibold ">Continue </div></Link>
         </div>
     </div>
