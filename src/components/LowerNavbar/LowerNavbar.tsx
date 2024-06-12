@@ -36,7 +36,7 @@ const LowerNavbar = () => {
       {isToggled && (
         <div className='fixed inset-0 bg-black/80 z-20'>
           <div className='flex flex-col items-center justify-end h-full pb-[2.8rem]'>
-            <div className='text-white mb-4 flex gap-[24px] flex-col'>
+            <div className='text-white mb-4 flex gap-[24px] flex-col items-center' >
               <p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Threads</p>
               <p className="text-white/opacity-95 text-base font-medium  leading-[19px]">Products</p>
             </div>
