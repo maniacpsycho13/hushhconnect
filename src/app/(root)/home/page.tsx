@@ -4,14 +4,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs, profileTabshome } from '@/Data/ProfileData'
 import { find } from '../../../../public/profile'
 import DashboardPage from '../dashboard/page'
+import Link from 'next/link'
 
 const page = () => {
   return (
     <div>
       <div className='px-6 py-4'>
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-center'>
         <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div> 
-          <Image src={find} alt="find" />  
+          <div className='flex gap-[26px] pt-[6px]'>
+            <Link href={'thread'}><div className=" text-gray-500 text-sm font-medium  leading-[22.91px] ">Thread</div></Link>
+            <Link href={'product'}><div className=" text-gray-500 text-sm font-medium  leading-[22.91px]">Product</div></Link>
+          </div>
         </div>
 
         <div className='mt-4'>
