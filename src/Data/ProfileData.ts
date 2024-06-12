@@ -4,3 +4,10 @@ export const profileTabs = [
     { value: "Meeting", label: "Schedule Meet",  },
    
   ];
+
+  export const profileTabshome = [
+    { value: "threads", label: "Threads",  },
+    { value: "Product", label: "Products",  },
+    
+   
+  ];

@@ -45,6 +45,7 @@ import { basicdetailsupdate } from "@/lib/Actions/user.action"
 import { backicon, detail } from "../../../../../public/profilePage"
 import { FormError } from "../form-error"
 import { FormSuccess } from "../form-success"
+import Link from "next/link"
 
 
 
@@ -84,7 +85,7 @@ export function BasicDetails({id}:{id:string}) {
         setError(data?.error);
         setSuccess(data?.success);
         if(data?.success){
-            router.push('/onboarding/username');
+            router.push('/onboarding/yourself');
         }
       })
     })
@@ -99,7 +100,7 @@ export function BasicDetails({id}:{id:string}) {
 
         <div  className='bg-white px-6 pt-4'>
           <div >
-            <Image src={backicon} alt="backicon" ></Image>
+            <Link href={'userdetails'}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
             <div className='mt-[28px]'>
               <Image src={detail} alt="lock" ></Image>

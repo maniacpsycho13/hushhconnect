@@ -28,6 +28,7 @@ import { Lock, backicon } from "../../../../../public/profilePage"
 import { FormSuccess } from "../form-success"
 import { FormError } from "../form-error"
 import { usernameupdate } from "@/lib/Actions/user.action"
+import Link from "next/link"
 
 export function UsernameForm({id}:{id:string}) {
 
@@ -54,7 +55,7 @@ export function UsernameForm({id}:{id:string}) {
         setError(data?.error);
         setSuccess(data?.success);
         if(data?.success){
-            router.push('/onboarding/yourself');
+            router.push('/onboarding/basicdetails');
         }
       })
     })
@@ -68,7 +69,7 @@ export function UsernameForm({id}:{id:string}) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white px-4 pt-4'>
           <div >
-            <Link href={'/basicdetails'}><Image src={backicon} alt="backicon" ></Image></Link>
+            <Link href={''}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
 
           <div className='mt-[28px]'>

@@ -1,0 +1,65 @@
+import Image from 'next/image'
+import React from 'react'
+import { find } from '../../../../../public/profile'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { profileTabs, profileTabshome } from '@/Data/ProfileData'
+
+const page = () => {
+  return (
+    <div>
+      <div className='px-6 py-4'>
+      <div className='flex justify-between'>
+        <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div> 
+          <Image src={find} alt="find" />  
+        </div>
+
+        <div className='mt-4'>
+        <Tabs defaultValue='threads' className='w-full'>
+           <TabsList className='flex bg-transparent gap-6' >
+            {profileTabshome.map((tab) => (
+              <TabsTrigger key={tab.label} value={tab.value} className='tab'>
+                {/* <Image
+                  src={tab.icon}
+                  alt={tab.label}
+                  width={24}
+                  height={24}
+                  className='object-contain max-sm:hidden'
+                /> */}
+                <p className=''>{tab.label}</p>
+
+                
+              </TabsTrigger>
+            ))}
+          </TabsList> 
+          
+            <TabsContent
+              key={`content-threads`}
+              value="threads"
+              className='w-full text-light-1'
+            >
+            {/* <ThreadsTab
+                currentUserId={user.id}
+                accountId={userInfo.id}
+                accountType='User'
+              /> */}
+            </TabsContent>
+
+            <TabsContent
+              key={`content-Product`}
+              value="Product"
+              className='w-full text-light-1'
+            >
+              {/* <div><ProductsTab 
+                currentUserId={user.id}
+                accountId={userInfo.id}
+                accountType='User'></ProductsTab></div> */}
+
+            </TabsContent>
+        </Tabs>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default page
