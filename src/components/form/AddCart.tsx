@@ -17,27 +17,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-
 import { useUploadThing } from "@/lib/uploadthing";
 import { isBase64Image } from "@/lib/utils";
 
 import { CreateProduct } from "@/lib/Validations/ProductValidation";
 import { createProduct } from "@/lib/Actions/product.action";
-
-interface Props {
-  // userid: string;
-  btnTitle: string;
-}
-
-interface ProductProps {
-  fileUrl: string;
-  price: string;
-  tile: string;
-  link: string;
-  currency: string;
-}
 
 const AddCart = () => {
   const router = useRouter();
@@ -50,7 +34,6 @@ const AddCart = () => {
 
   const form = useForm<z.infer<typeof CreateProduct>>({
     resolver: zodResolver(CreateProduct),
-
   });
 
   const onSubmit = async (values: z.infer<typeof CreateProduct>): Promise<void> => {
@@ -68,7 +51,7 @@ const AddCart = () => {
       }
 
       await createProduct({
-        fileUrl : values.fileUrl,
+        fileUrl: values.fileUrl,
         title: values.title,
         currency: values.currency,
         price: values.price,
@@ -83,7 +66,7 @@ const AddCart = () => {
       }
     } finally {
       setIsLoading(false);  // Set loading to false after submission completes
-      alert("your product added successfully");
+      alert("Your product added successfully");
     }
   };
 
@@ -111,143 +94,147 @@ const AddCart = () => {
   };
 
   return (
-    <Form {...form}>
-      <form
-        className='flex flex-col justify-start gap-8'
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <FormField
-          control={form.control}
-          name='fileUrl'
-          render={({ field }) => (
-            <FormItem className='flex items-center gap-4'>
-              <FormLabel className=' flex h-60 w-full items-center justify-center rounded-lg bg-dark-4 '>
-                {field.value ? (
-                  <Image
-                    src={field.value}
-                    alt='profile_icon'
-                    width={96}
-                    height={96}
-                    priority
-                    className=' object-contain'
+    <div className="px-6 pt-4 pb-24">
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+          <div className="w-16 h-16 border-4 border-t-4 border-white rounded-full animate-spin"></div>
+        </div>
+      )}
+      <Form {...form}>
+        <form
+          className="flex flex-col justify-start"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <div className="flex items-center">
+            <div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">
+              Cancel
+            </div>
+            <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">
+              Add Product
+            </div>
+            <div
+              className="text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0 outline-none cursor-pointer"
+              onClick={form.handleSubmit(onSubmit)}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Post"}
+            </div>
+          </div>
+
+          <FormField
+            control={form.control}
+            name="fileUrl"
+            render={({ field }) => (
+              <FormItem className="flex items-center gap-4 mt-[15px] w-full">
+                <FormLabel className="h-[155px] bg-zinc-300 opacity-30 rounded-lg w-full">
+                  {field.value ? (
+                    <Image
+                      src={field.value}
+                      alt="profile_icon"
+                      width={96}
+                      height={96}
+                      priority
+                      className="object-contain"
+                    />
+                  ) : (
+                    <div className="text-center text-black mt-auto opacity-95 text-xs font-medium leading-[33.29px]">
+                      Upload Product Image
+                    </div>
+                  )}
+                </FormLabel>
+                <FormControl className="flex-1 text-base-semibold text-gray-200">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    placeholder="Add Product photo"
+                    className="account-form_image-input hidden"
+                    onChange={(e) => handleImage(e, field.onChange)}
                   />
-                ) : (
-                  <p className="text-base text-gray-400 font-[300] ">Upload Product Image</p>
-                )}
+                </FormControl>
+              </FormItem>
+            )}
+          />
 
-                <FormLabel className=''>
-                {field.value ? (
-                  <Image
-                    src={editbox2}
-                    alt='profile_icon'
-                    width={32}
-                    height={32}
-                    priority
-                    className='rounded-full object-contain absolute right-[2rem] top-[3px] opacity-1'
-                  />
-                ) : (
-                  <Image
-                    src={editbox2}
-                    alt='profile_icon'
-                    width={32}
-                    height={32}
-                    className='object-contain absolute right-[2rem] top-[25rem] opacity-1'
-                  />
-                )}
-              </FormLabel>
-              </FormLabel>
-              <FormControl className='flex-1 text-base-semibold text-gray-200'>
-                <Input
-                  type='file'
-                  accept='image/*'
-                  placeholder='Add Product photo'
-                  className='account-form_image-input hidden '
-                  onChange={(e) => handleImage(e, field.onChange)}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+          <div className="text-black mt-[29.3px] mb-[5px] text-[10.88px] font-normal uppercase leading-[13.40px]">
+            Product information
+          </div>
 
-        <p className="text-[14px] text-[#8E8E8E]">PRODUCT INFORMATION</p>
+          <div className="flex flex-col gap-[10px]">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="flex w-full flex-col gap-3">
+                  <FormControl>
+                    <Input
+                      type="text"
+                      className="w-full h-[54px] px-4 bg-zinc-100 rounded-[14px] border-none justify-start items-center gap-2.5 inline-flex focus:border-none focus-visible:border-none shadow-none focus:outline-none text-neutral-500 text-base font-normal"
+                      placeholder="Product Title"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name='title'
-          render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormControl>
-                <Input
-                  type='text'
-                  className='account-form_input no-focus p-6'
-                  placeholder="Product Title"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="link"
+              render={({ field }) => (
+                <FormItem className="flex w-full flex-col gap-3">
+                  <FormControl>
+                    <Input
+                      type="text"
+                      className="w-full h-[54px] px-4 bg-zinc-100 rounded-[14px] border-none justify-start items-center gap-2.5 inline-flex focus:border-none focus-visible:border-none shadow-none focus:outline-none text-neutral-500 text-base font-normal"
+                      placeholder="Product Link"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <FormField
-          control={form.control}
-          name='link'
-          render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormControl>
-                <Input
-                  type='text'
-                  className='account-form_input no-focus p-6'
-                  placeholder="Product Link"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            <FormField
+              control={form.control}
+              name="currency"
+              render={({ field }) => (
+                <FormItem className="flex w-full flex-col gap-3">
+                  <FormControl>
+                    <Input
+                      type="text"
+                      className="w-full h-[54px] px-4 bg-zinc-100 rounded-[14px] border-none justify-start items-center gap-2.5 inline-flex focus:border-none focus-visible:border-none shadow-none focus:outline-none text-neutral-500 text-base font-normal"
+                      placeholder="Currency"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-      <FormField
-          control={form.control}
-          name='currency'
-          render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormControl>
-                <Input
-                  type='text'
-                  className='account-form_input no-focus p-6'
-                  placeholder="Currency"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='price'
-          render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormControl>
-                <Input
-                  type='text' 
-                  className='account-form_input no-focus p-6'
-                  placeholder="Price"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button type='submit' className='bg-primary-500' disabled={isLoading}>
-          {isLoading ? 'Loading...' : 'Add Product'}
-        </Button>
-      </form>
-    </Form>
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem className="flex w-full flex-col gap-3">
+                  <FormControl>
+                    <Input
+                      type="text"
+                      className="w-full h-[54px] px-4 bg-zinc-100 rounded-[14px] border-none justify-start items-center gap-2.5 inline-flex focus:border-none focus-visible:border-none shadow-none focus:outline-none text-neutral-500 text-base font-normal"
+                      placeholder="Price"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 };
 
