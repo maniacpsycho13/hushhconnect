@@ -54,7 +54,7 @@ const ProfileCard = (props:UserDetails) => {
                         
                     </div>
 
-                    <div className='bg-[#EFEFEF] rounded-xl p-4 mx-[5px]'>
+                    <div className=' rounded-xl p-4 mx-[5px]'>
                         <p className='text-center text-[#171717] text-[12px] font-medium'>{props.bio}</p>
                     </div>
 
@@ -138,7 +138,7 @@ const ProfileCard = (props:UserDetails) => {
                 </div>
             </div>
 
-            <div className={`fixed inset-0 bg-black bg-opacity-80 backdrop-blur-[7.20px] flex items-end transition-transform duration-300 z-100 ${showCard ? 'translate-y-0' : 'translate-y-full'}`}>
+            <div className={`fixed inset-0 bg-black bg-opacity-80 backdrop-blur-[7.20px] flex items-end z-50 transition-transform duration-300  ${showCard ? 'translate-y-0' : 'translate-y-full'}`}>
                 <div className='w-full shadow-lg rounded-t-lg'>
                     <div className='px-[14px]'>
                         <div className="w-full h-2 bg-zinc-300 rounded-tl-xl rounded-tr-xl" />
