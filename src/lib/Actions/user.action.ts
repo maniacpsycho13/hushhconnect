@@ -5,7 +5,7 @@ import { unstable_noStore as noStore } from 'next/cache'
 import { revalidatePath } from "next/cache";
 import * as z from 'zod';
 import { BasicDetailsValidation, ProfilePicValidation, SocialMediaValidation, SocialValidation, UsernameValidation } from "../Validations/UserValidation";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 export const getUserbyEmail =async (email : string )=>{
     noStore();
@@ -260,3 +260,11 @@ export async function whetherboarded(id: string | null) {
     return false;
 }
 
+
+export async function getUserId(){
+    const session = await auth();
+    if(!session || !session.userId) return null;
+    const userid=session.userId
+    if(!userid) return null;
+    return userid
+  }
