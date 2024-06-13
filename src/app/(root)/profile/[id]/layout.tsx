@@ -5,6 +5,7 @@ import { fetchPostsByUserId } from "@/lib/Actions/post.action";
 import { fetchProductsByUserId } from "@/lib/Actions/product.action";
 import { getUserbyId, getUserbyIdSocial } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
+import ProfileLoginCard from "@/components/ProfileCard/ProfileLoginCard";
 
 export type UserDetails={
   id:string
@@ -19,22 +20,24 @@ export type UserDetails={
 }
 export default async function layout({ children, params }: { children: React.ReactNode , params : {id : string}}) {
     
+    const session = await auth();
     const user=await getUserbyIdSocial(params.id);
     const posts=await fetchPostsByUserId(params.id);
     const products=await fetchProductsByUserId(params.id);
-
+    
     if(!user) return null
     const userdetails:UserDetails={
-        id:user.id,
-        username:user.username,
-        profilePic:user.image,
-        bio:user.bio,
-        email:user.email,
-        name:user.name,
-        lastname:user.gender,
-        socialmedia:user.socialMedia,
-        posts:posts
+      id:user.id,
+      username:user.username,
+      profilePic:user.image,
+      bio:user.bio,
+      email:user.email,
+      name:user.name,
+      lastname:user.gender,
+      socialmedia:user.socialMedia,
+      posts:posts
       }
+    if(!session || !session.userId) return <ProfileLoginCard {...userdetails}/>
 
     return (
     <div>
