@@ -22,7 +22,7 @@ import detail from "./detail.svg"
 
 import lowerNav from "./lowerNav.svg"
 import lowerNav2 from "./lowerNav2.svg"
-
+import loginbg from "./loginbg.svg"
 
 
 
@@ -56,7 +56,8 @@ export {
     homepage,
 
     lowerNav,
-    lowerNav2
+    lowerNav2,
+    loginbg
 
     
 }

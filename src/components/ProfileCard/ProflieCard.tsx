@@ -46,11 +46,7 @@ const ProfileCard = (props:UserDetails) => {
                         {props.socialmedia?.map((item:any) => (
                             <Link href={item.url} key={item.platform}><Image src={platformIcons[item.platform]} width={26} height={26} alt="Group1" /></Link>
                         ))}
-                       {/* <Link href={props.socialmedia?.[0].url}><Image src={instagram} alt="Group1" /></Link>
-                       <Link href={''}><Image src={twitter} width={26} height={26} alt="Group1" /></Link>
-                       <Link href={''}><Image src={facebook} alt="Group1" /></Link>
-                       <Link href={''}><Image src={youtube} alt="Group1" /></Link>
-                       <Link href={''}><Image src={linkedin} alt="Group1" /></Link> */}
+                       
                         
                     </div>
 

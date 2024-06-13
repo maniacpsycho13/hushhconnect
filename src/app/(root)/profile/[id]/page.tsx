@@ -1,3 +1,4 @@
+import ProfileLoginCard from "@/components/ProfileCard/ProfileLoginCard";
 import ProfileCard from "@/components/ProfileCard/ProflieCard";
 import { getUserbyId, getUserbyIdSocial } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
@@ -38,7 +39,9 @@ export default async function page( {params}:{params : {id : string}} ) {
   return (
     <div>
       {/* {JSON.stringify(user)} */}
-      <ProfileCard {...userdetails}/>
+      {/* <ProfileCard {...userdetails}/> */}
+
+      <ProfileLoginCard {...userdetails}/>
     </div>
   )
 }
