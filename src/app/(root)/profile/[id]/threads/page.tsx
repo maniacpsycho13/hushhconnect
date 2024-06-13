@@ -9,7 +9,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
 
   return (
-    <div>
+    <div className='bg-[#F4F4F5] px-4'>
         <Suspense fallback={<PostsSkeleton/>}>
         {posts?.map((post:any) => (
             <Post key={post.id} post={post} />
