@@ -4,9 +4,11 @@ import React, { useState } from 'react'
 import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, name, shareicon, user} from "@/../public/profile"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from '@/Data/ProfileData'
-import { UserDetails } from '@/app/(root)/profile/[id]/page'
+import { UserDetails } from '@/app/(root)/profile/[id]/layout'
 import Link from 'next/link'
 import { facebook, instagram, linkedin, twitter, youtube } from '../../../public/profilePage'
+import { PathParamsContext } from 'next/dist/shared/lib/hooks-client-context.shared-runtime'
+import Post from '../Post/Post'
 
 const ProfileCard = (props:UserDetails) => {
 
@@ -69,18 +71,11 @@ const ProfileCard = (props:UserDetails) => {
         <Tabs defaultValue='threads' className='w-full'>
            <TabsList className='flex bg-transparent gap-[10px]' >
             {profileTabs.map((tab) => (
-              <TabsTrigger key={tab.label} value={tab.value} className='tab'>
-                {/* <Image
-                  src={tab.icon}
-                  alt={tab.label}
-                  width={24}
-                  height={24}
-                  className='object-contain max-sm:hidden'
-                /> */}
-                <p className=''>{tab.label}</p>
-
-                
-              </TabsTrigger>
+              <Link href={tab.value} key={tab.label}>
+                  <TabsTrigger key={tab.label} value={tab.value} className='tab'>
+                    <p className=''>{tab.label}</p>
+                  </TabsTrigger>
+              </Link>
             ))}
           </TabsList> 
           
@@ -89,6 +84,9 @@ const ProfileCard = (props:UserDetails) => {
               value="threads"
               className='w-full text-light-1'
             >
+              {/* {props.posts?.map((post:any) => ( */}
+                
+                
               {/* <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}

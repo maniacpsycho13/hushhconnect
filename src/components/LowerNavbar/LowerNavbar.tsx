@@ -5,7 +5,7 @@ import { lowerNav2 } from '../../../public/profilePage'
 import { bell, coloredcircle, community, homeicon, profileicon, CrossColor } from '../../../public/profile' // Assume closeicon is the cross icon image
 import Link from 'next/link'
 
-const LowerNavbar = ( { id } : { id : string} ) => {
+const LowerNavbar = ( { id } : { id : string | null} ) => {
   // State to manage the toggle
   const [isToggled, setIsToggled] = useState(false);
 
@@ -24,7 +24,7 @@ const LowerNavbar = ( { id } : { id : string} ) => {
           <Image src={bell} alt='nav' className='ml-[16%]'></Image>
           <Image src={community} alt='nav' className='ml-[40%]'></Image>
          <div className='ml-auto'>
-         <Link href={'/profile/'+id} className={''}><Image src={profileicon} alt='nav' className=''></Image></Link>
+         <Link href={'/profile/'+id+"/threads"} className={''}><Image src={profileicon} alt='nav' className=''></Image></Link>
          </div>
         </div>
         <div className='flex absolute justify-center w-full mx-auto mt-[-1.5rem] z-20'>

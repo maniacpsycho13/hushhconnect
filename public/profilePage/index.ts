@@ -11,6 +11,7 @@ import linkedin from "./linkedin.svg"
 import facebook from "./facebook.svg"
 import youtube from "./youtube.svg"
 import homepage from "./HomePage.svg"
+import product1 from "./product1.png"
 
 import backicon from "./backicon.svg"
 // import airplane from "./airplane.svg"
@@ -56,7 +57,8 @@ export {
     homepage,
 
     lowerNav,
-    lowerNav2
+    lowerNav2,
+    product1
 
     
 }
