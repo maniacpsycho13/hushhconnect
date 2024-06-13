@@ -128,8 +128,8 @@ const AddCart = () => {
             control={form.control}
             name="fileUrl"
             render={({ field }) => (
-              <FormItem className="flex items-center gap-4 mt-[15px] w-full">
-                <FormLabel className="h-[155px] bg-zinc-300 opacity-30 rounded-lg w-full">
+              <FormItem className="flex items-center justify-center gap-4 mt-[15px] w-full">
+                <FormLabel className="h-[155px] bg-zinc-300 opacity-80 rounded-lg w-full">
                   {field.value ? (
                     <Image
                       src={field.value}
@@ -137,7 +137,8 @@ const AddCart = () => {
                       width={96}
                       height={96}
                       priority
-                      className="object-contain"
+                      className="object-contain h-full w-full "
+                      
                     />
                   ) : (
                     <div className="text-center text-black mt-auto opacity-95 text-xs font-medium leading-[33.29px]">
