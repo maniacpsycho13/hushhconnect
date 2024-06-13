@@ -10,7 +10,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
 
   return (
-    <div>
+    <div className='grid grid-cols-2 bg-[#F4F4F5]'>
         <Suspense fallback={<PostsSkeleton/>}>
         {products?.map((post:any) => (
             <ProductCard key={post.id} fileUrl={post.fileUrl} title={post.title} price={post.price} currency={post.currency} link={post.link} />

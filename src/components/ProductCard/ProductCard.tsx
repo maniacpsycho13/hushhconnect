@@ -6,11 +6,11 @@ export default function ProductCard({fileUrl,title,price,currency,link}:{fileUrl
   return (
 
     <Link href={link}>
-    <div className="my-10 mx-6 w-[163px]">
-        <Image src={fileUrl} alt="hushh" width={163} height={166}/>
-        <div className="flex flex-row justify-between">
-        <p className="text-black text-xs ml-2 font-normal leading-[17.74px] mt-2">{title}</p>
-        <p className="text-black text-xs mr-2 font-normal leading-[17.74px] mt-2">{currency}{price}</p>
+    <div className=" mx-6 h-[168px]">
+        <Image src={fileUrl} alt="hushh" width={163} height={166} className="w-full h-[166px]"/>
+        <div className="flex flex-row justify-between items-center mt-3">
+        <p className="text-black text-sm font-normal  leading-[17.74px]">{title}</p>
+        <p className="text-black text-sm mr-2 font-normal leading-[17.74px] ">{currency}{price}</p>
         </div>
     </div>
     </Link>
