@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { facebook, instagram, linkedin, twitter, youtube } from '../../../public/profilePage'
 import { PathParamsContext } from 'next/dist/shared/lib/hooks-client-context.shared-runtime'
 import Post from '../Post/Post'
+import { SharingOption } from './Sharingoption'
 
 const ProfileCard = (props:UserDetails) => {
 
@@ -152,7 +153,8 @@ const ProfileCard = (props:UserDetails) => {
                                 <p className="text-white text-[8.85px] font-medium font-['Figtree']">{props.email}</p>
                             </div>
                             <div className='absolute top-[24px] right-[26px]'>
-                                <Image src={shareicon} alt="card" className="" />
+                                
+                                <SharingOption/>
                             </div>
                         </div>
 
