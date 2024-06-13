@@ -149,8 +149,8 @@ const ProfileCard = (props:UserDetails) => {
                         <div className='relative'>
                             <Image src={hushhCard} alt="card" className="w-full  relative" />
                             <div className='absolute top-[16px] left-[24px] flex flex-col'>
-                                <p className="text-white text-2xl font-normal font-['Figtree']">{props.name}{props.lastname}</p>
-                                <p className="text-white text-[8.85px] font-medium font-['Figtree']">{props.email}</p>
+                                <p className="text-white text-2xl font-normal ">{props.name}{props.lastname}</p>
+                                <p className="text-white text-[8.85px] font-medium ">{props.email}</p>
                             </div>
                             <div className='absolute top-[24px] right-[26px]'>
                                 
