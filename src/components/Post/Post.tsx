@@ -61,7 +61,7 @@ async function Post({ post }: { post: PostWithExtras }) {
 
       {post.caption && (
         <div className="text-sm leading-none flex items-center space-x-2 font-medium px-3 sm:px-0">
-          <Link href={`/dashboard/${username}`} className="font-bold">
+          <Link href={`/profile/${userId}/threads`} className="font-bold">
             {username}
           </Link>
           <p>{post.caption}</p>

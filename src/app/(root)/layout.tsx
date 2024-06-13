@@ -6,7 +6,7 @@ import React from 'react'
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const id = await getUserId();
-  if(!id) notFound();
+  // if(!id) notFound();
   return (
     <div>
         {children}

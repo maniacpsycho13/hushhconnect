@@ -49,6 +49,8 @@ const AddCart = () => {
           values.fileUrl = imgRes[0].url;
         }
       }
+      console.log(values);
+      
 
       await createProduct({
         fileUrl: values.fileUrl,
@@ -57,6 +59,7 @@ const AddCart = () => {
         price: values.price,
         link: values.link,
       });
+      alert("Your product added successfully");
 
       // After submission, navigate to the appropriate page
       if (pathname === "/createproduct") {
@@ -66,7 +69,7 @@ const AddCart = () => {
       }
     } finally {
       setIsLoading(false);  // Set loading to false after submission completes
-      alert("Your product added successfully");
+      
     }
   };
 

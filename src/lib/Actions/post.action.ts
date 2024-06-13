@@ -221,6 +221,47 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
     }
   }
 
+
+
+  export async function fetchPostsByUserId(userId: string) {
+    noStore();
+  
+    try {
+      const data = await db.post.findMany({
+        where: {
+          user: {
+            id: userId,
+          }
+        },
+        include: {
+          comments: {
+            include: {
+              user: true,
+            },
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+          likes: {
+            include: {
+              user: true,
+            },
+          },
+          savedBy: true,
+          user: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+  
+      return data;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch posts");
+    }
+  }
+
   export async function updatePost(values: z.infer<typeof UpdatePost>) {
     const userId = await getUserId();
   
