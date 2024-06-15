@@ -31,7 +31,7 @@ const ProfileCard = (props:UserDetails) => {
                 <div className='flex justify-between'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
                     <div className='flex gap-4'>
-                        <Image src={user} alt="user" />
+                        <Link href={'/settings'} ><Image src={user} alt="user" /></Link>
                         <Image src={find} alt="find" />
                     </div>
                 </div>
