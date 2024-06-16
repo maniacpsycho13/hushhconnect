@@ -26,8 +26,7 @@ const ProfileCard = (props:UserDetails) => {
             id: props.id,
             name: props.name,
           });
-          setGoogleWallet(response.data.saveUrl);
-          // console.log(response.data.saveUrl);
+          setGoogleWallet(response.data.saveUrl);          
           
         } catch (error) {
           console.error('Error creating pass:', error);

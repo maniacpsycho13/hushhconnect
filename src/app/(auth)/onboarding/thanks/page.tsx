@@ -1,7 +1,15 @@
+'use client'
+import { getUserbyId } from '@/lib/Actions/user.action';
+import { db } from '@/lib/db';
+import { auth } from '@clerk/nextjs/server';
+import axios from 'axios';
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const page = () => {
+
+const Page = () => {
+  
+
   return (
     <div className='px-6 py-4 h-screen'>
         <div className=' flex h-[90%] flex-col justify-center'>
@@ -16,4 +24,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
