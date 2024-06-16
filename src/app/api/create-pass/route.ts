@@ -225,8 +225,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     
     
     //await createPassClass();
-    return await createPassObject(req, res);
-    // return NextResponse.json({ error: credentialsPath }, { status: 400 });
+    //return await createPassObject(req, res);
+    return NextResponse.json({ error: credentialsPath }, { status: 400 });
   } catch (error) {
     console.error('Error creating pass:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
