@@ -11,14 +11,14 @@ const classId = `${issuerId}.generic_class`;
 const credentialsPath = path.resolve(process.cwd(), process.env.GOOGLE_APPLICATION_CREDENTIALS as string);
 
 
-// const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
 
-// const httpClient = new GoogleAuth({
-//   credentials: credentials,
-//   scopes: 'https://www.googleapis.com/auth/wallet_object.issuer'
-// });
+const httpClient = new GoogleAuth({
+  credentials: credentials,
+  scopes: 'https://www.googleapis.com/auth/wallet_object.issuer'
+});
 
-//  const baseUrl = 'https://walletobjects.googleapis.com/walletobjects/v1';
+ const baseUrl = 'https://walletobjects.googleapis.com/walletobjects/v1';
 
 // async function createPassClass() {
 //   const genericClass = {
@@ -121,7 +121,7 @@ const credentialsPath = path.resolve(process.cwd(), process.env.GOOGLE_APPLICATI
 //       ]
 //     }
 //   };
-
+//
 //   try {
 //     await httpClient.request({
 //       url: `${baseUrl}/genericClass/${classId}`,
@@ -142,82 +142,88 @@ const credentialsPath = path.resolve(process.cwd(), process.env.GOOGLE_APPLICATI
 //   }
 // }
 
-// async function createPassObject(req: NextRequest, res: NextResponse) {
-//   const { email, name, id } = await req.json();
+async function createPassObject(req: NextRequest, res: NextResponse) {
+  const { email, name, id } = await req.json();
 
-//   if (!email || !name || !id) {
-//     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-//   }
+  if (!email || !name || !id) {
+    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  }
 
-//   const objectSuffix = `${email.replace(/[^\w.-]/g, '_')}`;
-//   const objectId = `${issuerId}.${objectSuffix}`;
+  const objectSuffix = `${email.replace(/[^\w.-]/g, '_')}`;
+  const objectId = `${issuerId}.${objectSuffix}`;
 
-//   const genericObject = {
-//     id: `${objectId}`,
-//     classId: classId,
-//     genericType: 'GENERIC_TYPE_UNSPECIFIED',
-//     hexBackgroundColor: '#0038FD',
-//     logo: {
-//       sourceUri: {
-//         uri: 'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg'
-//       }
-//     },
-//     cardTitle: {
-//       defaultValue: {
-//         language: 'en',
-//         value: 'Hushh Wallet'
-//       }
-//     },
-//     subheader: {
-//       defaultValue: {
-//         language: 'en',
-//         value: 'Name'
-//       }
-//     },
-//     header: {
-//       defaultValue: {
-//         language: 'en',
-//         value: name
-//       }
-//     },
-//     barcode: {
-//       type: 'QR_CODE',
-//       value: `https://hushhconnect.vercel.app/profile/${id}/threads`
-//     },
-//     heroImage: {
-//       sourceUri: {
-//         uri: 'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/google-io-hero-demo-only.jpg'
-//       }
-//     },
-//     textModulesData: [
-//       {
-//         header: 'POINTS',
-//         body: '1234',
-//         id: 'points'
-//       },
-//       {
-//         header: 'CONTACTS',
-//         body: '20',
-//         id: 'contacts'
-//       }
-//     ]
-//   };
+  const genericObject = {
+    id: `${objectId}`,
+    classId: classId,
+    genericType: 'GENERIC_TYPE_UNSPECIFIED',
+    hexBackgroundColor: '#0038FD',
+    logo: {
+      sourceUri: {
+        uri: 'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg'
+      }
+    },
+    cardTitle: {
+      defaultValue: {
+        language: 'en',
+        value: 'Hushh Wallet'
+      }
+    },
+    subheader: {
+      defaultValue: {
+        language: 'en',
+        value: 'Name'
+      }
+    },
+    header: {
+      defaultValue: {
+        language: 'en',
+        value: name
+      }
+    },
+    barcode: {
+      type: 'QR_CODE',
+      value: `https://hushhconnect.vercel.app/profile/${id}/threads`
+    },
+    heroImage: {
+      sourceUri: {
+        uri: 'https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/google-io-hero-demo-only.jpg'
+      }
+    },
+    textModulesData: [
+      {
+        header: 'POINTS',
+        body: '1234',
+        id: 'points'
+      },
+      {
+        header: 'CONTACTS',
+        body: '20',
+        id: 'contacts'
+      }
+    ]
+  };
 
-//   const claims = {
-//     iss: credentials.client_email,
-//     aud: 'google',
-//     origins: [],
-//     typ: 'savetowallet',
-//     payload: {
-//       genericObjects: [genericObject]
-//     }
-//   };
+  const claims = {
+    iss: process.env.GOOGLE_WALLET_CLIENT_EMAIL,
+    aud: 'google',
+    origins: [],
+    typ: 'savetowallet',
+    payload: {
+      genericObjects: [genericObject]
+    }
+  };
+  let privatekey=process.env.GOOGLE_WALLET_PRIVATE_KEY
+  if(!privatekey){
+    return NextResponse.json({ error: 'Missing Information' }, { status: 400 });
+  }
+  privatekey=privatekey.replace(/\\n/g, '\n');
+  // privatekey.replace(/\\n/g, '\n'); 
 
-//   const token = jwt.sign(claims, credentials.private_key, { algorithm: 'RS256' });
-//   const saveUrl = `https://pay.google.com/gp/v/save/${token}`;
+  const token = jwt.sign(claims, privatekey , { algorithm: 'RS256' });
+  const saveUrl = `https://pay.google.com/gp/v/save/${token}`;
 
-//   return NextResponse.json({ saveUrl }, { status: 200 });
-// }
+  return NextResponse.json({ saveUrl }, { status: 200 });
+}
 
 export async function POST(req: NextRequest, res: NextResponse) {
   try {
