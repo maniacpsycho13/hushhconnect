@@ -3,8 +3,6 @@ import { GoogleAuth } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
-import Error from 'next/error';
-import { getToggleButtonGroupUtilityClass } from '@mui/material';
 
 const issuerId = process.env.ISSUER_ID;
 const classId = `${issuerId}.generic_class`;
@@ -226,11 +224,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     
     
-    await createPassClass();
+    //await createPassClass();
     return await createPassObject(req, res);
     // return NextResponse.json({ error: credentialsPath }, { status: 400 });
   } catch (error) {
     console.error('Error creating pass:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
+}
+
+export async function GET(req: NextRequest, res: NextResponse) {
+  return NextResponse.json({ error: 'hi there' }, { status: 200 });
 }
