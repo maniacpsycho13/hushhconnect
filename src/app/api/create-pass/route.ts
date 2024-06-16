@@ -8,15 +8,15 @@ const issuerId = process.env.ISSUER_ID;
 const classId = `${issuerId}.generic_class`;
 
 
-const credentialsPath = path.resolve(process.cwd(), process.env.GOOGLE_APPLICATION_CREDENTIALS as string);
+// const credentialsPath = path.resolve(process.cwd(), process.env.GOOGLE_APPLICATION_CREDENTIALS as string);
 
 
-const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+// const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
 
-const httpClient = new GoogleAuth({
-  credentials: credentials,
-  scopes: 'https://www.googleapis.com/auth/wallet_object.issuer'
-});
+// const httpClient = new GoogleAuth({
+//   credentials: credentials,
+//   scopes: 'https://www.googleapis.com/auth/wallet_object.issuer'
+// });
 
  const baseUrl = 'https://walletobjects.googleapis.com/walletobjects/v1';
 
@@ -231,8 +231,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     
     
     //await createPassClass();
-    //return await createPassObject(req, res);
-    return NextResponse.json({ error: credentialsPath }, { status: 400 });
+    return await createPassObject(req, res);
+   // return NextResponse.json({ error: credentialsPath }, { status: 400 });
   } catch (error) {
     console.error('Error creating pass:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
