@@ -28,6 +28,7 @@ import ErrorForm from "@/components/ui/Error";
 function CreatePage() {
   const router = useRouter();
   const mount = useMount();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof CreatePost>>({
     resolver: zodResolver(CreatePost),
     defaultValues: {
@@ -37,35 +38,45 @@ function CreatePage() {
   });
   const fileUrl = form.watch("fileUrl");
 
+  const handleSubmit = async (values: z.infer<typeof CreatePost>) => {
+    setIsSubmitting(true);
+    const res = await createPost(values);
+    if (res) {
+      toast.error(<ErrorForm res={res} />);
+    } else {
+      toast.success("Post created successfully!");
+      router.push("/"); // Redirect to another page after successful post creation
+    }
+    setIsSubmitting(false);
+  };
+
   if (!mount) return null;
 
   return (
     <div className="px-6 py-4">
-      
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(async (values) => {
-            const res = await createPost(values);
-            if (res) {
-              return toast.error(<ErrorForm res={res} />);
-            } else {
-              toast.success("Post created successfully!");
-              router.push("/"); // Redirect to another page after successful post creation
-            }
-          })}
+          onSubmit={form.handleSubmit(handleSubmit)}
           className="space-y-4"
         >
-
           <div className="flex items-center">
-            <div className=" text-red-500 text-sm font-semibold  leading-[18.42px] flex justify-start">Cancel</div>
-            <div className="mx-auto text-black text-base font-semibold  leading-[18.42px] flex justify-center">Add Thread</div>
-            <Button type="submit" disabled={form.formState.isSubmitting} className=" text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0">
-              Post
-            </Button>
+            <div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">Cancel</div>
+            <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">Add Thread</div>
+            <div
+              onClick={!isSubmitting ? form.handleSubmit(handleSubmit) : undefined}
+              className={`text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0 ${isSubmitting ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+              style={{ pointerEvents: isSubmitting ? 'none' : 'auto' }}
+            >
+              {isSubmitting ? (
+                <div className="loader" /> // Add your loader icon or spinner here
+              ) : (
+                'Post'
+              )}
+            </div>
           </div>
           {!!fileUrl && (
             <div className="h-[155px] overflow-hidden rounded-md">
-              <AspectRatio ratio={16/9} className="w-full h-[155px]   rounded-xl text-black">
+              <AspectRatio ratio={16 / 9} className="w-full h-[155px] rounded-xl text-black">
                 <Image
                   src={fileUrl}
                   alt="Post preview"
@@ -118,7 +129,7 @@ function CreatePage() {
                     type="text"
                     id="caption"
                     placeholder="Title"
-                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight placeholder:opacity-50"
+                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
                     {...field}
                     required
                   />
@@ -127,29 +138,13 @@ function CreatePage() {
               </FormItem>
             )}
           />
-            {/* convert it for text area */}
-            {/* <FormField
-            control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl> */}
-                  <Input
-                    type="text"
-                    id="caption"
-                    placeholder="Thread Content"
-                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight placeholder:opacity-50"
-                    // {...field}
-                    
-                    required
-                  />
-                {/* </FormControl>
-                <FormMessage />
-              </FormItem> */}
-            {/* )} */}
-          {/* /> */}
-
-          
+          <Input
+            type="text"
+            id="caption"
+            placeholder="Thread Content"
+            className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
+            required
+          />
         </form>
       </Form>
     </div>
