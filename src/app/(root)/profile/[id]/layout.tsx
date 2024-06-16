@@ -6,6 +6,7 @@ import { fetchProductsByUserId } from "@/lib/Actions/product.action";
 import { getUserbyId, getUserbyIdSocial } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 import ProfileLoginCard from "@/components/ProfileCard/ProfileLoginCard";
+import axios from "axios";
 
 export type UserDetails={
   id:string
@@ -24,8 +25,10 @@ export default async function layout({ children, params }: { children: React.Rea
     const user=await getUserbyIdSocial(params.id);
     const posts=await fetchPostsByUserId(params.id);
     const products=await fetchProductsByUserId(params.id);
+
     
     if(!user) return null
+    
     const userdetails:UserDetails={
       id:user.id,
       username:user.username,
@@ -35,15 +38,15 @@ export default async function layout({ children, params }: { children: React.Rea
       name:user.name,
       lastname:user.gender,
       socialmedia:user.socialMedia,
-      posts:posts
+      posts:posts,
       }
     if(!session || !session.userId) return <ProfileLoginCard {...userdetails}/>
-
+    
     return (
     <div>
 
+
       <ProfileCard {...userdetails}/>
-    
       {children}
     </div>
   )

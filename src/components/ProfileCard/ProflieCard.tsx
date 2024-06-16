@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, name, shareicon, user} from "@/../public/profile"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from '@/Data/ProfileData'
@@ -10,10 +10,34 @@ import { facebook, instagram, linkedin, twitter, youtube } from '../../../public
 import { PathParamsContext } from 'next/dist/shared/lib/hooks-client-context.shared-runtime'
 import Post from '../Post/Post'
 import { SharingOption } from './Sharingoption'
+import axios from 'axios'
+
 
 const ProfileCard = (props:UserDetails) => {
 
     const [showCard, setShowCard] = useState<boolean>(false);
+    const [googleWallet,setGoogleWallet] = useState<string>("");
+
+    useEffect(() => {
+      const handleSubmit = async () => {
+        try {
+          const response = await axios.post('/api/create-pass', {
+            email: props.email,
+            id: props.id,
+            name: props.name,
+          });
+          setGoogleWallet(response.data.saveUrl);
+          // console.log(response.data.saveUrl);
+          
+        } catch (error) {
+          console.error('Error creating pass:', error);
+        }
+      };
+      handleSubmit();
+      
+    },[])
+    
+
     const handleToggle = () => {
         setShowCard(!showCard);
     };
@@ -82,8 +106,6 @@ const ProfileCard = (props:UserDetails) => {
               className='w-full text-light-1'
             >
               {/* {props.posts?.map((post:any) => ( */}
-                
-                
               {/* <ThreadsTab
                 currentUserId={user.id}
                 accountId={userInfo.id}
@@ -159,7 +181,9 @@ const ProfileCard = (props:UserDetails) => {
                         </div>
 
                         <div className='flex justify-between px-[22px]'>
-                          <Image src={GoogleWallet} alt='goofle'></Image>
+                          <Link href={googleWallet || ""} target="_blank">
+                          <Image src={GoogleWallet} alt='google'></Image>
+                          </Link>
                           <Image src={AppleWallet} alt='apple'></Image>
                         </div>
                     </div>
