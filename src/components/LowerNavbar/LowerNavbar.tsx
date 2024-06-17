@@ -14,6 +14,13 @@ const LowerNavbar = ({ id }: { id: string | null }) => {
     setIsToggled(!isToggled);
   }
 
+  // Function to handle the delayed toggle
+  const handleDelayedToggle = () => {
+    setTimeout(() => {
+      setIsToggled(false);
+    }, 300); // 300ms delay
+  }
+
   return (
     <div className='h-full'>
       <div className={`w-full flex flex-col fixed bottom-0 z-10`}>
@@ -36,8 +43,8 @@ const LowerNavbar = ({ id }: { id: string | null }) => {
         <div className='fixed inset-0 bg-black/80 z-20 transition-opacity duration-300 ease-in-out'>
           <div className='flex flex-col items-center justify-end h-full pb-[2.8rem]'>
             <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
-              <Link href={'/create'} onClick={handleToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
-              <Link href={'/createproduct'} onClick={handleToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
+              <Link href={'/create'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
+              <Link href={'/createproduct'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
             </div>
             <div className='cursor-pointer' onClick={handleToggle}>
               <Image src={CrossColor} alt='close' className='transition-transform duration-300 ease-in-out' />
