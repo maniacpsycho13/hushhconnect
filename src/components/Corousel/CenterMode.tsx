@@ -1,4 +1,7 @@
+// SimpleSlider.tsx
+
 "use client";
+
 import React, { useEffect } from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,7 +12,11 @@ import './Carosuel.css';
 
 const images: StaticImageData[] = [hushhprofile, hushhprofile, hushhprofile, hushhprofile, hushhprofile, hushhprofile];
 
-const SimpleSlider: React.FC = () => {
+interface SimpleSliderProps {
+  onImageSelect: (url: string) => void;
+}
+
+const SimpleSlider: React.FC<SimpleSliderProps> = ({ onImageSelect }) => {
   useEffect(() => {
     const handleResize = () => {
       const slides = document.querySelectorAll<HTMLElement>(".slick-slide");
@@ -95,11 +102,15 @@ const SimpleSlider: React.FC = () => {
     },
   };
 
+  const handleImageClick = (url: StaticImageData) => {
+    onImageSelect(url.src);
+  };
+
   return (
     <div className="slider-container">
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div key={index} className="slide">
+          <div key={index} className="slide" onClick={() => handleImageClick(image)}>
             <Image className="profile-image" src={image} alt={`profile-${index}`} layout="responsive" />
           </div>
         ))}
