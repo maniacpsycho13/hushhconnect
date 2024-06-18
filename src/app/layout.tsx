@@ -8,7 +8,7 @@ import {
   UserButton,
   UserProfile
 } from '@clerk/nextjs'
-
+import { EdgeStoreProvider } from '../lib/edgestore';
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 const fontSans = FontSans({
@@ -44,7 +44,9 @@ export default function RootLayout({
           <UserButton/>
 
         </SignedIn> */}
+        <EdgeStoreProvider> 
         {children}
+        </EdgeStoreProvider>
         </body>
      
     </html>
