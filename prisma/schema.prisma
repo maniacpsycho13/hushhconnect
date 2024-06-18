@@ -34,6 +34,13 @@ model User {
   comments      Comment[]
   followedBy    Follows[]   @relation("following")
   following     Follows[]   @relation("follower")
+  communities          CommunityMembership[]
+  communityPosts       CommunityPost[]
+  communityRequests    CommunityJoinRequest[]
+  communityPostLikes   CommunityPostLike[]
+  communityPostSaved   CommunityPostSavedPost[]
+  communityPostComments CommunityPostComment[]
+  communityAdmin       CommunityAdmin[]
 } 
 
 
@@ -71,8 +78,12 @@ model Post {
     comments  Comment[]
     user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId    String      @map("user_id")
+    // community   Community?  @relation(fields: [communityId], references: [id])
+    // communityId String?     @map("community_id")
+
 
     @@index([userId])
+    // @@index([communityId])
 }
 
 model Product {
@@ -133,3 +144,116 @@ model Comment {
     @@index([userId])
 }
 
+
+model Community {
+  id          String               @id @default(cuid())
+  name        String               @unique
+  description String
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  members     CommunityMembership[]
+  posts       CommunityPost[]
+  admins      CommunityAdmin[]
+  joinRequests    CommunityJoinRequest[] 
+}
+
+model CommunityMembership {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @map("user_id")
+  community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId String    @map("community_id")
+  createdAt   DateTime  @default(now())
+
+  @@unique([userId, communityId])
+  @@index([userId])
+  @@index([communityId])
+}
+
+model CommunityAdmin {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @map("user_id")
+  community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId String    @map("community_id")
+  createdAt   DateTime  @default(now())
+
+  @@unique([userId, communityId])
+  @@index([userId])
+  @@index([communityId])
+}
+
+model CommunityPost {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  content     String
+  fileUrl     String?   @unique
+  likes       CommunityPostLike[]
+  savedBy     CommunityPostSavedPost[]
+  comments    CommunityPostComment[]
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @map("user_id")
+  community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId String    @map("community_id")
+
+  @@index([userId])
+  @@index([communityId])
+}
+
+model CommunityPostLike {
+  id          String         @id @default(cuid())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  communityPost CommunityPost @relation(fields: [communityPostId], references: [id], onDelete: Cascade)
+  communityPostId String     @map("community_post_id")
+  userId      String         @map("user_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([communityPostId, userId])
+  @@index([userId])
+}
+
+model CommunityPostSavedPost {
+  id          String         @id @default(cuid())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  communityPost CommunityPost @relation(fields: [communityPostId], references: [id], onDelete: Cascade)
+  communityPostId String     @map("community_post_id")
+  userId      String         @map("user_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([communityPostId, userId])
+  @@index([userId])
+}
+
+model CommunityPostComment {
+  id          String         @id @default(cuid())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  body        String
+  communityPost CommunityPost @relation(fields: [communityPostId], references: [id], onDelete: Cascade)
+  communityPostId String     @map("community_post_id")
+  userId      String         @map("user_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([communityPostId])
+  @@index([userId])
+}
+
+model CommunityJoinRequest {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String    @map("user_id")
+  community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  communityId String    @map("community_id")
+  status      String    @default("pending") // Can be "pending", "approved", "rejected"
+  createdAt   DateTime  @default(now())
+
+  @@unique([userId, communityId])
+  @@index([userId])
+  @@index([communityId])
+}
