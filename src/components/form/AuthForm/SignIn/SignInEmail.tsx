@@ -73,7 +73,7 @@ export default function SignInEmail() {
         </div>
       </div>
 
-      <div className='text-[30px] font-bold text-black mt-[40px]'>Login in</div>
+      <div className='text-[30px] font-bold text-black mt-[40px]'>Log in</div>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className='flex flex-col w-full mt-[38px]'>
           <label htmlFor="email" className='text-black text-sm font-normal leading-[17.50px]'>Email address</label>
