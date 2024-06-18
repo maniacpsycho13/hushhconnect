@@ -28,7 +28,9 @@ const LowerNavbar = ({ id }: { id: string | null }) => {
         <div className='flex absolute w-full mt-[1.7rem] px-6 z-10 transition-all duration-300 ease-in-out'>
           <Link href={'/home/thread'}> <Image src={homeicon} alt='nav' /></Link>
           <Image src={bell} alt='nav' className='ml-[16%]' />
-          <Image src={community} alt='nav' className='ml-[40%]' />
+          <Link href={'/allcomm'} className='ml-[40%]' >
+          <Image src={community} alt='nav'   />
+          </Link>
           <div className='ml-auto'>
             <Link href={'/profile/' + id + "/threads"}><Image src={profileicon} alt='nav' /></Link>
           </div>

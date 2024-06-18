@@ -1,4 +1,4 @@
-import { CreateComm } from "@/components/form/CreateCommunity";
+import { CreateComm } from "@/components/Community/CreateCommunity";
 import { getUserId } from "@/lib/Actions/user.action";
 
 export default async function Page() {

@@ -26,8 +26,8 @@ import Image from "next/image"
 
 
 import Link from "next/link"
-import { FormError } from "./AuthForm/form-error"
-import { FormSuccess } from "./AuthForm/form-success"
+import { FormError } from "../form/AuthForm/form-error"
+import { FormSuccess } from "../form/AuthForm/form-success"
 import { Lock, backicon } from "../../../public/profilePage"
 import { CreateCommunity } from "@/lib/Validations/CommunityVal"
 import { createCommunity } from "@/lib/Actions/community.action"
