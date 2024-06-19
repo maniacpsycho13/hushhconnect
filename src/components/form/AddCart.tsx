@@ -23,7 +23,7 @@ import { isBase64Image } from "@/lib/utils";
 import { CreateProduct } from "@/lib/Validations/ProductValidation";
 import { createProduct } from "@/lib/Actions/product.action";
 
-const AddCart = () => {
+const AddCart = ({communityId}:{communityId?:string}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -58,6 +58,8 @@ const AddCart = () => {
         currency: values.currency,
         price: values.price,
         link: values.link,
+        communityId:communityId || undefined
+
       });
       alert("Your product added successfully");
 

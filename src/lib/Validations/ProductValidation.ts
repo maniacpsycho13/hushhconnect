@@ -7,6 +7,7 @@ export const ProductSchema = z.object({
   price: z.string(),
   currency: z.string(),
   link  : z.string().url(),
+  communityId :z.string().optional()
 });
 
 export const CreateProduct = ProductSchema.omit({ id: true });

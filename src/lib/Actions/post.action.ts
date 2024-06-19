@@ -8,67 +8,49 @@ import { getUserId } from "./user.action";
 import {unstable_noStore as noStore} from "next/cache"
 
 export async function createPost(values: z.infer<typeof CreatePost>) {
-    const userId = await getUserId();
+  const userId = await getUserId();
 
-    if (!userId) {
-      return {
-        message: "User not found. Failed to Create Post.",
-      };
-    }
-  
-    const validatedFields = CreatePost.safeParse(values);
-  
-    if (!validatedFields.success) {
-      return {
-        errors: validatedFields.error.flatten().fieldErrors,
-        message: "Missing Fields. Failed to Create Post.",
-      };
-    }
-  
-    const { fileUrl, caption } = validatedFields.data;
-  
-    if (!fileUrl) {
-        
-    try {
-        await db.post.create({
-          data: {
-            caption,
-            user: {
-              connect: {
-                id: userId,
-              },
-            },
-          },
-        });
-      } catch (error) {
-        return {
-          message: "Database Error: Failed to Create Post.",
-        };
-      }
-    }else{
-        try {
-            await db.post.create({
-              data: {
-                caption,
-                fileUrl,
-                user: {
-                  connect: {
-                    id: userId,
-                  },
-                },
-              },
-            });
-          } catch (error) {
-            return {
-              message: "Database Error: Failed to Create Post.",
-            };
-          }
-
-    }
-  
-    revalidatePath("/Profle");
-    redirect("/Profle");
+  if (!userId) {
+    return {
+      message: "User not found. Failed to Create Post.",
+    };
   }
+
+  const validatedFields = CreatePost.safeParse(values);
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Create Post.",
+    };
+  }
+
+  const { fileUrl, caption, communityId } = validatedFields.data;
+
+  const postData = {
+    caption,
+    fileUrl: fileUrl || undefined,
+    user: {
+      connect: {
+        id: userId,
+      },
+    },
+    community: communityId ? { connect: { id: communityId } } : undefined,
+  };
+
+  try {
+    await db.post.create({
+      data: postData,
+    });
+  } catch (error) {
+    return {
+      message: "Database Error: Failed to Create Post.",
+    };
+  }
+
+  revalidatePath("/profile"+userId);
+  redirect("/profile/"+userId);
+}
 
 
   export async function deletePost(formData: FormData) {

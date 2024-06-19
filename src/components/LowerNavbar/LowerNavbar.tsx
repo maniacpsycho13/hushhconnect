@@ -5,7 +5,7 @@ import { lowerNav2 } from '../../../public/profilePage'
 import { bell, coloredcircle, community, homeicon, profileicon, CrossColor } from '../../../public/profile' // Assume closeicon is the cross icon image
 import Link from 'next/link'
 
-const LowerNavbar = ({ id }: { id: string | null }) => {
+const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:string }) => {
   // State to manage the toggle
   const [isToggled, setIsToggled] = useState(false);
 
@@ -29,7 +29,7 @@ const LowerNavbar = ({ id }: { id: string | null }) => {
           <Link href={'/home/thread'}> <Image src={homeicon} alt='nav' /></Link>
           <Image src={bell} alt='nav' className='ml-[16%]' />
           <Link href={'/allcomm'} className='ml-[40%]' >
-          <Image src={community} alt='nav'   />
+          <Image src={community} alt='nav'/>
           </Link>
           <div className='ml-auto'>
             <Link href={'/profile/' + id + "/threads"}><Image src={profileicon} alt='nav' /></Link>
@@ -44,10 +44,19 @@ const LowerNavbar = ({ id }: { id: string | null }) => {
       {isToggled && (
         <div className='fixed inset-0 bg-black/80 z-20 transition-opacity duration-300 ease-in-out'>
           <div className='flex flex-col items-center justify-end h-full pb-[2.8rem]'>
-            <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
-              <Link href={'/create'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
-              <Link href={'/createproduct'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
-            </div>
+            {!communityid && (
+                <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
+                <Link href={'create/'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
+                <Link href={'/createproduct'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
+              </div>
+            )}
+            {communityid && (
+                <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
+                <Link href={`/community/${communityid}/create/threads`} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
+                <Link href={'/community/${communityid}/create/products'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
+              </div>
+            )}
+            
             <div className='cursor-pointer' onClick={handleToggle}>
               <Image src={CrossColor} alt='close' className='transition-transform duration-300 ease-in-out' />
             </div>

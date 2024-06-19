@@ -1,6 +1,6 @@
 import AddCart from "@/components/form/AddCart";
 
-export default function page() {
+export default function Page() {
   return (
     <div>
         <AddCart/>

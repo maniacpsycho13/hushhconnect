@@ -4,7 +4,7 @@ import { checkUserRole, getCommunityById } from "@/lib/Actions/community.action"
 import { getUserId } from "@/lib/Actions/user.action";
 import Image from "next/image";
 import Link from "next/link";
-import { hushhprofile } from "../../../../../../public/profile";
+import { hushhprofile } from "../../../../../public/profile";
 
 export default async function Page({params}:{params:{id:string}}) {
     const userid= await getUserId();
@@ -43,7 +43,7 @@ export default async function Page({params}:{params:{id:string}}) {
         </div>
         {role.role==='none' && <div><CommunityReq communityid={params.id} userid={userid}/></div>} 
         {role.role==='admin' && <div><AllRequests communityId={params.id} userid={userid}/></div>}
-        {role.role==='member' && <div>u r fucking member</div>}
+        {role.role==='member' && <div>u r member</div>}
         </div>
     </>
   )
