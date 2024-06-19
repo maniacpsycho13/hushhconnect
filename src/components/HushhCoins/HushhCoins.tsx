@@ -6,7 +6,7 @@ import { Coin, gift, medal, whitebackicon, copyicon, referal } from '../../../pu
 import { hushhprofile } from '../../../public/profile'
 
 const HushhCoins = () => {
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCopy = () => {
     if (inputRef.current) {
