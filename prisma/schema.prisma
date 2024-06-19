@@ -95,6 +95,8 @@ model Product {
     currency      String
     user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId        String      @map("user_id")
+    community   Community?  @relation(fields: [communityId], references: [id])
+    communityId String?     @map("community_id")
 
     @@index([userId])
 }
@@ -151,6 +153,7 @@ model Community {
   updatedAt   DateTime             @updatedAt
   members     CommunityMembership[]
   posts        Post[]
+  products     Product[]
   admins      CommunityAdmin[]
   joinRequests    CommunityJoinRequest[] 
 }

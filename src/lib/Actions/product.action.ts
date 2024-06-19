@@ -78,3 +78,5 @@ export async function createProduct(values: z.infer<typeof CreateProduct>) {
       throw new Error("Failed to fetch posts");
     }
   }
+
+ export async function fetchProducts

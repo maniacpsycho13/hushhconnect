@@ -97,6 +97,9 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
   
     try {
       const data = await db.post.findMany({
+        where: {
+          communityId: null,
+        },
         include: {
           comments: {
             include: {
