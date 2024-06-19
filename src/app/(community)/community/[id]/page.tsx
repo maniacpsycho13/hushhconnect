@@ -15,9 +15,9 @@ export default async function Page({params}:{params:{id:string}}) {
   return (
     <>
     
-        <div className="px-6 pt-4">
+        <div className="px-6 pt-4 bg-zinc-100 h-screen">
           <div>
-            <div className="text-rose-500 w-[45%]  text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]">Community</div>
+            <div className="w-[45%]  text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]">Community</div>
           </div>
 
           <div className="pt-4">
