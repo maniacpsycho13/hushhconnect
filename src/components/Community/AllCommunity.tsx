@@ -12,7 +12,7 @@ export default async function AllCommunity() {
         )
     }
   return (
-    <div className="px-6 pt-2 bg-gray-100 h-screen">
+    <div className="px-6 pt-4 bg-gray-100 h-screen">
         <div className="flex justify-between mb-[24px]">
             <div>
                 <div className="text-rose-500  text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]">Community</div>
