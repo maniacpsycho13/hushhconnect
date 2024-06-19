@@ -79,4 +79,54 @@ export async function createProduct(values: z.infer<typeof CreateProduct>) {
     }
   }
 
- export async function fetchProducts
+ 
+  export async function fetchAllProducts(excludeCommunity: boolean = false) {
+    // equivalent to doing fetch, cache: no-store
+    noStore();
+  
+    try {
+      const data = await db.product.findMany({
+        where: excludeCommunity
+          ? {
+              communityId: null,
+            }
+          : {},
+        include: {
+          user: true,
+          community: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+  
+      return data;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch products");
+    }
+  }
+
+  export async function fetchProductsByCommunityId(communityId: string) {
+    noStore();
+  
+    try {
+      const data = await db.product.findMany({
+        where: {
+          communityId: communityId,
+        },
+        include: {
+          user: true,
+          community: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+  
+      return data;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch products");
+    }
+  }

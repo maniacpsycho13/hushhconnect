@@ -41,9 +41,11 @@ export default async function Page({params}:{params:{id:string}}) {
             Share
           </div>
         </div>
-        {role.role==='none' && <div><CommunityReq communityid={params.id} userid={userid}/></div>} 
         {role.role==='admin' && <div><AllRequests communityId={params.id} userid={userid}/></div>}
+        {role.role==='none' && <div><CommunityReq communityid={params.id} userid={userid}/></div>} 
         {role.role==='member' && <div>u r member</div>}
+
+        
         </div>
     </>
   )

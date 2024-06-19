@@ -81,7 +81,7 @@ model Post {
 
 
     @@index([userId])
-    // @@index([communityId])
+    @@index([communityId])
 }
 
 model Product {
@@ -99,6 +99,8 @@ model Product {
     communityId String?     @map("community_id")
 
     @@index([userId])
+    @@index([communityId])
+
 }
 
 model SavedPost {
