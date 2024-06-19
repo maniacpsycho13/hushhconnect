@@ -562,3 +562,29 @@ export async function createPost(values: z.infer<typeof CreatePost>) {
     }
   }
   
+
+  export async function fetchUserPostComments(userId: string) {
+    noStore();
+  
+    try {
+      const data = await db.comment.findMany({
+        where: {
+          post: {
+            userId: userId,
+          },
+        },
+        include: {
+          post: true,
+          user: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+      });
+  
+      return data;
+    } catch (error) {
+      console.error('Database Error:', error);
+      throw new Error('Failed to fetch comments');
+    }
+  }
