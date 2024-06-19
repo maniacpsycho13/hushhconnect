@@ -27,9 +27,11 @@ const CommunityNav = ({ id, communityid }: { id: string | null , communityid?:st
       <div className={`w-full flex flex-col fixed bottom-0 z-10`}>
         <Image src={lowerNav2} alt='nav' className='relative shadow-xl w-full transition-all duration-300 ease-in-out' />
         <div className='flex absolute w-full mt-[1.7rem] px-6 z-10 transition-all duration-300 ease-in-out'>
-          <Link href={'threads'}> <Image src={homeicon} alt='nav' /></Link>
-          <Image src={commthread} alt='nav' className='ml-[16%]' />
-          <Link href={'products'} className='ml-[40%]' >
+          <Link href={`/home`}> <Image src={homeicon} alt='nav' /></Link>
+        <Link href={`/community/${communityid}/threads`} className='ml-[16%]'>
+        <Image src={commthread} alt='nav' />
+        </Link>  
+          <Link href={`products`} className='ml-[40%]' >
           <Image src={commproduct} alt='nav'/>
           </Link>
           <div className='ml-auto'>
@@ -54,7 +56,7 @@ const CommunityNav = ({ id, communityid }: { id: string | null , communityid?:st
             {communityid && (
                 <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
                 <Link href={`/community/${communityid}/create/threads`} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
-                <Link href={'/community/${communityid}/create/products'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
+                <Link href={`/community/${communityid}/create/products`} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
               </div>
             )}
             
