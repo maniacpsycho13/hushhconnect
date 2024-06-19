@@ -89,31 +89,33 @@ export function CreateComm({id}:{id:string}) {
               <FormItem>
                 
                 <FormControl>
-                  <Input placeholder="Name of Community" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
+                  <Input placeholder="Name of Community" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight outline-none focus:border-zinc-300 shadow-none" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />  
 
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                
-                <FormControl>
-                  <Input placeholder="Description" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />  
+          <div className="mt-[12px]">
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  
+                  <FormControl>
+                    <Input placeholder="Description" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />  
+          </div>
           
           </div>
         <FormError message={error} />
         <FormSuccess message={success} />
-        <div className="px-4 pt-[88px]">
+        <div className="px-4 pt-[96px]">
           <Button type="submit" disabled={isPending} className=" h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight">Create</Button>
         </div>
       </form>
