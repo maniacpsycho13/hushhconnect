@@ -11,6 +11,7 @@ import { PathParamsContext } from 'next/dist/shared/lib/hooks-client-context.sha
 import Post from '../Post/Post'
 import { SharingOption } from './Sharingoption'
 import axios from 'axios'
+import { Coin } from '../../../public/coins'
 
 
 const ProfileCard = (props:UserDetails) => {
@@ -54,8 +55,16 @@ const ProfileCard = (props:UserDetails) => {
                 <div className='flex justify-between'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
                     <div className='flex gap-4'>
-                        <Link href={'/settings'} ><Image src={user} alt="user" /></Link>
-                        <Image src={find} alt="find" />
+                     <Link href={'/hushhcoins'}>
+                        <div className='w-[62.33px] h-[30.68px] bg-gradient-to-l from-rose-600 to-blue-700 rounded-[118.88px] justify-center flex items-center gap-[4px]'>
+                          <div>
+                            <Image src={Coin} alt='coin' className='w-[14.25px] h-[14.25px]'></Image>
+                          </div>
+                          <div className="text-white text-base font-semibold ">324</div>
+                        </div>
+                     </Link>
+                        {/* <Link href={'/settings'} ><Image src={user} alt="user" /></Link>
+                        <Image src={find} alt="find" /> */}
                     </div>
                 </div>
 

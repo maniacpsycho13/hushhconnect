@@ -1,0 +1,89 @@
+import Image from 'next/image'
+import React from 'react'
+import { backicon, hushhprofile } from '../../../public/profilePage'
+import { Coin } from '../../../public/coins'
+
+const Leaderboard = () => {
+  return (
+    <div className='bg-zinc-100  pt-4 h-screen'>
+        <div className='px-6'>
+            <Image src={backicon} alt='icon'></Image>
+        </div>
+        <div className='flex justify-center px-6'>
+            <div className="text-center  text-base font-bold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF] w-[35%] leading-[23.04px]">Leaderboard</div>
+        </div>
+
+        <div>
+            <div className='flex justify-between px-6'>
+                <div className='mt-[60px] flex flex-col items-center'>
+                    <Image src={hushhprofile} alt='profile' className='w-[71.04px] relative h-[71.04px] rounded-full border-2 border-black/opacity-25'></Image>
+                    <div className='text-center text-white text-base font-bold  leading-[23.04px] w-[26.88px] h-[26.88px] bg-black rounded-full absolute  top-[11.2rem] '>2</div>
+                   <div className='flex flex-col items-center'>
+                    <div className=" text-center text-black text-sm font-bold mt-3 leading-tight">Meghan Jes...</div>
+                        <div className="flex items-center">
+                            <div>
+                                <Image src={Coin} alt='coin' className='w-[14.25px] h-[14.25px]'></Image>
+                            </div>
+                            <div className="text-black text-sm font-semibold">150</div>
+                        </div>
+                   </div>
+                </div>
+
+                <div className='mt-[32.68px] flex flex-col items-center'>
+                    <Image src={hushhprofile} alt='profile' className='w-[80.64px] h-[80.64px] rounded-full border-2 border-rose-500'></Image>
+                    <div className='text-center text-white text-base font-bold  leading-[23.04px] w-[26.88px] h-[26.88px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-full absolute  top-[10.1rem] '>1</div>
+                    <div className='flex flex-col items-center'>
+                        <div className="mt-3 text-center text-black text-sm font-bold  leading-tight">Bryan Wolf</div>
+                        <div className="flex items-center">
+                            <div>
+                                <Image src={Coin} alt='coin' className='w-[14.25px] h-[14.25px]'></Image>
+                            </div>
+                            <div className="text-black text-sm font-semibold">150</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='mt-[60px] flex flex-col items-center'>
+                    <Image src={hushhprofile} alt='profile' className='w-[71.04px] relative h-[71.04px] rounded-full border-2 border-black/opacity-25'></Image>
+                    <div className='text-center text-white text-base font-bold  leading-[23.04px] w-[26.88px] h-[26.88px] bg-black rounded-full absolute  top-[11.2rem] '>2</div>
+                   <div className='flex flex-col items-center'>
+                    <div className=" text-center text-black text-sm font-bold mt-3 leading-tight">Meghan Jes...</div>
+                        <div className="flex items-center">
+                            <div>
+                                <Image src={Coin} alt='coin' className='w-[14.25px] h-[14.25px]'></Image>
+                            </div>
+                            <div className="text-black text-sm font-semibold">150</div>
+                        </div>
+                   </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <div className='bg-lime-50 rounded-tl-[30.72px] rounded-tr-[30.72px] pt-[23px] mt-[30px] px-6 h-full'>
+            <div className=" bg-white rounded-xl px-4 py-[8px] flex justify-between"> 
+                <div className='gap-[11px] flex items-center'>
+                    <p>4</p>
+                    <div className='flex items-center gap-[12px]'>
+                        <div>
+                            <Image src={hushhprofile} alt='profile' className='h-[30.72px] w-[30.72px]'></Image>
+                        </div>
+                        <div className="text-neutral-900 text-sm font-medium  leading-tight">Marsha Fisher</div>
+                    </div>
+                </div>
+
+                <div className='flex items-center gap-[4px]'>
+                    <div>
+                        <Image src={Coin} alt='coin ' className='w-[14.25px] h-[14.25px]'></Image>
+                    </div>
+                    <div className="text-black text-sm font-semibold ">68</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  )
+}
+
+export default Leaderboard

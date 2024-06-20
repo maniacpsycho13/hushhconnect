@@ -4,6 +4,7 @@ import React, { useRef } from 'react'
 
 import { Coin, gift, medal, whitebackicon, copyicon, referal } from '../../../public/coins'
 import { hushhprofile } from '../../../public/profile'
+import Link from 'next/link'
 
 const HushhCoins = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,10 +36,12 @@ const HushhCoins = () => {
             <Image src={medal} alt='medal' className='opacity-100' />
             <div className="text-white text-xs font-semibold uppercase leading-[14.40px]">24 referrals</div>
           </div>
-          <div className='px-4 flex h-[38.40px] bg-violet-50/20 rounded-[48px] items-center gap-[8px]'>
-            <Image src={gift} alt='medal' className='opacity-100' />
-            <div className="text-white text-xs font-semibold uppercase leading-[14.40px]">leaderboard</div>
-          </div>
+          <Link href={'leaderboard'}>
+            <div className='px-4 flex h-[38.40px] bg-violet-50/20 rounded-[48px] items-center gap-[8px]'>
+              <Image src={gift} alt='medal' className='opacity-100' />
+              <div className="text-white text-xs font-semibold uppercase leading-[14.40px]">leaderboard</div>
+            </div>
+          </Link>
         </div>
       </div>
 
