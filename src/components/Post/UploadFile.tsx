@@ -13,7 +13,7 @@ import { useDropzone, type DropzoneOptions } from 'react-dropzone';
 import { twMerge } from 'tailwind-merge';
 
 const variants = {
-  base: 'relative rounded-md p-4 w-96 max-w-[calc(100vw-1rem)] flex justify-center items-center flex-col cursor-pointer border border-dashed border-gray-400 dark:border-gray-300 transition-colors duration-200 ease-in-out',
+  base: ' p-4 w-full h-[155px] bg-zinc-300 opacity-30 rounded-lg flex justify-center items-center flex-col cursor-pointer    transition-colors duration-200 ease-in-out',
   active: 'border-2',
   disabled:
     'bg-gray-200 border-gray-300 cursor-default pointer-events-none bg-opacity-30 dark:bg-gray-700 dark:border-gray-600',
@@ -142,9 +142,9 @@ const MultiFileDropzone = React.forwardRef<HTMLInputElement, InputProps>(
               })}
             >
               <input ref={ref} {...getInputProps()} />
-              <div className="flex flex-col items-center justify-center text-xs text-gray-400">
+              <div className="flex flex-col items-center justify-center text-sm text-black">
                 <UploadCloudIcon className="mb-1 h-7 w-7" />
-                <div className="text-gray-400">
+                <div className="text-black">
                   drag & drop or click to upload
                 </div>
               </div>
@@ -160,7 +160,7 @@ const MultiFileDropzone = React.forwardRef<HTMLInputElement, InputProps>(
           {value?.map(({ file, progress }, i) => (
             <div
               key={i}
-              className="flex h-16 w-96 max-w-[100vw] flex-col justify-center rounded border border-gray-300 px-4 py-2"
+              className="flex h-16 w-full px-3 flex-col justify-center rounded border shadow-lg  "
             >
               <div className="flex items-center gap-2 text-gray-500 dark:text-white">
                 <FileIcon size="30" className="shrink-0" />
