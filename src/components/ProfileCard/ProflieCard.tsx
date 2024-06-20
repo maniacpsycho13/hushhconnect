@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, name, shareicon, user} from "@/../public/profile"
+import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, menu, name, shareicon, user} from "@/../public/profile"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from '@/Data/ProfileData'
 import { UserDetails } from '@/app/(root)/profile/[id]/layout'
@@ -12,12 +12,14 @@ import Post from '../Post/Post'
 import { SharingOption } from './Sharingoption'
 import axios from 'axios'
 import { Coin } from '../../../public/coins'
+import './ProfileCard.css'; 
 
 
 const ProfileCard = (props:UserDetails) => {
 
     const [showCard, setShowCard] = useState<boolean>(false);
     const [googleWallet,setGoogleWallet] = useState<string>("");
+    const [showMenu, setShowMenu] = useState<boolean>(false);
 
     useEffect(() => {
       const handleSubmit = async () => {
@@ -41,6 +43,11 @@ const ProfileCard = (props:UserDetails) => {
     const handleToggle = () => {
         setShowCard(!showCard);
     };
+
+    const handleToggleMenu = () => {
+      setShowMenu(!showMenu);
+    };
+
     const platformIcons:any = {
         facebook,
         instagram,
@@ -52,9 +59,9 @@ const ProfileCard = (props:UserDetails) => {
   return (
     <div>
        <div className='bg-zinc-100 px-6 py-4'>
-                <div className='flex justify-between'>
+                <div className='flex justify-between items-center'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
-                    <div className='flex gap-4'>
+                    <div className='flex gap-4 items-center'>
                      <Link href={'/hushhcoins'}>
                         <div className='w-[62.33px] h-[30.68px] bg-gradient-to-l from-rose-600 to-blue-700 rounded-[118.88px] justify-center flex items-center gap-[4px]'>
                           <div>
@@ -63,8 +70,13 @@ const ProfileCard = (props:UserDetails) => {
                           <div className="text-white text-base font-semibold ">324</div>
                         </div>
                      </Link>
-                        {/* <Link href={'/settings'} ><Image src={user} alt="user" /></Link>
-                        <Image src={find} alt="find" /> */}
+                     <div onClick={handleToggleMenu} className="cursor-pointer">
+                <Image src={menu} alt='menu'></Image>
+            </div>
+            <div className={`menu-content ${showMenu ? 'open' : 'close'}`}>
+                <Image src={user} alt="user" />
+                <Image src={find} alt="find" />
+            </div>
                     </div>
                 </div>
 
@@ -89,11 +101,7 @@ const ProfileCard = (props:UserDetails) => {
                         <p className='text-center text-[#171717] text-[12px] font-medium'>{props.bio}</p>
                     </div>
 
-                    {/* <div className='my-4 text-[12px] font-medium text-black flex justify-between'>
-                       <div className='py-[6px] px-[24px] rounded-[4px] addcolor text-white'>Thread</div>
-                       <div className='py-[6px] px-[24px] bg-[#EFEFEF] rounded-[4px]'>Products</div>
-                       <div className='py-[6px] px-[24px] bg-[#EFEFEF] rounded-[4px]'>Schedule Meet</div>
-                     </div> */}
+                    
 
 {/* ------------------------------------------------------------------------------------------------------------ */}
       <div className='mt-[16.14px]'>

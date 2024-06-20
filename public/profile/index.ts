@@ -18,6 +18,7 @@ import coloredcircle from "./coloredcircle.svg"
 import CrossColor from "./CrossColor.svg"
 import AppleWallet from "./AppleWallet.svg"
 import GoogleWallet from "./GoogleWallet.svg"
+import menu from "./menu.svg"
 
 // import homepage from "./HomePage.svg"
 
@@ -57,7 +58,8 @@ export {
     coloredcircle,
     CrossColor,
     AppleWallet,
-    GoogleWallet
+    GoogleWallet,
+    menu,
 
     // backicon,
     // airplane,

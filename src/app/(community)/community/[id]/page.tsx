@@ -63,7 +63,8 @@ export default async function Page({params}:{params:{id:string}}) {
             Share
           </div>
           </div>
-          <CommunityReq communityid={params.id} userid={userid}/></div>
+          {/* <CommunityReq communityid={params.id} userid={userid}/> */}
+          </div>
           } 
 
         {role.role==='member' && <div className="pt-[28.14px] flex gap-[6px] justify-center">
