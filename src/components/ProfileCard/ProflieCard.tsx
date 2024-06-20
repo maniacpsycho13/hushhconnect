@@ -74,7 +74,7 @@ const ProfileCard = (props:UserDetails) => {
                 <Image src={menu} alt='menu'></Image>
             </div>
             <div className={`menu-content ${showMenu ? 'open' : 'close'}`}>
-                <Image src={user} alt="user" />
+                <Link href={'/settings'}><Image src={user} alt="user" /></Link>
                 <Image src={find} alt="find" />
             </div>
                     </div>
