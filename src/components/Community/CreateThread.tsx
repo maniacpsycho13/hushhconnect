@@ -24,11 +24,34 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import ErrorForm from "@/components/ui/Error";
+import { MultiFileDropzoneUsage } from "../Post/MainFileUpload";
+import {
+  MultiFileDropzone,
+  type FileState,
+} from '@/components/Post/UploadFile';
+import { useEdgeStore } from "@/lib/edgestore";
+import { getFileTypeFromUrl } from "@/lib/utils";
 
 function CreateThread({communityId}:{communityId:string}) {
   const router = useRouter();
   const mount = useMount();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fileStates, setFileStates] = useState<FileState[]>([]);
+  const [fileType, setFileType] = useState<string>("");
+  const { edgestore } = useEdgeStore();
+
+  function updateFileProgress(key: string, progress: FileState['progress']) {
+    setFileStates((fileStates) => {
+      const newFileStates = structuredClone(fileStates);
+      const fileState = newFileStates.find(
+        (fileState) => fileState.key === key,
+      );
+      if (fileState) {
+        fileState.progress = progress;
+      }
+      return newFileStates;
+    });
+  }
   const form = useForm<z.infer<typeof CreatePost>>({
     resolver: zodResolver(CreatePost),
     defaultValues: {
@@ -69,7 +92,7 @@ function CreateThread({communityId}:{communityId:string}) {
               style={{ pointerEvents: isSubmitting ? 'none' : 'auto' }}
             >
               {isSubmitting ? (
-                <div className="loader" /> // Add your loader icon or spinner here
+                <div className="loader">...Loading</div> // Add your loader icon or spinner here
               ) : (
                 'Post'
               )}
@@ -78,13 +101,26 @@ function CreateThread({communityId}:{communityId:string}) {
           {!!fileUrl && (
             <div className="h-[155px] overflow-hidden rounded-md">
               <AspectRatio ratio={16 / 9} className="w-full h-[155px] rounded-xl text-black">
-                <Image
+                {/* <Image
                   src={fileUrl}
                   alt="Post preview"
                   fill
                   className="rounded-md object-cover h-full w-full"
                   style={{ objectFit: 'contain' }}
-                />
+                /> */}
+                {fileType === "image" &&(
+                   <Image
+                   src={fileUrl}
+                   alt="Post preview"
+                   fill
+                   className="rounded-md object-cover h-full w-full"
+                   style={{ objectFit: 'contain' }}
+                 />
+                )}
+
+                {fileType === "video" && (
+                  <iframe src={fileUrl} ></iframe>
+                )}
               </AspectRatio>
             </div>
           )}
@@ -97,17 +133,72 @@ function CreateThread({communityId}:{communityId:string}) {
                 <FormLabel htmlFor="picture">Picture (Optional)</FormLabel>
                 <FormControl>
                   {!fileUrl && ( // Conditionally render the UploadButton based on fileUrl
-                    <UploadButton
-                      className="w-full h-[155px] bg-zinc-300 opacity-30 rounded-xl text-black"
-                      endpoint="imageUploader"
-                      onClientUploadComplete={(res) => {
-                        form.setValue("fileUrl", res[0].url);
-                        toast.success("Upload complete");
-                      }}
-                      onUploadError={(error: Error) => {
-                        console.error(error);
-                        toast.error("Upload failed");
-                      }}
+                    // <UploadButton
+                    //   className="w-full h-[155px] bg-zinc-300 opacity-30 rounded-xl text-black"
+                    //   endpoint="imageUploader"
+                    //   onClientUploadComplete={(res) => {
+                    //     form.setValue("fileUrl", res[0].url);
+                    //     toast.success("Upload complete");
+                    //   }}
+                    //   onUploadError={(error: Error) => {
+                    //     console.error(error);
+                    //     toast.error("Upload failed");
+                    //   }}
+                    // />
+                    // <MultiFileDropzoneUsage/>
+                    <MultiFileDropzone
+                          value={fileStates}
+                          onChange={(files) => {
+                            setFileStates(files);
+                          }}
+                          onFilesAdded={async (addedFiles) => {
+                            setFileStates([...fileStates, ...addedFiles]);
+                            await Promise.all(
+                              addedFiles.map(async (addedFileState) => {
+                                try {
+                                  const res = await edgestore.publicFiles.upload({
+                                    file: addedFileState.file,
+                                    onProgressChange: async (progress) => {
+                                      updateFileProgress(addedFileState.key, progress);
+                                      if (progress === 100) {
+                                        // wait 1 second to set it to complete
+                                        // so that the user can see the progress bar at 100%
+                                        await new Promise((resolve) => setTimeout(resolve, 1000));
+                                        updateFileProgress(addedFileState.key, 'COMPLETE');
+                                      }
+                                    },
+                                  });
+                                  
+                                  
+
+                                  let fileuurl = res.url;
+                                  let filetype = "";
+                                  let filesize =res.size;
+                                  filesize = filesize / (1024 * 1024);
+                                  if(filesize>10){
+                                      updateFileProgress(addedFileState.key, 'ERROR');
+                                      toast.error("File size should be less than 10 MB");
+                                  }
+                                  
+
+                                  if(fileuurl)filetype=getFileTypeFromUrl(fileuurl);
+                                  if(filetype == "image" || filetype == "video"){
+                                      form.setValue("fileUrl", res.url);
+                                  }else{
+                                      updateFileProgress(addedFileState.key, 'ERROR');
+                                      toast.error("Please upload an image or video");
+                                  }
+                                  // console.log("fileurl",fileuurl);
+                                  // // console.log("filetype",filetype);
+                                  
+                          
+
+                                } catch (err) {
+                                  updateFileProgress(addedFileState.key, 'ERROR');
+                                }
+                              }),
+                            );
+                          }}
                     />
                   )}
                 </FormControl>

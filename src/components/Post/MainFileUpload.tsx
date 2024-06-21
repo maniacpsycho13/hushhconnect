@@ -26,19 +26,7 @@ export function MultiFileDropzoneUsage() {
 
   return (
     <div className='px-6 pt-4'>
-      <div className="flex items-center">
-            <div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">
-              Cancel
-            </div>
-            <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">
-              Add Video
-            </div>
-            <button
-              className="text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0 outline-none cursor-pointer"
-            >
-              Post
-            </button>
-          </div>
+         
       <div className='mt-[15px]'>
         <MultiFileDropzone
           value={fileStates}

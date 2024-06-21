@@ -10,11 +10,16 @@ import PostOptions from "./PostOptions";
 import PostActions from "./PostActions";
 import { auth } from "@clerk/nextjs/server";
 import { getUserbyId } from "@/lib/Actions/user.action";
+import { getFileTypeFromUrl } from "@/lib/utils";
 
 async function Post({ post }: { post: PostWithExtras }) {
   const session = await auth();
   const userId = session.userId;
   const username = post.user.username;
+  let filetype="";
+  if(post.fileUrl){
+    filetype=getFileTypeFromUrl(post.fileUrl);
+  }
   
   if (!session || !session.userId) return null;
   if(!userId || !username) return null
@@ -47,14 +52,21 @@ async function Post({ post }: { post: PostWithExtras }) {
       </div>
 
       <Card className="relative h-[290px] w-full overflow-hidden rounded-none sm:rounded-md">
-        {post.fileUrl && (
-            <Image
-            src={post.fileUrl }
-            alt="Post Image"
-            fill
-            className="sm:rounded-md object-contain"
-            />
+        {post.fileUrl && filetype==="image" && (
+           <Image
+           src={post.fileUrl}
+           alt={post.caption}
+           fill
+           className="object-cover"
+          />
         )}
+        {post.fileUrl && filetype==="video" && (
+           <iframe
+           src={post.fileUrl}
+           className="object-cover"
+          />
+        )}
+
       </Card>
 
       <PostActions post={post} userId={userId} className="px-3 sm:px-0" />
