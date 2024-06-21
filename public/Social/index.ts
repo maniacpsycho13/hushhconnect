@@ -4,6 +4,7 @@ import linkedin from "./linkedin.svg"
 import TemplateButton from "./TemplateButton.svg"
 import urlImage from "./urlImage.svg"
 import youtube from "./youtube.svg"
+import addurl from "./addurl.svg"
 
 export {
     Insta,
@@ -11,5 +12,6 @@ export {
     linkedin,
     TemplateButton,
     urlImage,
-    youtube
+    youtube,
+    addurl
 }

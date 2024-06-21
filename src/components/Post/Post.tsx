@@ -63,10 +63,15 @@ async function Post({ post }: { post: PostWithExtras }) {
           />
         )}
         {post.fileUrl && filetype==="video" && (
+           <div className="absolute inset-0 flex items-center justify-center">
            <iframe
-           src={post.fileUrl}
-           className="object-cover"
-          />
+               src={post.fileUrl}
+               className="w-full h-full object-cover"
+               frameBorder="0"
+               allow="autoplay; encrypted-media"
+               allowFullScreen
+           />
+       </div>
         )}
 
       </Card>
