@@ -20,6 +20,8 @@ async function Post({ post }: { post: PostWithExtras }) {
   if(post.fileUrl){
     filetype=getFileTypeFromUrl(post.fileUrl);
   }
+  console.log(filetype);
+  
   
   if (!session || !session.userId) return null;
   if(!userId || !username) return null

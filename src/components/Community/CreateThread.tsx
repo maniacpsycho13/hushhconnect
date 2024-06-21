@@ -188,11 +188,9 @@ function CreateThread({communityId}:{communityId:string}) {
                                       updateFileProgress(addedFileState.key, 'ERROR');
                                       toast.error("Please upload an image or video");
                                   }
-                                  // console.log("fileurl",fileuurl);
-                                  // // console.log("filetype",filetype);
                                   
-                          
-
+                                  
+  
                                 } catch (err) {
                                   updateFileProgress(addedFileState.key, 'ERROR');
                                 }
