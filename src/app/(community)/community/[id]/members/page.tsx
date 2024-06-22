@@ -25,13 +25,13 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     alt={`${member.user.name}'s profile picture`}
                                     width={40}
                                     height={40}
-                                    className='h-[40px] w-[40px]'
+                                    className='h-[40px] w-[40px] rounded-full'
                                 />
                             </div>
                             <div className='flex flex-col'>
                                 <div className="text-black text-xs font-medium">{member.user.name}</div>
                                 <div className="text-xs font-normal bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]">
-                                    Status: member
+                                    Status: {role.role}
                                 </div>
                             </div>
                         </div>
