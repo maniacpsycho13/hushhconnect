@@ -48,7 +48,7 @@ const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:str
           <div className='flex flex-col items-center justify-end h-full pb-[2.8rem]'>
             {!communityid && (
                 <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
-                <Link href={'create/'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
+                <Link href={'/create'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p></Link>
                 <Link href={'/createproduct'} onClick={handleDelayedToggle}><p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Products</p></Link>
               </div>
             )}

@@ -8,7 +8,7 @@ import { getUserId } from '@/lib/Actions/user.action'
 import React from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabsAdmin, profileTabsMember } from "@/Data/ProfileData";
-import { addcommunity, commlock } from "../../../../../public/community";
+import { addcommunity, commlock, sharebutton } from "../../../../../public/community";
 import { backicon } from "../../../../../public/profilePage";
 
 
@@ -30,7 +30,7 @@ const Layout = async ({ children , params}: { children: React.ReactNode,params:{
               <div className="  text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]">Community</div>
             </div>
             <div>
-             <Image src={shareicon} alt="community"></Image>
+             <Image src={sharebutton} alt="community"></Image>
             </div>
           </div>
 
