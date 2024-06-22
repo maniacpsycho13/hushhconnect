@@ -40,13 +40,14 @@ export const createCommunity = async (values: z.infer<typeof CreateCommunity>, u
         return { error: "Invalid Fields" };
     }
 
-    const { name, description } = validated.data;
+    const { name, description , image } = validated.data;
 
     try {
         await db.community.create({
             data: {
                 name,
                 description,
+                image,
                 admins: {
                     create: {
                         userId

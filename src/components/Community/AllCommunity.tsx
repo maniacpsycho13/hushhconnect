@@ -19,7 +19,7 @@ export default async function AllCommunity() {
             return (
                 <>
                     <div className="flex items-center gap-4 py-[12px] border-b-2 border-neutral-300">
-                        <Image src={community.image || hushhprofile} alt="profile" className="w-[57px] h-[57px] rounded-full"></Image>
+                        <Image src={community.image ||   hushhprofile} alt="profile" className="w-[57px] h-[57px] rounded-full"></Image>
                         <Link href={`/community/${community.id}/threads`} className="text-black text-xs font-medium ">
                             <div key={community.id}>{community.name}</div>
                             <div className="text-zinc-600 text-xs font-normal lowercase">@{community.name}</div>
