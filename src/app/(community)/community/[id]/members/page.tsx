@@ -1,6 +1,7 @@
 import { checkUserRole, fetchAllMembersByCommunityId } from "@/lib/Actions/community.action";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { hushhprofile } from "../../../../../../public/profile";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const session = await auth();
@@ -21,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className='flex items-center gap-[8px]'>
                             <div>
                                 <Image
-                                    src={member.user.image}
+                                    src={member.user.image || hushhprofile}
                                     alt={`${member.user.name}'s profile picture`}
                                     width={40}
                                     height={40}

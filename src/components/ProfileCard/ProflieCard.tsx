@@ -37,7 +37,7 @@ const ProfileCard = (props:UserDetails) => {
       };
       handleSubmit();
       
-    },[])
+    },[props.email,props.id,props.name]);
     
 
     const handleToggle = () => {
