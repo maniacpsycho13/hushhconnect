@@ -19,7 +19,7 @@ export default function SharingCommunity() {
     const pathname = usePathname();
     console.log(pathname);
     const content="Hushh Community"
-    const path='www.hushhconnect.vercel.app'+pathname
+    const path='https://hushhconnect.vercel.app'+pathname
 
     return(
         <div className='flex gap-3 justify-center items-center'>
