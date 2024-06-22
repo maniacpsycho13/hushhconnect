@@ -142,9 +142,7 @@ const Layout = async ({ children , params}: { children: React.ReactNode,params:{
                   </TabsTrigger>
               </Link>
             ))}
-            <div className=" px-[21px] py-1.5 text-center text-black text-xs font-medium bg-neutral-200 rounded border justify-start items-center gap-2.5 inline-flex">
-            Member
-          </div>
+            
 
           
           </TabsList> 
