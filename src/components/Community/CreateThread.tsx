@@ -156,7 +156,7 @@ function CreateThread({ communityId }: { communityId: string }) {
                               let filetype = "";
                               let filesize = res.size;
                               filesize = filesize / (1024 * 1024);
-                              if (filesize > 10) {
+                              if (filesize > 20) {
                                 updateFileProgress(addedFileState.key, 'ERROR');
                                 toast.error("File size should be less than 10 MB");
                               } else {
