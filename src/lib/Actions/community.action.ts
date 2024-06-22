@@ -181,6 +181,7 @@ export const getAllJoinRequests = async (communityId: string) => {
             userId: request.userId,
             username: request.user.username,
             status: request.status,
+            image: request.user.image,
             createdAt: request.createdAt
         }));
     } catch (error) {

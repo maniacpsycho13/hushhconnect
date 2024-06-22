@@ -7,7 +7,7 @@ import { hushhprofile } from '../../../public/profile';
 type JoinRequest = {
     id: string;
     userId: string;
-   
+    image: string | null;
     username: string | null;
     status: string;
     createdAt: Date;
@@ -56,7 +56,7 @@ const AllRequests = ({ communityId , userid}: { communityId: string, userid: str
                            
                                 <div className='flex items-center gap-[8px]'>
                                 <div>
-                                    <Image src={hushhprofile} alt='profile' className='h-[40px] w-[40px] rounded-full'></Image>
+                                    <Image src={request.image || hushhprofile} alt='profile' className='h-[40px] w-[40px] rounded-full'></Image>
                                 </div>
                                 <div className='flex flex-col '>
                                     <div className="text-black text-xs font-medium ">{request.username}</div>
