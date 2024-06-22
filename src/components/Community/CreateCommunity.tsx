@@ -75,7 +75,13 @@ export function CreateComm({id}:{id:string}) {
       createCommunity(values,id).then((data)=>{
         setError(data?.error);
         setSuccess(data?.success);  
+        if(data?.success){
+          router.push('/allcomm');
+        }
       })
+      
+
+
     })
     
     console.log(values)
