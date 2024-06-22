@@ -7,7 +7,7 @@ import { hushhprofile } from '../../../public/profile';
 type JoinRequest = {
     id: string;
     userId: string;
-    image:string;
+   
     username: string | null;
     status: string;
     createdAt: Date;
