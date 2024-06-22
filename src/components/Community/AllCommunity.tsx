@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { addcommunity } from "../../../public/community";
 import { hushhprofile } from "../../../public/profile";
+import { backicon } from "../../../public/profilePage";
 
 export default async function AllCommunity() {
     const communities = await getAllCommunities();
@@ -13,7 +14,10 @@ export default async function AllCommunity() {
     }
   return (
     <div className="px-6 pt-4 bg-gray-100 h-screen">
-        <div className="flex justify-between mb-[24px]">
+        <div>
+            <Link href={'/home/thread'}><Image src={backicon} alt="back"></Image></Link>
+          </div>
+        <div className="flex justify-between mb-[24px] mt-[6px]">
             <div>
                 <div className="text-rose-500  text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]">Community</div>
             </div>

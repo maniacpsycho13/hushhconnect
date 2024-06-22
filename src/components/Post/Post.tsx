@@ -11,6 +11,7 @@ import PostActions from "./PostActions";
 import { auth } from "@clerk/nextjs/server";
 import { getUserbyId } from "@/lib/Actions/user.action";
 import { getFileTypeFromUrl } from "@/lib/utils";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 async function Post({ post }: { post: PostWithExtras }) {
   const session = await auth();
@@ -53,14 +54,18 @@ async function Post({ post }: { post: PostWithExtras }) {
         <PostOptions post={post} userId={userId} />
       </div>
 
-      <Card className="relative h-[290px] w-full overflow-hidden rounded-none sm:rounded-md">
+      <div className="relative h-[290px]  overflow-hidden rounded-md">
+      <AspectRatio ratio={16 / 9} className="w-full h-[290px] rounded-xl text-black">
         {post.fileUrl && filetype==="image" && (
-           <Image
-           src={post.fileUrl}
-           alt={post.caption}
-           fill
-           className="h-full w-full object-cover"
-          />
+           <div className="">
+            <Image
+              src={post.fileUrl}
+              alt={post.caption}
+              fill
+              className="rounded-md  h-full w-full"
+              
+            />
+           </div>
         )}
         {post.fileUrl && filetype==="video" && (
            <div className="absolute inset-0 flex items-center justify-center">
@@ -71,10 +76,11 @@ async function Post({ post }: { post: PostWithExtras }) {
                allow="autoplay; encrypted-media"
                allowFullScreen
            />
+     
        </div>
         )}
-
-      </Card>
+       </AspectRatio>
+      </div>
 
       <PostActions post={post} userId={userId} className="px-3 sm:px-0" />
 
