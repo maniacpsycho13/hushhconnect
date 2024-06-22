@@ -59,7 +59,7 @@ async function Post({ post }: { post: PostWithExtras }) {
            src={post.fileUrl}
            alt={post.caption}
            fill
-           className="h-full w-full"
+           className="h-full w-full object-cover"
           />
         )}
         {post.fileUrl && filetype==="video" && (
