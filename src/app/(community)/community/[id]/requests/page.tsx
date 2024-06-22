@@ -12,7 +12,9 @@ export default async function Page({params}:{params:{id:string}})  {
      const role=await checkUserRole(community.id,userid);
   return (
     <div>
-        <AllRequests communityId={params.id} userid={userid}/>
+        {role.role==='admin' && (
+          <AllRequests communityId={params.id} userid={userid}/>
+        )}
     </div>
   )
 }
