@@ -1,13 +1,21 @@
 import Post from '@/components/Post/Post';
 import { PostsSkeleton } from '@/components/Post/Skeletons';
 import ProductCard from '@/components/ProductCard/ProductCard';
+import { checkUserRole } from '@/lib/Actions/community.action';
 import { fetchProductsByCommunityId } from '@/lib/Actions/product.action';
+import { auth } from '@clerk/nextjs/server';
 import React, { Suspense } from 'react'
 
 export default async function page({ params }: { params: { id: string } }) {
 
   const products=await fetchProductsByCommunityId(params.id);
-
+  const session = await auth();
+  const role=await checkUserRole(params.id,session.userId);
+  if(role.role !== 'admin' && role.role !== 'member') {
+    return (
+      <div></div>
+    )
+  }
 
   return (
     <div className='bg-[#F4F4F5] h-screen'>

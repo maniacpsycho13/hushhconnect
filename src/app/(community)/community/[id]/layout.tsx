@@ -17,7 +17,8 @@ const Layout = async ({ children , params}: { children: React.ReactNode,params:{
     const community=await getCommunityById(params.id);
     if(!community || !userid) return null;
     const role=await checkUserRole(community.id,userid);
-  
+    
+    
   // if(!id) notFound();
   return (
     <div>
