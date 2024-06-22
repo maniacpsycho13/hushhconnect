@@ -110,7 +110,7 @@ export function CreateComm({id}:{id:string}) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white px-4 pt-4'>
           <div >
-            <Link href={''}><Image src={backicon} alt="backicon" ></Image></Link>
+            <Link href={'/allcomm'}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
 
           <div className='mt-[28px]'>
@@ -127,8 +127,8 @@ export function CreateComm({id}:{id:string}) {
           control={form.control}
           name='image'
           render={({ field }) => (
-            <FormItem className=' relative mx-auto items-center '>
-              <FormLabel className='account-form_image-label'>
+            <FormItem className=' relative mx-auto items-center bg-gray-200 w-[96px] h-[96px] rounded-full'>
+              <FormLabel className='flex flex-col items-center justify-center'>
                 {field.value ? (
                   <Image
                     src={field.value}
@@ -139,13 +139,9 @@ export function CreateComm({id}:{id:string}) {
                     className='rounded-full object-contain'
                   />
                 ) : (
-                  <Image
-                    src='/assets/profile.svg'
-                    alt='profile_icon'
-                    width={24}
-                    height={24}
-                    className='object-contain'
-                  />
+                  <div className="text-center text-black text-[15px] font-normal leading-tight h-full mt-[2.3rem]">
+                       profile 
+                    </div>
                 )}
               </FormLabel>
               <FormLabel className=''>
@@ -180,19 +176,21 @@ export function CreateComm({id}:{id:string}) {
             </FormItem>
           )}
         />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                
-                <FormControl>
-                  <Input placeholder="Name of Community" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight outline-none focus:border-zinc-300 shadow-none" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />  
+          <div className="mt-10">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  
+                  <FormControl>
+                    <Input placeholder="Name of Community" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight outline-none focus:border-zinc-300 shadow-none" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />  
+          </div>
 
           <div className="mt-[12px]">
             <FormField
