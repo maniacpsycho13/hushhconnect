@@ -79,7 +79,7 @@
 
   @layer utilities {
   .tab {
-    @apply flex h-[26px] text-[12px] items-center gap-3 bg-[#EFEFEF]  rounded-[4px] text-black font-[500] px-[22px]  ;
+    @apply flex h-[26px] text-[12px] items-center gap-3 bg-[#E5E5E5]  rounded-[4px] text-black font-[500] px-[22px]  ;
   }
   
   .tab[data-state='active'] {

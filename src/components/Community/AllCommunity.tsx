@@ -26,7 +26,7 @@ export default async function AllCommunity() {
                 <>
                     <div className="flex items-center gap-4 py-[12px] border-b-2 border-neutral-300">
                         <Image src={hushhprofile} alt="profile" className="w-[57px] h-[57px] rounded-full"></Image>
-                        <Link href={`/community/${community.id}`} className="text-black text-xs font-medium ">
+                        <Link href={`/community/${community.id}/threads`} className="text-black text-xs font-medium ">
                             <div key={community.id}>{community.name}</div>
                             <div className="text-zinc-600 text-xs font-normal lowercase">@{community.name}</div>
                         </Link>

@@ -11,3 +11,17 @@ export const profileTabs = [
     
    
   ];
+
+  export const profileTabsAdmin = [
+    { value: "threads", label: "Threads",  },
+    { value: "postthreads", label: "Post",  },
+    { value: "requests", label: "Requests",  },
+    
+   
+  ];
+
+  export const profileTabsMember = [
+    { value: "threads", label: "Threads",  },
+    { value: "postthreads", label: "Post",  },
+    
+  ];

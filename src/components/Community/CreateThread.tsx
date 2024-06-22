@@ -24,7 +24,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import ErrorForm from "@/components/ui/Error";
-import { MultiFileDropzoneUsage } from "../Post/MainFileUpload";
 import {
   MultiFileDropzone,
   type FileState,
@@ -32,12 +31,13 @@ import {
 import { useEdgeStore } from "@/lib/edgestore";
 import { getFileTypeFromUrl } from "@/lib/utils";
 
-function CreateThread({communityId}:{communityId:string}) {
+function CreateThread({ communityId }: { communityId: string }) {
   const router = useRouter();
   const mount = useMount();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileStates, setFileStates] = useState<FileState[]>([]);
   const [fileType, setFileType] = useState<string>("");
+  const [isUploading, setIsUploading] = useState(false); // New state for upload status
   const { edgestore } = useEdgeStore();
 
   function updateFileProgress(key: string, progress: FileState['progress']) {
@@ -52,6 +52,7 @@ function CreateThread({communityId}:{communityId:string}) {
       return newFileStates;
     });
   }
+
   const form = useForm<z.infer<typeof CreatePost>>({
     resolver: zodResolver(CreatePost),
     defaultValues: {
@@ -60,6 +61,7 @@ function CreateThread({communityId}:{communityId:string}) {
       fileUrl: undefined,
     },
   });
+
   const fileUrl = form.watch("fileUrl");
 
   const handleSubmit = async (values: z.infer<typeof CreatePost>) => {
@@ -88,11 +90,11 @@ function CreateThread({communityId}:{communityId:string}) {
             <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">Add Thread</div>
             <div
               onClick={!isSubmitting ? form.handleSubmit(handleSubmit) : undefined}
-              className={`text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0 ${isSubmitting ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
-              style={{ pointerEvents: isSubmitting ? 'none' : 'auto' }}
+              className={`text-blue-600 text-sm font-semibold bg-transparent shadow-none leading-[18.42px] flex justify-end p-0 ${isSubmitting || isUploading ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+              style={{ pointerEvents: isSubmitting || isUploading ? 'none' : 'auto' }}
             >
-              {isSubmitting ? (
-                <div className="loader">...Loading</div> // Add your loader icon or spinner here
+              {isSubmitting || isUploading ? (
+                <div className="loader">Loading...</div> // Add your loader icon or spinner here
               ) : (
                 'Post'
               )}
@@ -101,25 +103,18 @@ function CreateThread({communityId}:{communityId:string}) {
           {!!fileUrl && (
             <div className="h-[155px] overflow-hidden rounded-md">
               <AspectRatio ratio={16 / 9} className="w-full h-[155px] rounded-xl text-black">
-                {/* <Image
-                  src={fileUrl}
-                  alt="Post preview"
-                  fill
-                  className="rounded-md object-cover h-full w-full"
-                  style={{ objectFit: 'contain' }}
-                /> */}
-                {fileType === "image" &&(
-                   <Image
-                   src={fileUrl}
-                   alt="Post preview"
-                   fill
-                   className="rounded-md object-cover h-full w-full"
-                   style={{ objectFit: 'contain' }}
-                 />
+                {fileType === "image" && (
+                  <Image
+                    src={fileUrl}
+                    alt="Post preview"
+                    fill
+                    className="rounded-md object-cover h-full w-full"
+                    style={{ objectFit: 'contain' }}
+                  />
                 )}
 
                 {fileType === "video" && (
-                  <iframe src={fileUrl} ></iframe>
+                  <iframe src={fileUrl} className="rounded-md object-cover h-full w-full" />
                 )}
               </AspectRatio>
             </div>
@@ -133,70 +128,54 @@ function CreateThread({communityId}:{communityId:string}) {
                 <FormLabel htmlFor="picture">Picture (Optional)</FormLabel>
                 <FormControl>
                   {!fileUrl && ( // Conditionally render the UploadButton based on fileUrl
-                    // <UploadButton
-                    //   className="w-full h-[155px] bg-zinc-300 opacity-30 rounded-xl text-black"
-                    //   endpoint="imageUploader"
-                    //   onClientUploadComplete={(res) => {
-                    //     form.setValue("fileUrl", res[0].url);
-                    //     toast.success("Upload complete");
-                    //   }}
-                    //   onUploadError={(error: Error) => {
-                    //     console.error(error);
-                    //     toast.error("Upload failed");
-                    //   }}
-                    // />
-                    // <MultiFileDropzoneUsage/>
                     <MultiFileDropzone
-                          value={fileStates}
-                          onChange={(files) => {
-                            setFileStates(files);
-                          }}
-                          onFilesAdded={async (addedFiles) => {
-                            setFileStates([...fileStates, ...addedFiles]);
-                            await Promise.all(
-                              addedFiles.map(async (addedFileState) => {
-                                try {
-                                  const res = await edgestore.publicFiles.upload({
-                                    file: addedFileState.file,
-                                    onProgressChange: async (progress) => {
-                                      updateFileProgress(addedFileState.key, progress);
-                                      if (progress === 100) {
-                                        // wait 1 second to set it to complete
-                                        // so that the user can see the progress bar at 100%
-                                        await new Promise((resolve) => setTimeout(resolve, 1000));
-                                        updateFileProgress(addedFileState.key, 'COMPLETE');
-                                      }
-                                    },
-                                  });
-                                  
-                                  
-
-                                  let fileuurl = res.url;
-                                  let filetype = "";
-                                  let filesize =res.size;
-                                  filesize = filesize / (1024 * 1024);
-                                  if(filesize>10){
-                                      updateFileProgress(addedFileState.key, 'ERROR');
-                                      toast.error("File size should be less than 10 MB");
+                      value={fileStates}
+                      onChange={(files) => {
+                        setFileStates(files);
+                      }}
+                      onFilesAdded={async (addedFiles) => {
+                        setIsUploading(true); // Set uploading state to true
+                        setFileStates([...fileStates, ...addedFiles]);
+                        await Promise.all(
+                          addedFiles.map(async (addedFileState) => {
+                            try {
+                              const res = await edgestore.publicFiles.upload({
+                                file: addedFileState.file,
+                                onProgressChange: async (progress) => {
+                                  updateFileProgress(addedFileState.key, progress);
+                                  if (progress === 100) {
+                                    // wait 1 second to set it to complete
+                                    // so that the user can see the progress bar at 100%
+                                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                                    updateFileProgress(addedFileState.key, 'COMPLETE');
                                   }
-                                  
+                                },
+                              });
 
-                                  if(fileuurl)filetype=getFileTypeFromUrl(fileuurl);
-                                  if(filetype == "image" || filetype == "video"){
-                                      form.setValue("fileUrl", res.url);
-                                  }else{
-                                      updateFileProgress(addedFileState.key, 'ERROR');
-                                      toast.error("Please upload an image or video");
-                                  }
-                                  
-                                  
-  
-                                } catch (err) {
+                              let fileuurl = res.url;
+                              let filetype = "";
+                              let filesize = res.size;
+                              filesize = filesize / (1024 * 1024);
+                              if (filesize > 10) {
+                                updateFileProgress(addedFileState.key, 'ERROR');
+                                toast.error("File size should be less than 10 MB");
+                              } else {
+                                if (fileuurl) filetype = getFileTypeFromUrl(fileuurl);
+                                setFileType(filetype); // Set the file type
+                                if (filetype == "image" || filetype == "video") {
+                                  form.setValue("fileUrl", res.url);
+                                } else {
                                   updateFileProgress(addedFileState.key, 'ERROR');
+                                  toast.error("Please upload an image or video");
                                 }
-                              }),
-                            );
-                          }}
+                              }
+                            } catch (err) {
+                              updateFileProgress(addedFileState.key, 'ERROR');
+                            }
+                          }),
+                        );
+                        setIsUploading(false); // Set uploading state to false after upload completes
+                      }}
                     />
                   )}
                 </FormControl>

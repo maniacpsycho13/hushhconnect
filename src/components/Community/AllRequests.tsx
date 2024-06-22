@@ -45,8 +45,8 @@ const AllRequests = ({ communityId , userid}: { communityId: string, userid: str
     };
 
     return (
-        <div>
-            <div className="text-black text-sm font-medium mt-[24px]">Join Requests</div>
+        <div className='bg-zinc-100 px-6 h-screen py-4'>
+            <div className="text-black text-sm font-medium">Join Requests</div>
             {joinRequests.length > 0 ? (
                 <div className=' mt-[12px]'>
                     {joinRequests.map(request => (
