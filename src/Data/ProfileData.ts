@@ -23,5 +23,6 @@ export const profileTabs = [
   export const profileTabsMember = [
     { value: "threads", label: "Threads",  },
     { value: "postthreads", label: "Post",  },
+    {value: "members", label: "Members",  },
     
   ];

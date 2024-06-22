@@ -231,3 +231,27 @@ export const handleJoinRequest = async (requestId: string, status: "approved" | 
         return { error: `Failed to ${status} Join Request` };
     }
 };
+
+
+export async function fetchAllMembersByCommunityId(communityId: string) {
+  noStore();
+
+  try {
+    const members = await db.communityMembership.findMany({
+      where: {
+        communityId: communityId,
+      },
+      include: {
+        user: true,
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
+
+    return members;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch community members');
+  }
+}
