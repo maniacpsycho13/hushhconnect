@@ -36,7 +36,7 @@ const Layout = async ({ children , params}: { children: React.ReactNode,params:{
 
           <div className="pt-4">
             <div className="flex justify-center">
-              <Image src={hushhprofile} alt="profile" className="w-[108px] h-[108px]  rounded-full"></Image>
+              <Image src={community.image || hushhprofile} alt="profile" className="w-[108px] h-[108px]  rounded-full"></Image>
             </div>
           </div>
        

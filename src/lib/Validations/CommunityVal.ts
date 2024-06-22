@@ -5,6 +5,7 @@ export const CommunitySchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
+  image: z.string().optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
 });
@@ -12,6 +13,7 @@ export const CommunitySchema = z.object({
 // Create Community Schema
 export const CreateCommunity = CommunitySchema.omit({
   id: true,
+
   createdAt: true,
   updatedAt: true,
 });

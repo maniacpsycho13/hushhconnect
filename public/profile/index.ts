@@ -19,6 +19,7 @@ import CrossColor from "./CrossColor.svg"
 import AppleWallet from "./AppleWallet.svg"
 import GoogleWallet from "./GoogleWallet.svg"
 import menu from "./menu.svg"
+import editbox from "../editbox.svg"
 
 // import homepage from "./HomePage.svg"
 
@@ -60,6 +61,7 @@ export {
     AppleWallet,
     GoogleWallet,
     menu,
+    editbox
 
     // backicon,
     // airplane,
