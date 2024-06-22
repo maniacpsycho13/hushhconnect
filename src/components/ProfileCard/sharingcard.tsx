@@ -19,7 +19,7 @@ export default function SharingCard() {
     const pathname = usePathname();
     console.log(pathname);
     const content="Hushh Business Card"
-    const path='www.hushhconnect.vercel.app'+pathname
+    const path='https://hushhconnect.vercel.app'+pathname
 
     return(
         <div className='flex gap-3 justify-center items-center'>
