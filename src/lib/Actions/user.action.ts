@@ -55,6 +55,22 @@ export const getUserbyIdSocial = async (id : string )=>{
 //     }
 // }
 
+import  { generate }   from "referral-codes";
+
+function generateReferralCode({username }: { username: string }) {
+    
+        try {
+            const code = generate({
+                prefix: "hushhconnect-",
+                length:6,
+            });
+            return code;
+        } catch (error) {
+            return "Error Generating Referral Code";
+        }
+   
+}
+
 export async function usernameupdate(values: z.infer<typeof UsernameValidation>, id: string | null, pathname: string) {
     noStore();
     if(!id){
@@ -64,26 +80,41 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
     if(!validated.success){
         return {error:"Invalid Fields"}
     }
-    const { username } =validated.data
-    // const existingToken =await getVerificationTokenByToken(token);
-
-    // if(!existingToken){
-    //     return {error:"Invalid Token"}  
-    // }
-
-    // const hasexpired=new Date(existingToken.expires) < new Date();
-    // if(hasexpired){
-    //     return {error:"Token Expired"}
-    // }
-    //console.log(id);
+    const { username ,code } =validated.data
     
+    const referralcodeuser=generateReferralCode({username});
+    
+    if(referralcodeuser==="Error Generating Referral Code"){
+        return {error: "Error Generating Referral Code"}
+    }
+
+    if(code){  
+        const referral=await db.referral.findFirst({
+            where:{
+                code
+            }
+        })
+
+        if(!referral){
+            return {error:"Invalid Referral Code"}
+        }
+        await db.user.update({
+            where: {
+              id: referral.referredById,
+            },
+            data: {
+              coins: {
+                increment: 200,
+              },
+            },
+        });
+    }
+
     const existingUser=await getUserbyId(id);
     const user1=await currentUser();
     if(user1===null){
         return {error:"Not Logged In"}
     }
-    //console.log(existingUser);
-    
     if(!existingUser){
         await db.user.create({
             data:{
@@ -93,17 +124,24 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
                 image:user1.imageUrl,
             }
         })
+        await db.referral.create({
+            data: {
+              code: referralcodeuser[0],
+              referredBy: {
+                connect: {
+                  id,
+                },
+              },
+            },
+          });
+        revalidatePath(pathname);
+        return {success:"Usename Added"}
     }
 
     const newuser=await getUserbyId(id);
     if(!newuser){
         return {error:"User Does Not Exist"}
     }
-
-    
-    
-
-    
     await db.user.update({
         where:{
             id:newuser.id

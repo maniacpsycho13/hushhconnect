@@ -1,3 +1,4 @@
+import { Code } from "lucide-react";
 import { platform } from "os";
 import * as z from "zod";
 
@@ -23,6 +24,7 @@ export const UserValidation = z.object({
       .string()
       .min(3, { message: "Minimum 3 characters." })
       .max(30, { message: "Maximum 30 caracters." }),
+    code :z.string().optional()
   })
 
   export const BasicDetailsValidation = z.object({

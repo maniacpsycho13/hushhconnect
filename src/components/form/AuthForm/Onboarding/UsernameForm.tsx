@@ -44,6 +44,7 @@ export function UsernameForm({id}:{id:string}) {
     resolver: zodResolver(UsernameValidation), 
     defaultValues: {
       username: "",
+      code :undefined
     }
   })
 
@@ -95,9 +96,21 @@ export function UsernameForm({id}:{id:string}) {
               </FormItem>
             )}
           />  
-          <div className='w-[40%] mt-4 ml-4'>
+          <div className='w-[40%] mt-4 ml-4 mb-4'>
                 <p className='text-[14px] font-[400] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E0055F] to-[#2020ED]'>usename available</p>
-              </div>
+          </div>
+          <FormField
+            control={form.control}
+            name="code"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Referral Code" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />  
           </div>
         <FormError message={error} />
         <FormSuccess message={success} />

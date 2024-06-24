@@ -24,6 +24,7 @@ model User {
   image         String?
   bio           String?
   googlewallet  String?
+  coins         Int             @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   products      Product[]
@@ -39,6 +40,14 @@ model User {
   communityRequests    CommunityJoinRequest[]
   
   communityAdmin       CommunityAdmin[]
+
+  referrals       Referral[]      @relation("ReferredBy")
+  referralCode    Referral?       @relation("ReferredTo", fields: [referralCodeId], references: [id])
+  referralCodeId  String?         @map("referral_code_id")
+
+  @@index([email])
+  @@index([username])
+  @@index([referralCodeId])
 } 
 
 
@@ -199,4 +208,17 @@ model CommunityJoinRequest {
   @@unique([userId, communityId])
   @@index([userId])
   @@index([communityId])
+}
+
+model Referral {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  referredBy    User     @relation("ReferredBy", fields: [referredById], references: [id])
+  referredById  String   @map("referred_by_id")
+  referredTo    User[]   @relation("ReferredTo")
+
+  createdAt     DateTime @default(now())
+
+  @@index([code])
+  @@index([referredById])
 }
