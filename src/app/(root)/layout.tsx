@@ -10,7 +10,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
         {children}
-        <LowerNavbar id={id}/>
+        <LowerNavbar id={id} />
     </div>
   )
 }

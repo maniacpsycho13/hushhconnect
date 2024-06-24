@@ -20,6 +20,9 @@ import AppleWallet from "./AppleWallet.svg"
 import GoogleWallet from "./GoogleWallet.svg"
 import menu from "./menu.svg"
 import editbox from "../editbox.svg"
+import coloredbell from "./coloredbell.svg"
+import coloredhome from "./coloredhome.svg"
+import coloredmeet from "./coloredmeet.svg"
 
 // import homepage from "./HomePage.svg"
 
@@ -61,7 +64,10 @@ export {
     AppleWallet,
     GoogleWallet,
     menu,
-    editbox
+    editbox,
+    coloredbell,
+    coloredhome,
+    coloredmeet
 
     // backicon,
     // airplane,

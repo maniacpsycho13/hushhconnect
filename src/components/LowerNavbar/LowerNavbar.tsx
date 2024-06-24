@@ -2,23 +2,23 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { lowerNav2 } from '../../../public/profilePage'
-import { bell, coloredcircle, community, homeicon, profileicon, CrossColor } from '../../../public/profile' // Assume closeicon is the cross icon image
+import { bell, coloredcircle, community, homeicon, profileicon, CrossColor, coloredbell,coloredhome,coloredmeet } from '../../../public/profile' // Assume closeicon is the cross icon image
 import Link from 'next/link'
 
 const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:string }) => {
-  // State to manage the toggle
+ 
   const [isToggled, setIsToggled] = useState(false);
 
-  // Function to handle the toggle
+ 
   const handleToggle = () => {
     setIsToggled(!isToggled);
   }
 
-  // Function to handle the delayed toggle
+  
   const handleDelayedToggle = () => {
     setTimeout(() => {
       setIsToggled(false);
-    }, 300); // 300ms delay
+    }, 300); 
   }
 
   return (

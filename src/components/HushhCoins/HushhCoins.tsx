@@ -20,7 +20,7 @@ const HushhCoins = () => {
   return (
     <div className='h-screen w-screen'>
       <div className='bg-gradient-to-l from-rose-600 to-blue-700 pt-4 px-6 pb-[21px]'>
-        <Image src={whitebackicon} alt='back' />
+        <Link href={'home/thread'}><Image src={whitebackicon} alt='back' /></Link>
 
         <div className=''>
           <div className="text-white text-base text-center font-semibold leading-tight">Hushh Coins</div>
@@ -36,7 +36,7 @@ const HushhCoins = () => {
             <Image src={medal} alt='medal' className='opacity-100' />
             <div className="text-white text-xs font-semibold uppercase leading-[14.40px]">24 referrals</div>
           </div>
-          <Link href={'leaderboard'}>
+          <Link href={'/hushhcoins/leaderboard'}>
             <div className='px-4 flex h-[38.40px] bg-violet-50/20 rounded-[48px] items-center gap-[8px]'>
               <Image src={gift} alt='medal' className='opacity-100' />
               <div className="text-white text-xs font-semibold uppercase leading-[14.40px]">leaderboard</div>
