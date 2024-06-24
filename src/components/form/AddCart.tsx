@@ -23,7 +23,7 @@ import { isBase64Image } from "@/lib/utils";
 import { CreateProduct } from "@/lib/Validations/ProductValidation";
 import { createProduct } from "@/lib/Actions/product.action";
 
-const AddCart = ({communityId}:{communityId?:string}) => {
+const AddCart = ({ communityId }: { communityId?: string }) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -37,11 +37,11 @@ const AddCart = ({communityId}:{communityId?:string}) => {
   });
 
   const onSubmit = async (values: z.infer<typeof CreateProduct>): Promise<void> => {
-    setIsLoading(true);  // Set loading to true when the submission starts
+    setIsLoading(true); // Set loading to true when the submission starts
     try {
       const blob = values.fileUrl;
       const hasImageChanged = isBase64Image(blob);
-      
+
       if (hasImageChanged) {
         const imgRes = await startUpload(files);
 
@@ -50,7 +50,6 @@ const AddCart = ({communityId}:{communityId?:string}) => {
         }
       }
       console.log(values);
-      
 
       await createProduct({
         fileUrl: values.fileUrl,
@@ -58,8 +57,7 @@ const AddCart = ({communityId}:{communityId?:string}) => {
         currency: values.currency,
         price: values.price,
         link: values.link,
-        communityId:communityId || undefined
-
+        communityId: communityId || undefined,
       });
       alert("Your product added successfully");
 
@@ -70,8 +68,7 @@ const AddCart = ({communityId}:{communityId?:string}) => {
         router.push("/");
       }
     } finally {
-      setIsLoading(false);  // Set loading to false after submission completes
-      
+      setIsLoading(false); // Set loading to false after submission completes
     }
   };
 
@@ -140,7 +137,6 @@ const AddCart = ({communityId}:{communityId?:string}) => {
                       height={96}
                       priority
                       className="object-contain h-full w-full "
-                      
                     />
                   ) : (
                     <div className="text-center text-black mt-auto opacity-95 text-xs font-medium leading-[33.29px]">
@@ -206,14 +202,16 @@ const AddCart = ({communityId}:{communityId?:string}) => {
               control={form.control}
               name="currency"
               render={({ field }) => (
-                <FormItem className="flex w-full flex-col gap-3">
+                <FormItem className="flex w-full flex-col gap-3 ">
                   <FormControl>
-                    <Input
-                      type="text"
+                    <select
                       className="w-full h-[54px] px-4 bg-zinc-100 rounded-[14px] border-none justify-start items-center gap-2.5 inline-flex focus:border-none focus-visible:border-none shadow-none focus:outline-none text-neutral-500 text-base font-normal"
-                      placeholder="Currency"
                       {...field}
-                    />
+                    >
+                      <option value="">Select Currency</option>
+                      <option value="$">$</option>
+                      <option value="Rs">Rs</option>
+                    </select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
