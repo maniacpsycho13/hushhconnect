@@ -54,18 +54,18 @@ async function Post({ post }: { post: PostWithExtras }) {
         <PostOptions post={post} userId={userId} />
       </div>
 
-      <div className="relative h-[290px]  overflow-hidden rounded-md">
+      <div className=" h-[290px]  overflow-hidden rounded-md">
       <AspectRatio ratio={16 / 9} className="w-full h-[290px] rounded-xl text-black">
         {post.fileUrl && filetype==="image" && (
-           <div className="">
-            <Image
-              src={post.fileUrl}
-              alt={post.caption}
-              fill
-              className="rounded-md  h-full w-full"
-              
-            />
-           </div>
+           
+           <Image
+             src={post.fileUrl}
+             alt={post.caption}
+             layout="fill"
+             className="rounded-md object-cover h-full w-full"
+             style={{ objectFit: 'contain' }}
+           />
+       
         )}
         {post.fileUrl && filetype==="video" && (
            <div className="absolute inset-0 flex items-center justify-center">

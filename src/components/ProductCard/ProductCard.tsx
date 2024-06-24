@@ -1,13 +1,18 @@
 import Image from "next/image";
 import { product1 } from "../../../public/profilePage";
 import Link from "next/link";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function ProductCard({fileUrl,title,price,currency,link}:{fileUrl:string,title:string,price:string,currency:string,link:string}) {
   return (
 
     <Link href={link}>
     <div className=" px-2 py-2 ">
-        <Image src={fileUrl} alt="hushh" width={163} height={166} className="w-full h-[166px] "/>
+        <div className="overflow-hidden rounded-md h-[166px]">
+        <div  className="w-full h-[166px] rounded-xl text-black">
+          <Image src={fileUrl} alt="hushh" width={80} height={166} className="rounded-md object-cover h-full w-full " style={{ objectFit: 'contain' }}/>
+        </div>
+        </div>
         <div className="flex flex-col gap-[6px] mt-3">
           {/* <div className="text-sm  px-1 rounded-[39px] border border-neutral-400 justify-center items-center gap-2.5 inline-flex">Shop Now</div> */}
           <div className="flex items-center justify-between">
