@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import ErrorForm from "@/components/ui/Error";
+import Link from "next/link";
 
 function CreatePage() {
   const router = useRouter();
@@ -60,7 +61,7 @@ function CreatePage() {
           className="space-y-4"
         >
           <div className="flex items-center">
-            <div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">Cancel</div>
+            <Link href={'/home/thread'}><div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">Cancel</div></Link>
             <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">Add Thread</div>
             <div
               onClick={!isSubmitting ? form.handleSubmit(handleSubmit) : undefined}

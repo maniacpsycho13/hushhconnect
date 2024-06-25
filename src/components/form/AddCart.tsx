@@ -22,6 +22,7 @@ import { isBase64Image } from "@/lib/utils";
 
 import { CreateProduct } from "@/lib/Validations/ProductValidation";
 import { createProduct } from "@/lib/Actions/product.action";
+import Link from "next/link";
 
 const AddCart = ({ communityId }: { communityId?: string }) => {
   const router = useRouter();
@@ -108,9 +109,9 @@ const AddCart = ({ communityId }: { communityId?: string }) => {
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="flex items-center">
-            <div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">
+            <Link href={'/home/thread'}><div className="text-red-500 text-sm font-semibold leading-[18.42px] flex justify-start">
               Cancel
-            </div>
+            </div></Link>
             <div className="mx-auto text-black text-base font-semibold leading-[18.42px] flex justify-center">
               Add Product
             </div>
