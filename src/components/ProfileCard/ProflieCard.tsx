@@ -13,6 +13,9 @@ import { SharingOption } from './Sharingoption'
 import axios from 'axios'
 import { Coin } from '../../../public/coins'
 import './ProfileCard.css'; 
+import { responsive } from '@/Data/ResponsiveData'
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 
 const ProfileCard = (props:UserDetails) => {
@@ -89,12 +92,15 @@ const ProfileCard = (props:UserDetails) => {
                         </div>
                     </div>
 
-                    <div className='flex justify-evenly my-4'>
+                    <div className=' my-4 pl-5'>
+                    <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000}  >
                         {props.socialmedia?.map((item:any) => (
-                            <Link href={item.url} key={item.platform}><Image src={platformIcons[item.platform]} width={26} height={26} alt="Group1" /></Link>
+                              <Link href={item.url} key={item.platform}>
+                              <Image src={platformIcons[item.platform]} width={46} height={46} alt={item.platform} />
+                            </Link>
                         ))}
-                       
-                        
+                    </Carousel>
+
                     </div>
 
                     <div className=' rounded-xl p-4 mx-[5px]'>
