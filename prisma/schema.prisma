@@ -14,41 +14,65 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  username      String?         @unique
-  dob           DateTime?
-  gender        String?
-  email         String          @unique
-  isboarded     Boolean         @default(false)
-  image         String?
-  bio           String?
-  googlewallet  String?
-  coins         Int             @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  products      Product[]
-  socialMedia   SocialMedia[]
-  posts         Post[]
-  saved         SavedPost[]
-  likes         Like[]
-  comments      Comment[]
-  followedBy    Follows[]   @relation("following")
-  following     Follows[]   @relation("follower")
-  communities          CommunityMembership[]
+  id                 String          @id @default(cuid())
+  name               String?
+  username           String          @unique
+  dob                DateTime?
+  gender             String?
+  email              String          @unique
+  isboarded          Boolean         @default(false)
+  image              String?
+  bio                String?
+  googlewallet       String?
+  coins              Int             @default(0)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  products           Product[]
+  socialMedia        SocialMedia[]
+  posts              Post[]
+  saved              SavedPost[]
+  likes              Like[]
+  comments           Comment[]
   
-  communityRequests    CommunityJoinRequest[]
+
   
-  communityAdmin       CommunityAdmin[]
+  followedBy         Follows[]       @relation("following")
+  following          Follows[]       @relation("follower")
+  communities        CommunityMembership[]
+  communityRequests  CommunityJoinRequest[]
+  communityAdmin     CommunityAdmin[]
 
-  referrals       Referral[]      @relation("ReferredBy")
-  referralCode    Referral?       @relation("ReferredTo", fields: [referralCodeId], references: [id])
-  referralCodeId  String?         @map("referral_code_id")
 
+
+  userReferral         Referral?          @relation("Referredfrom")
+
+  referral             Referral?          @relation("ReferredTo",fields: [referraltoId], references: [id])
+  referraltoId         String?
+ 
   @@index([email])
   @@index([username])
-  @@index([referralCodeId])
 } 
+
+
+model Referral{
+  id              String        @id @default(cuid())
+  code            String        @unique
+
+  auther          User          @relation("Referredfrom",fields: [autherId],references:[id])
+  autherId        String        @unique
+
+  users           User[]        @relation("ReferredTo")
+
+  
+
+
+  @@index([autherId])
+  @@index([code])
+}
+
+
+
+
 
 
 model SocialMedia {
@@ -210,15 +234,3 @@ model CommunityJoinRequest {
   @@index([communityId])
 }
 
-model Referral {
-  id            String   @id @default(cuid())
-  code          String   @unique
-  referredBy    User     @relation("ReferredBy", fields: [referredById], references: [id])
-  referredById  String   @map("referred_by_id")
-  referredTo    User[]   @relation("ReferredTo")
-
-  createdAt     DateTime @default(now())
-
-  @@index([code])
-  @@index([referredById])
-}

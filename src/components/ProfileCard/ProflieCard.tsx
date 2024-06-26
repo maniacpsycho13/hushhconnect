@@ -65,12 +65,12 @@ const ProfileCard = (props:UserDetails) => {
                 <div className='flex justify-between items-center'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
                     <div className='flex gap-4 items-center'>
-                     <Link href={'/hushhcoins'}>
+                     <Link href={`/hushhcoins/${props.id}`}>
                         <div className='w-[62.33px] h-[30.68px] bg-gradient-to-l from-rose-600 to-blue-700 rounded-[118.88px] justify-center flex items-center gap-[4px]'>
                           <div>
                             <Image src={Coin} alt='coin' className='w-[14.25px] h-[14.25px]'></Image>
                           </div>
-                          <div className="text-white text-base font-semibold ">324</div>
+                          <div className="text-white text-base font-semibold ">{props.coins}</div>
                         </div>
                      </Link>
                      <div onClick={handleToggleMenu} className="cursor-pointer">

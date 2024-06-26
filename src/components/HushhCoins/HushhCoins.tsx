@@ -5,8 +5,9 @@ import React, { useRef } from 'react'
 import { Coin, gift, medal, whitebackicon, copyicon, referal } from '../../../public/coins'
 import { hushhprofile } from '../../../public/profile'
 import Link from 'next/link'
+import { User } from '@prisma/client'
 
-const HushhCoins = () => {
+export default function HushhCoins({coins, referralcode ,users}:{coins:number, referralcode:string, users:User[]}) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCopy = () => {
@@ -27,7 +28,7 @@ const HushhCoins = () => {
         </div>
         <div className='flex justify-center gap-[4px] mt-[10px]'>
           <Image src={Coin} alt='back' />
-          <div className="text-white text-[53.76px] font-semibold leading-[53.76px]">2956</div>
+          <div className="text-white text-[53.76px] font-semibold leading-[53.76px]">{coins}</div>
           <div className="text-white text-[9.60px] font-normal leading-[14.40px] mt-[31px]">Earned</div>
         </div>
 
@@ -51,7 +52,9 @@ const HushhCoins = () => {
             type="text"
             ref={inputRef}
             className='h-full w-full bg-white opacity-95'
-            placeholder='https://hushh.com/ref/23523525'
+            placeholder={referralcode}
+            defaultValue={referralcode}
+            readOnly
             
           />
           <button onClick={handleCopy}>
@@ -69,7 +72,7 @@ const HushhCoins = () => {
             <div className='flex justify-between items-center'>
                 <div>
                     <div className="text-black text-sm font-semibold  leading-[21px]">Referral History</div>
-                    <div className="text-zinc-400 text-xs font-normal  leading-[18px]">2 Referrals</div>
+                    <div className="text-zinc-400 text-xs font-normal  leading-[18px]">{users.length} Referrals</div>
                 </div>
                 <div className=" text-black text-sm font-semibold  leading-[21px]">View all</div>
             </div>
@@ -78,14 +81,18 @@ const HushhCoins = () => {
 
         <div className='mt-[23px] w-full'>
             <div className=' px-3 py-[12px] bg-white rounded-xl justify-between items-center inline-flex w-full'>
-                <div className='flex gap-[11.52px] items-center'>
+              {users.map((user)=>(
+                <div key={user.id} className='flex items-center justify-between'>
+                    <div className='flex gap-3 items-center'>
                     <Image src={hushhprofile} alt='profile' className='w-[40.72px] h-[40.72px] rounded-full'></Image>
                     <div className='flex flex-col'>
-                        <div className="text-neutral-900 text-sm font-medium  leading-[21px]">Marsha Fisher</div>
-                        <div className="text-neutral-900 text-[10px] font-medium font-['Figtree'] leading-[15px]">marshafisher@gmail.com</div>
+                        <div className="text-neutral-900 text-sm font-medium  leading-[21px]">{user.username}</div>
+                        <div className="text-neutral-900 text-[10px] font-medium font-['Figtree'] leading-[15px]">{user.email}</div>
                     </div>
+                    </div>
+                    <div className="text-right text-fuchsia-800 text-xs font-normal leading-[18px]">{user.createdAt.getDate()}-{user.createdAt.getMonth()+1}-{user.createdAt.getFullYear()}</div>
                 </div>
-                <div className=" text-right text-fuchsia-800 text-xs font-normal  leading-[18px]">Joined 8th Aug 2021</div>
+              ))}
             </div>
         </div>
         <div className='mt-[24px]'>
@@ -96,4 +103,3 @@ const HushhCoins = () => {
   )
 }
 
-export default HushhCoins

@@ -17,6 +17,7 @@ export type UserDetails={
   name:string | null
   lastname:string | null
   socialmedia?:any
+  coins:number
   posts?:any
 }
 export default async function layout({ children, params }: { children: React.ReactNode , params : {id : string}}) {
@@ -39,6 +40,7 @@ export default async function layout({ children, params }: { children: React.Rea
       lastname:user.gender,
       socialmedia:user.socialMedia,
       posts:posts,
+      coins:user.coins
       }
     if(!session || !session.userId) return <ProfileLoginCard {...userdetails}/>
     

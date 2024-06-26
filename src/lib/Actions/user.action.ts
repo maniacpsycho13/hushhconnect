@@ -61,7 +61,7 @@ function generateReferralCode({username }: { username: string }) {
     
         try {
             const code = generate({
-                prefix: "hushhconnect-",
+                prefix: username+'-',
                 length:6,
             });
             return code;
@@ -82,32 +82,35 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
     }
     const { username ,code } =validated.data
     
-    const referralcodeuser=generateReferralCode({username});
-    
-    if(referralcodeuser==="Error Generating Referral Code"){
-        return {error: "Error Generating Referral Code"}
-    }
-
-    if(code){  
-        const referral=await db.referral.findFirst({
-            where:{
-                code
-            }
-        })
-
-        if(!referral){
-            return {error:"Invalid Referral Code"}
+    if (code) {
+        try {
+            const updatedReferral = await db.referral.update({
+                where: {
+                    code: code
+                },
+                data: {
+                    users: {
+                        connect: {
+                            id: id,
+                        },
+                    },
+                },
+            });
+            await db.user.update({
+                where: {
+                    id:updatedReferral.autherId
+                },
+                data: {
+                    coins: {
+                        increment: 200
+                    }
+                }
+                    
+            })
+            console.log('Updated Referral:', updatedReferral);
+        } catch (error) {
+            return { error: "Invalid Referral Code" };
         }
-        await db.user.update({
-            where: {
-              id: referral.referredById,
-            },
-            data: {
-              coins: {
-                increment: 200,
-              },
-            },
-        });
     }
 
     const existingUser=await getUserbyId(id);
@@ -124,16 +127,6 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
                 image:user1.imageUrl,
             }
         })
-        await db.referral.create({
-            data: {
-              code: referralcodeuser[0],
-              referredBy: {
-                connect: {
-                  id,
-                },
-              },
-            },
-          });
         revalidatePath(pathname);
         return {success:"Usename Added"}
     }
@@ -310,3 +303,86 @@ export async function getUserId(){
     if(!userid) return null;
     return userid
   }
+
+export async function getReferralbyId(id:string){
+    try {
+        const referral=await db.referral.findFirst({
+            where:{
+                id
+            }
+        })
+        if(referral)return referral;
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+export async function getReferralbyAuther(autherId:string){
+    try {
+        const referral=await db.referral.findFirst({
+            where:{
+                autherId
+            },
+            include:{
+                auther:true,
+                users:true
+
+            }
+        })
+        if(referral)return referral;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+
+
+
+
+export async function createReferralbyUserId(id: string) {
+    try {
+        // Check if the user exists
+        const user = await db.user.findUnique({
+            where: { id },
+        });
+
+        if (!user) {
+            return { error: 'User not found' };
+        }
+
+        // Generate a referral code (Assuming you have a function generateReferralCode)
+        const referralCode = generateReferralCode({ username: user.username }); // Implement your generateReferralCode function
+
+        if (referralCode === 'Error Generating Referral Code') {
+            return { error: 'Error Generating Referral Code' };
+        }
+
+        // Check if a referral code already exists for this user
+        const existingReferral = await db.referral.findFirst({
+            where: { autherId: id }, // Assuming autherId is the correct field
+        });
+
+        if (existingReferral) {
+            return { error: 'Referral code already exists for this user' };
+        }
+
+        // Create the referral code
+        const newReferral = await db.referral.create({
+            data: {
+                code: referralCode[0],
+                auther: {
+                    connect: { id },
+                },
+            },
+        });
+
+
+        return { success: 'Referral code created', referral: newReferral };
+    } catch (error) {
+        console.error('Error creating referral:', error);
+        return { error: 'Error creating referral' };
+    }
+}
