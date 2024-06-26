@@ -32,7 +32,7 @@ model User {
   posts              Post[]
   saved              SavedPost[]
   likes              Like[]
-  comments           Comment[]
+  comments           Comment[]  
   
 
   
