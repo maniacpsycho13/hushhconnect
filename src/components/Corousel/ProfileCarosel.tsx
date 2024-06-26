@@ -88,17 +88,17 @@ export interface CarouselInternalState {
     deviceType?: string;
     transform: number;
 }
-export default class Carousel extends React.Component<CarouselProps> {
-    previous: (slidesHavePassed: number) => void;
-    next: (slidesHavePassed: number) => void;
-    goToSlide: (slide: number, skipCallbacks?: SkipCallbackOptions) => void;
-    state: CarouselInternalState;
-    setClones: (slidesToShow: number, itemWidth?: number, forResizing?: boolean) => void;
-    setItemsToShow: (shouldCorrectItemPosition?: boolean) => void;
-    correctClonesPosition: ({ domLoaded }: {
-        domLoaded: boolean;
-    }) => void;
-    onMove: boolean;
-    direction: Direction;
-    containerRef: React.RefObject<HTMLDivElement>;
-}
+// export default class Carousel extends React.Component<CarouselProps> {
+//     previous: (slidesHavePassed: number) => void;
+//     next: (slidesHavePassed: number) => void;
+//     goToSlide: (slide: number, skipCallbacks?: SkipCallbackOptions) => void;
+//     state: CarouselInternalState;
+//     setClones: (slidesToShow: number, itemWidth?: number, forResizing?: boolean) => void;
+//     setItemsToShow: (shouldCorrectItemPosition?: boolean) => void;
+//     correctClonesPosition: ({ domLoaded }: {
+//         domLoaded: boolean;
+//     }) => void;
+//     onMove: boolean;
+//     direction: Direction;
+//     containerRef: React.RefObject<HTMLDivElement>;
+// }
