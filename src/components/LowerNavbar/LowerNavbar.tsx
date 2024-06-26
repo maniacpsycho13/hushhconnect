@@ -34,8 +34,8 @@ const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:str
           <Link href={'/home/thread'}>
             <Image src={getIcon('/home', homeicon, coloredhome)} alt='nav' />
           </Link>
-          <Link href={`/activity`} className='ml-[16%]'>
-            <Image src={getIcon(`/activity`, bell, coloredbell)} alt='nav' />
+          <Link href={`/activity/${id}`} className='ml-[16%]'>
+            <Image src={getIcon(`/activity/${id}`, bell, coloredbell)} alt='nav' />
           </Link>
           <Link href={'/allcomm'} className='ml-[40%]'>
             <Image src={getIcon('/allcomm', community, coloredmeet)} alt='nav'/>
