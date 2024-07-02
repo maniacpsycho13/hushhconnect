@@ -93,6 +93,7 @@ export function ProfilePicForm({ id }: { id: string }) {
 
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+      file.size > 500000 && setError("Profile Picture too large (>1mb)");
       setFiles([file]);
 
       if (!file.type.includes("image")) return;
@@ -103,6 +104,7 @@ export function ProfilePicForm({ id }: { id: string }) {
         setSelectedImage(imageDataUrl);
         form.setValue("profile_photo", imageDataUrl);
         console.log("Image selected from file input:", imageDataUrl);
+        
       };
 
       fileReader.readAsDataURL(file);
