@@ -34,7 +34,7 @@ export default function RootLayout({
       
 
       <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased max-w-[460px] mx-auto",
           fontSans.variable
         )}>
         {/* <SignedOut>

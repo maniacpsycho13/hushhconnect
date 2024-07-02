@@ -27,8 +27,8 @@ const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:str
   const isProfileActive = pathname.startsWith(`/profile/${id}`);
 
   return (
-    <div className='h-full'>
-      <div className={`w-full flex flex-col fixed bottom-0 z-10`}>
+    <div className='h-full '>
+      <div className={`w-full flex flex-col fixed bottom-0 z-10 max-w-[460px]`}>
         <Image src={lowerNav2} alt='nav' className='relative shadow-xl w-full transition-all duration-300 ease-in-out' />
         <div className='flex absolute w-full mt-[1.7rem] px-6 z-10 transition-all duration-300 ease-in-out'>
           <Link href={'/home/thread'}>

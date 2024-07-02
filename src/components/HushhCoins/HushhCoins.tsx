@@ -21,7 +21,7 @@ export default function HushhCoins({coins, referralcode ,users}:{coins:number, r
   return (
     <div className='h-screen w-screen'>
       <div className='bg-gradient-to-l from-rose-600 to-blue-700 pt-4 px-6 pb-[21px]'>
-        <Link href={'home/thread'}><Image src={whitebackicon} alt='back' /></Link>
+        <Link href={'/home/thread'}><Image src={whitebackicon} alt='back' /></Link>
 
         <div className=''>
           <div className="text-white text-base text-center font-semibold leading-tight">Hushh Coins</div>
@@ -80,7 +80,7 @@ export default function HushhCoins({coins, referralcode ,users}:{coins:number, r
         </div>
 
         <div className='mt-[23px] w-full'>
-            <div className=' px-3 py-[12px] bg-white rounded-xl justify-between items-center inline-flex w-full'>
+            <div className=' px-3 py-[12px] bg-white rounded-xl flex-col gap-[12px] w-full'>
               {users.map((user)=>(
                 <div key={user.id} className='flex items-center justify-between'>
                     <div className='flex gap-3 items-center'>
