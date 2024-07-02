@@ -68,7 +68,7 @@ export default function SignInEmail() {
     <div  className='px-6 pt-4'>
       <div className=''>
         <div className='flex justify-between '>
-          <Image src={Back} alt='backicon'></Image>
+         <Link href={'/sign-up'}><Image src={Back} alt='backicon'></Image></Link>
           <Image src={Star} alt='star'></Image>
         </div>
       </div>

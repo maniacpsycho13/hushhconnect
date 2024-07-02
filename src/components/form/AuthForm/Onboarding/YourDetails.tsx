@@ -23,7 +23,7 @@ const YourDetails = () => {
     return (
         <div>
             <div className='px-6 py-4'>
-                <Link href='/username'><Image src={Back} alt='backicon' /></Link>
+                <Link href='basicdetails'><Image src={Back} alt='backicon' /></Link>
                 <div className='mt-4'>
                     <div className="text-gray-900 text-xl font-bold text-center">Tell us about yourself</div>
                     <div className="text-center text-neutral-500 text-[15px] font-normal mt-[8px] leading-tight">This will personalize your hushh connect experience.</div>

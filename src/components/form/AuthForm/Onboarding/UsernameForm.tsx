@@ -70,7 +70,7 @@ export function UsernameForm({id}:{id:string}) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white px-4 pt-4'>
           <div >
-            <Link href={''}><Image src={backicon} alt="backicon" ></Image></Link>
+            <Link href={'/sign-in'}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
 
           <div className='mt-[28px]'>

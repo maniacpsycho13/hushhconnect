@@ -100,7 +100,7 @@ export function BasicDetails({id}:{id:string}) {
 
         <div  className='bg-white px-6 pt-4'>
           <div >
-            <Link href={'userdetails'}><Image src={backicon} alt="backicon" ></Image></Link>
+            <Link href={'username'}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
             <div className='mt-[28px]'>
               <Image src={detail} alt="lock" ></Image>

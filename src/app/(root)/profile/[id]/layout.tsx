@@ -45,7 +45,7 @@ export default async function layout({ children, params }: { children: React.Rea
     if(!session || !session.userId) return <ProfileLoginCard {...userdetails}/>
     
     return (
-    <div>
+    <div >
 
 
       <ProfileCard {...userdetails}/>
