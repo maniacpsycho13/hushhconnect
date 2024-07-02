@@ -16,6 +16,8 @@ import './ProfileCard.css';
 import { responsive } from '@/Data/ResponsiveData'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useQRCode } from "next-qrcode";
+import { useRouter, usePathname } from 'next/navigation'
 
 
 const ProfileCard = (props:UserDetails) => {
@@ -23,6 +25,9 @@ const ProfileCard = (props:UserDetails) => {
     const [showCard, setShowCard] = useState<boolean>(false);
     const [googleWallet,setGoogleWallet] = useState<string>("");
     const [showMenu, setShowMenu] = useState<boolean>(false);
+    const { Canvas } = useQRCode();
+    const pathname = usePathname();
+    const path='https://hushhconnect.vercel.app/'+pathname
 
     useEffect(() => {
       const handleSubmit = async () => {
@@ -192,13 +197,34 @@ const ProfileCard = (props:UserDetails) => {
                         </div>
                         <div className='relative'>
                             <Image src={hushhCard} alt="card" className="w-full  relative" />
-                            <div className='absolute top-[16px] left-[24px] flex flex-col'>
+                            <div className='absolute top-[16px] left-[24px] flex flex-col gap-[3.5rem] '>
+                               <div>
                                 <p className="text-white text-2xl font-normal ">{props.name}{props.lastname}</p>
                                 <p className="text-white text-[8.85px] font-medium ">{props.email}</p>
+                               </div>
+                                <div className='opacity-[80%]'>
+                                    <Canvas
+                                  text={path}
+                                  options={{
+                                    errorCorrectionLevel: 'M',
+                                    margin: 2,
+                                    scale: 2,
+                                    width: 56,
+                                    color: {
+                                      dark: '#FFFFFF',
+                                      light: '#1A73E9',
+                                    },
+                                    
+                                  }}
+                                />
+                                </div>
                             </div>
                             <div className='absolute top-[24px] right-[26px]'>
                                 
                                 <SharingOption/>
+                            </div>
+                            <div>
+                           
                             </div>
                         </div>
 
