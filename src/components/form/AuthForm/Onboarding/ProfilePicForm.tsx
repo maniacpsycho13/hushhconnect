@@ -177,7 +177,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                         <FadeLoader color="rgba(200, 73, 168, 1)" />
                       ) : (
                         <UploadButton
-                          className="p-1 rounded-xl text-[10px]  bg-transparent"
+                          className="p-1 rounded-xl text-[10px] ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50 custom-class"
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
                             setIsUploading(false); 
@@ -190,7 +190,6 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                             console.error(error);
                           }}
                           onUploadBegin={()=>setIsUploading(true)}
-                          
                         />
                       )}
                     </FormControl>
