@@ -19,7 +19,7 @@ export default function HushhCoins({coins, referralcode ,users}:{coins:number, r
   };
 
   return (
-    <div className='h-screen w-screen'>
+    <div className='h-screen w-screen  max-w-[460px] mx-auto'>
       <div className='bg-gradient-to-l from-rose-600 to-blue-700 pt-4 px-6 pb-[21px]'>
         <Link href={'/home/thread'}><Image src={whitebackicon} alt='back' /></Link>
 
