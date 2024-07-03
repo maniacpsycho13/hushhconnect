@@ -8,9 +8,9 @@ import React from 'react'
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const id = await getUserId();
 
-   if(!id)return null;
+  //  if(!id)return null;
   const profile=await fetchProfile(id);
-  if(!profile)return null;
+  // if(!profile)return null;
   return (
     <div>
         {children}

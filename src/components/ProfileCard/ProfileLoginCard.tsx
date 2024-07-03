@@ -1,3 +1,4 @@
+
 import Image from 'next/image'
 import React from 'react'
 import { facebook, hushhprofile, instagram, linkedin, loginbg, twitter, youtube } from '../../../public/profilePage'
@@ -5,7 +6,8 @@ import Link from 'next/link'
 import { UserDetails } from '@/app/(root)/profile/[id]/layout'
 
 const ProfileLoginCard = (props:UserDetails) => {
-
+    console.log("checking");
+    
     const platformIcons:any = {
         facebook,
         instagram,

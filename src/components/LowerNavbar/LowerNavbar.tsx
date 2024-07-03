@@ -8,7 +8,7 @@ import Link from 'next/link'
 import UserAvatar from '../Post/UserAvatar'
 import { UserWithExtras } from '@/lib/Validations/definitions'
 
-const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communityid?:string ,profile?:UserWithExtras }) => {
+const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communityid?:string ,profile?:UserWithExtras | null }) => {
   const pathname = usePathname();
   const [isToggled, setIsToggled] = useState(false);
 

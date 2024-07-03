@@ -42,11 +42,14 @@ export default async function layout({ children, params }: { children: React.Rea
       posts:posts,
       coins:user.coins
       }
-    if(!session || !session.userId) return <ProfileLoginCard {...userdetails}/>
-    
-    return (
-    <div >
+      if(!session || !session.userId )return <ProfileLoginCard {...userdetails}/> ;
+      console.log("ckdk");
+      // console.log(userdetails);
+      
+      return (
+        <div >
 
+      {/**/}
 
       <ProfileCard {...userdetails}/>
       {children}

@@ -430,8 +430,9 @@ export async function updateProfile(values: z.infer<typeof UpdateUser>) {
   }
 
 
-  export async function fetchProfile(id: string) {
+  export async function fetchProfile(id: string| null) {
     noStore();
+    if(!id)return null;
   
     try {
       const data = await db.user.findUnique({
@@ -475,6 +476,7 @@ export async function updateProfile(values: z.infer<typeof UpdateUser>) {
       return data;
     } catch (error) {
       console.error("Database Error:", error);
-      throw new Error("Failed to fetch profile");
+      return null;
+    //   throw new Error("Failed to fetch profile");
     }
   }
