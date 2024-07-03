@@ -99,8 +99,43 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
                 image:user1.imageUrl,
             }
         })
+        if (code) {
+            try {
+                const updatedReferral = await db.referral.update({
+                    where: {
+                        code: code
+                    },
+                    data: {
+                        users: {
+                            connect: {
+                                id: id,
+                            },
+                        },
+                    },
+                });
+                
+                console.log(code);
+                
+                await db.user.update({
+                    where: {
+                        id:updatedReferral.autherId
+                    },
+                    data: {
+                        coins: {
+                            increment: 200
+                        }
+                    }
+                        
+                })
+                console.log('Updated Referral:', updatedReferral);
+            } catch (error) {
+                console.log(error);
+                
+                return { error: "Invalid Referral Code" };
+            }
+        }
         revalidatePath(pathname);
-        return {success:"Usename Added"}
+        return {success:"Usename Added 1"}
     }
 
     const newuser=await getUserbyId(id);
@@ -115,43 +150,7 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
             username
         }
     })
-    if (code) {
-        try {
-            console.log("aaaaaaaaaa");
-            
-            const updatedReferral = await db.referral.update({
-                where: {
-                    code: code
-                },
-                data: {
-                    users: {
-                        connect: {
-                            id: id,
-                        },
-                    },
-                },
-            });
-            
-            console.log(code);
-            
-            await db.user.update({
-                where: {
-                    id:updatedReferral.autherId
-                },
-                data: {
-                    coins: {
-                        increment: 200
-                    }
-                }
-                    
-            })
-            console.log('Updated Referral:', updatedReferral);
-        } catch (error) {
-            console.log(error);
-            
-            return { error: "Invalid Referral Code" };
-        }
-    }
+    
     revalidatePath(pathname);
     return {success:"Usename Added"}
 }
