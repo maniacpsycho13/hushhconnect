@@ -134,7 +134,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
       </div> */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center px-6 ">
             {/* <FormField
               control={form.control}
               name="profile_photo"
@@ -180,6 +180,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
               )}
             /> */}
 
+                <div  className="bg-zinc-100 h-[6rem] w-full rounded-xl">
                 <FormField
                 control={form.control}
                 name="profile_photo"
@@ -187,7 +188,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                   <FormItem>
                     <FormControl>
                       <UploadButton
-                        className="text-sm h-11 ut-button:bg-transparent border-y border-zinc-300 dark:border-neutral-700 ut-button:text-blue-500 ut-button:font-bold ut-allowed-content:hidden ut-button:ring-0 ut-button:focus-visible:ring-0 ut-button:ring-offset-0 ut-button:w-full"
+                        className=" py-6 "
                         endpoint="imageUploader"
                         onClientUploadComplete={(res) => {
                           form.setValue("profile_photo", res[0].url);
@@ -205,8 +206,13 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                   </FormItem>
                 )}
               />
+                </div>
 
-            <div className="w-full pt-6 px-4">
+            <div className="w-full pt-6 ">
+              <div className="text-[#797979] text-center text-[15px] py-[8px] mx-[2.5rem] font-[400] mb-4">
+                Share your bio with Hushh <br />
+                Let the World Know You
+              </div>
               <FormField
                 control={form.control}
                 name="bio"
@@ -214,7 +220,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                   <FormItem className="w-full">
                     <FormControl>
                       <Textarea
-                        rows={10}
+                        rows={8}
                         className="p-4 bg-zinc-100 rounded-[14px] justify-start items-start gap-2.5 inline-flex text-neutral-500 text-base font-normal border-none"
                         {...field}
                         placeholder="BIO"
