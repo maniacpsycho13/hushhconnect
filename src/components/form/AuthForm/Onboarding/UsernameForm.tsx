@@ -90,7 +90,7 @@ export function UsernameForm({id}:{id:string}) {
               <FormItem>
                 
                 <FormControl>
-                  <Input placeholder="Username" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
+                  <Input placeholder="Username" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-medium placeholder:font-normal  leading-tight" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,7 +105,7 @@ export function UsernameForm({id}:{id:string}) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Referral Code" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal  leading-tight" />
+                  <Input placeholder="Referral Code" type="text" {...field} disabled={isPending} className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-medium placeholder:font-normal leading-tight" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

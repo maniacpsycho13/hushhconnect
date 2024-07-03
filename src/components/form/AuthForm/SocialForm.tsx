@@ -203,7 +203,7 @@ export function SocialForm({id}:{id:string}) {
           </div> */}
         <FormError message={error} />
         <FormSuccess message={success} />
-        <div className="pt-[88px]">
+        <div className="pt-[50px]">
           <Button type="submit" disabled={isPending} className=" h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight">Next</Button>
         </div>
       </form>

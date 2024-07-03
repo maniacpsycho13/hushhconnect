@@ -9,14 +9,22 @@ const YourDetails = () => {
 
     const items2 = ['Fashion & beauty', 'Crafts', 'Designer', 'Model', 'Visual arts', 'Writer', 'Lifestyle', 'Other'];
 
-    const [selectedItem, setSelectedItem] = useState<number | null>(null);
-    const [selectedItem2, setSelectedItem2] = useState<number | null>(null);
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const [selectedItems2, setSelectedItems2] = useState<number[]>([]);
 
-    const handleItemClick = (index : number, category : string) => {
+    const handleItemClick = (index: number, category: string) => {
         if (category === 'items') {
-            setSelectedItem(index);
+            if (selectedItems.includes(index)) {
+                setSelectedItems(selectedItems.filter(item => item !== index));
+            } else if (selectedItems.length < 3) {
+                setSelectedItems([...selectedItems, index]);
+            }
         } else {
-            setSelectedItem2(index);
+            if (selectedItems2.includes(index)) {
+                setSelectedItems2(selectedItems2.filter(item => item !== index));
+            } else if (selectedItems2.length < 3) {
+                setSelectedItems2([...selectedItems2, index]);
+            }
         }
     };
 
@@ -29,7 +37,7 @@ const YourDetails = () => {
                     <div className="text-center text-neutral-500 text-[15px] font-normal mt-[8px] leading-tight">This will personalize your hushh connect experience.</div>
                 </div>
                 <div className='mt-[33px]'>
-                    <div className="text-center text-gray-900 text-[15px] font-semibold leading-tight">Select one category that fits for you</div>
+                    <div className="text-center text-gray-900 text-[15px] font-semibold leading-tight">Select up to 3 categories that fit you</div>
                 </div>
             </div>
             <div className='flex flex-wrap gap-[8px] px-[16px]'>
@@ -37,7 +45,7 @@ const YourDetails = () => {
                     <button
                         key={index}
                         id={`button-${index}`}
-                        className={`px-2.5 py-[3px] ${selectedItem === index ? 'bg-gradient-to-l from-rose-500 to-purple-500 text-white' : 'bg-white'} rounded-[51px] border border-neutral-200 ${selectedItem === index ? 'text-white' : 'text-black'} text-[13px] font-normal leading-snug`}
+                        className={`px-2.5 py-[3px] ${selectedItems.includes(index) ? 'bg-gradient-to-l from-rose-500 to-purple-500 text-white' : 'bg-white'} rounded-[51px] border border-neutral-200 ${selectedItems.includes(index) ? 'text-white' : 'text-black'} text-[13px] font-normal leading-snug`}
                         onClick={() => handleItemClick(index, 'items')}
                     >
                         {item}
@@ -45,13 +53,13 @@ const YourDetails = () => {
                 ))}
             </div>
             <div className='px-[16px]'>
-                <div className="mt-[33px] text-center text-gray-900 text-[15px] font-semibold leading-tight">Pick your Influencer & Digital Creator category (optional)</div>
+                <div className="mt-[33px] text-center text-gray-900 text-[15px] font-semibold leading-tight">Pick up to 3 Influencer & Digital Creator categories (optional)</div>
                 <div className='flex flex-wrap gap-[8px] mt-4'>
                     {items2.map((item, index) => (
                         <button
                             key={index}
                             id={`button-${index}`}
-                            className={`px-2.5 py-[3px] ${selectedItem2 === index ? 'bg-black text-white' : 'bg-white'} rounded-[51px] border border-neutral-200 ${selectedItem2 === index ? 'text-white' : 'text-black'} text-[13px] font-normal leading-snug`}
+                            className={`px-2.5 py-[3px] ${selectedItems2.includes(index) ? 'bg-black text-white' : 'bg-white'} rounded-[51px] border border-neutral-200 ${selectedItems2.includes(index) ? 'text-white' : 'text-black'} text-[13px] font-normal leading-snug`}
                             onClick={() => handleItemClick(index, 'items2')}
                         >
                             {item}

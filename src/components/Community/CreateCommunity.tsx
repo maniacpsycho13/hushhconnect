@@ -130,14 +130,17 @@ export function CreateComm({ id }: { id: string }) {
               >
                 <FormLabel className="flex flex-col items-center justify-center">
                   {field.value ? (
-                    <Image
+                    <div  className="relative h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
+                      <Image
                       src={field.value}
                       alt="profile_icon"
-                      width={96}
-                      height={96}
+                      layout="fill"
+                      objectFit="contain"
                       priority
-                      className="rounded-full object-contain"
+                      className="rounded-full"
                     />
+
+                    </div>
                   ) : (
                     <div className="text-center text-black text-[15px] font-normal leading-tight h-full mt-[2.3rem]">
                       upload community profile

@@ -106,11 +106,11 @@ export function BasicDetails({id}:{id:string}) {
               <Image src={detail} alt="lock" ></Image>
 
               <div className="text-gray-900 text-xl font-bold mt-[10px]">Basic Details</div>
-              <div className=" text-neutral-500 text-[15px] font-normal leading-tight mt-[8px]">Silence Speaks Louder: Discover Hushh for Your Sound Solutions</div>
+              <div className=" text-neutral-500 text-[15px] font-normal leading-tight mt-[12px]">Hushh Connect: Network, Business, Community, and Commerce - Seamlessly Integrated, Effortlessly Yours!</div>
             </div> 
               
           </div>
-        
+      
         <div className="px-6 ">
           <FormField
             control={form.control}
