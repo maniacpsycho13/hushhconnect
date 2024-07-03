@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState, useTransition, ChangeEvent, useRef } from "react";
 import { z } from "zod";
 import Loader from "@/components/Loader/Loader";
-
+import { FadeLoader } from 'react-spinners'
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -166,7 +166,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
               )}
             /> */}
 
-                <div  className="bg-zinc-100 h-[6rem] w-full rounded-xl">
+                <div  className="mx-auto">
                 <FormField
                 control={form.control}
                 name="profile_photo"
@@ -174,23 +174,23 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                   <FormItem>
                     <FormControl>
                       {isUploading ? (
-                        <BeatLoader color="#36d7b7" /> // Show loader when uploading
+                        <FadeLoader color="rgba(200, 73, 168, 1)" />
                       ) : (
                         <UploadButton
-                          className="py-6"
+                          className="p-1 rounded-xl text-[10px]  bg-transparent"
                           endpoint="imageUploader"
                           onClientUploadComplete={(res) => {
-                            setIsUploading(false); // Stop loader when upload is complete
+                            setIsUploading(false); 
                             form.setValue("profile_photo", res[0].url);
                             setSelectedImage(res[0].url);
                             console.log("Image uploaded:", res[0].url);
                           }}
                           onUploadError={(error: Error) => {
-                            setIsUploading(false); // Stop loader on error
+                            setIsUploading(false); 
                             console.error(error);
                           }}
                           onUploadBegin={()=>setIsUploading(true)}
-                          // onUploadStart={() => setIsUploading(true)} // Start loader when upload starts
+                          
                         />
                       )}
                     </FormControl>
@@ -200,23 +200,21 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
             </div>
 
             {selectedImage && (
-              <div className="pt-4">
-                <Image
-                  src={selectedImage}
-                  alt="profile_icon"
-                  width={84}
-                  height={84}
-                  priority
-                  className="rounded-full object-contain"
-                />
-              </div>
+              <div  className="relative h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
+              <Image
+              src={selectedImage}
+              alt="profile_icon"
+              layout="fill"
+              objectFit="contain"
+              priority
+              className="rounded-full"
+            />
+
+            </div>
             )}
 
             <div className="w-full pt-6 ">
-              <div className="text-[#797979] text-center text-[15px] py-[8px] mx-[2.5rem] font-[400] mb-4">
-                Share your bio with Hushh <br />
-                Let the World Know You
-              </div>
+              
               <FormField
                 control={form.control}
                 name="bio"

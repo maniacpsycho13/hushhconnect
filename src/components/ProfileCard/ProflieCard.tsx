@@ -84,7 +84,7 @@ const ProfileCard = (props:UserDetails) => {
             </div>
             <div className={`menu-content ${showMenu ? 'open' : 'close'}`}>
                 <Link href={'/settings'}><Image src={user} alt="user" /></Link>
-                <Image src={find} alt="find" />
+                <Link href={'/search'}><Image src={find} alt="find" /></Link>
             </div>
                     </div>
                 </div>
