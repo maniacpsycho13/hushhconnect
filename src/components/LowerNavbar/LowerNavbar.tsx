@@ -5,8 +5,10 @@ import { usePathname } from 'next/navigation'
 import { lowerNav2 } from '../../../public/profilePage'
 import { bell, coloredcircle, community, homeicon, profileicon, CrossColor, coloredbell, coloredhome, coloredmeet } from '../../../public/profile'
 import Link from 'next/link'
+import UserAvatar from '../Post/UserAvatar'
+import { UserWithExtras } from '@/lib/Validations/definitions'
 
-const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:string }) => {
+const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communityid?:string ,profile?:UserWithExtras }) => {
   const pathname = usePathname();
   const [isToggled, setIsToggled] = useState(false);
 
@@ -42,7 +44,9 @@ const LowerNavbar = ({ id, communityid }: { id: string | null , communityid?:str
           </Link>
           <div className={`ml-auto ${isProfileActive ? 'border-2 border-rose-500 rounded-full' : ''}`}>
             <Link href={`/profile/${id}/threads`}>
-              <Image src={profileicon} alt='nav' />
+             
+                 <Image src={profile?.image || profileicon} alt='nav' height={24} width={24} /> 
+             
             </Link>
           </div>
         </div>

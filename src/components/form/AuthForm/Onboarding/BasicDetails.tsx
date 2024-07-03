@@ -166,15 +166,15 @@ export function BasicDetails({id}:{id:string}) {
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
+                    
                     <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date:Date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
-                    />
+                    mode="single"
+                    captionLayout="dropdown-buttons"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    fromYear={1960}
+                    toYear={2030}
+                  />
                   </PopoverContent>
                 </Popover>
                 {/* <FormDescription>

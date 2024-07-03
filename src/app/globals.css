@@ -111,3 +111,6 @@
   border-color: var(--Linear, linear-gradient(268deg, #E0055F 1.32%, #2020ED 95.37%));
   background-color: var(--Linear, linear-gradient(268deg, #E0055F 1.32%, #2020ED 95.37%));
 }
+.rdp-vhidden {
+  @apply hidden;
+}
