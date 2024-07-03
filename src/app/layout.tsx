@@ -15,7 +15,7 @@ const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })    
-
+import "@uploadthing/react/styles.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
