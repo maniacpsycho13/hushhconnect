@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState, useTransition, ChangeEvent } from "react";
+import { useState, useTransition, ChangeEvent, useRef } from "react";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -21,14 +21,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 
 import Image from "next/image";
-import { useUploadThing } from "@/lib/uploadthing";
+import { UploadButton, useUploadThing } from "@/lib/uploadthing";
 import { ProfilePicValidation } from "@/lib/Validations/UserValidation";
 import { profilepicupdate } from "@/lib/Actions/user.action";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import SimpleSlider from "@/components/Corousel/CenterMode";
+import ProfileAvatar from "@/components/ProfileCard/ProfileAvatar";
+import UserAvatar from "@/components/Post/UserAvatar";
+import { UserWithExtras } from "@/lib/Validations/definitions";
 
-export function ProfilePicForm({ id }: { id: string }) {
+export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras}) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -48,27 +51,27 @@ export function ProfilePicForm({ id }: { id: string }) {
       bio: "",
     },
   });
-
+    
   const onSubmit = async (values: z.infer<typeof ProfilePicValidation>) => {
     setError("");
     setSuccess("");
 
-    console.log("Selected Image URL:", selectedImage);
-    console.log("Files Array:", files);
+    // console.log("Selected Image URL:", selectedImage);
+    // console.log("Files Array:", files);
 
-    if (selectedImage) {
-      values.profile_photo = selectedImage;
-      console.log("Using selected image from slider:", selectedImage);
-    } else if (files.length > 0) {
-      const imgRes = await startUpload(files);
-      if (imgRes && imgRes[0].url) {
-        values.profile_photo = imgRes[0].url;
-        console.log("Image uploaded:", imgRes[0].url);
-      }
-    } else {
-      setError("Please select an image.");
-      return;
-    }
+    // if (selectedImage) {
+    //   values.profile_photo = selectedImage;
+    //   console.log("Using selected image from slider:", selectedImage);
+    // } else if (files.length > 0) {
+    //   const imgRes = await startUpload(files);
+    //   if (imgRes && imgRes[0].url) {
+    //     values.profile_photo = imgRes[0].url;
+    //     console.log("Image uploaded:", imgRes[0].url);
+    //   }
+    // } else {
+    //   setError("Please select an image.");
+    //   return;
+    // }
 
     console.log("Form values to be submitted:", values);
 
@@ -82,6 +85,7 @@ export function ProfilePicForm({ id }: { id: string }) {
       });
     });
   };
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleImage = (
     e: ChangeEvent<HTMLInputElement>,
@@ -112,86 +116,129 @@ export function ProfilePicForm({ id }: { id: string }) {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="w-full flex flex-col items-center">
-          <FormField
-            control={form.control}
-            name="profile_photo"
-            render={({ field }) => (
-              <FormItem className="relative mx-auto items-center">
-                <FormLabel className="flex flex-col items-center">
-                  {selectedImage ? (
-                    <Image
-                      src={selectedImage}
-                      alt="profile_icon"
-                      width={84}
-                      height={84}
-                      
-                      priority
-                      className="rounded-full object-contain"
-                    />
-                  ) : (
-                    <div className="text-center text-blue-600 text-[15px] font-normal leading-tight">
-                      Upload your picture
-                    </div>
-                  )}
-                </FormLabel>
-                <div className="w-screen">
-                  <SimpleSlider
-                    onImageSelect={(url) => {
-                      setSelectedImage(url);
-                      form.setValue("profile_photo", url);
-                      console.log("Image selected from slider:", url);
-                    }}
-                  />
-                </div>
-                <FormControl className="hidden">
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    placeholder="Add profile photo"
-                    className="account-form_image-input2"
-                    onChange={(e) => handleImage(e, field.onChange)}
-                    disabled={isPending}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          <div className="w-full pt-6 px-4">
-            <FormField
+    <div>
+      {/* <div className="flex items-center gap-x-2 md:gap-x-5">
+        <ProfileAvatar user={user}>
+          <div className="md:w-20 flex md:justify-end">
+            <UserAvatar user={user} className="w-11 h-11 cursor-pointer" />
+          </div>
+        </ProfileAvatar>
+        <div>
+          <p className="font-medium">{user.username}</p>
+          <ProfileAvatar user={user}>
+            <p className="text-blue-500 text-sm font-bold cursor-pointer hover:text-white">
+              Change profile photo
+            </p>
+          </ProfileAvatar>
+        </div>
+      </div> */}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="w-full flex flex-col items-center">
+            {/* <FormField
               control={form.control}
-              name="bio"
+              name="profile_photo"
               render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormControl>
-                    <Textarea
-                      rows={10}
-                      className="p-4 bg-zinc-100 rounded-[14px] justify-start items-start gap-2.5 inline-flex text-neutral-500 text-base font-normal border-none"
-                      {...field}
-                      placeholder="BIO"
+                <FormItem className="relative mx-auto items-center">
+                  <FormLabel className="flex flex-col items-center">
+                    {selectedImage ? (
+                      <Image
+                        src={selectedImage}
+                        alt="profile_icon"
+                        width={84}
+                        height={84}
+                        
+                        priority
+                        className="rounded-full object-contain"
+                      />
+                    ) : (
+                      <div className="text-center text-blue-600 text-[15px] font-normal leading-tight">
+                        Upload your picture
+                      </div>
+                    )}
+                  </FormLabel>
+                  <div className="w-screen">
+                    <SimpleSlider
+                      onImageSelect={(url) => {
+                        setSelectedImage(url);
+                        form.setValue("profile_photo", url);
+                        console.log("Image selected from slider:", url);
+                      }}
+                    />
+                  </div>
+                  <FormControl className="hidden">
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      placeholder="Add profile photo"
+                      className="account-form_image-input2"
+                      onChange={(e) => handleImage(e, field.onChange)}
+                      disabled={isPending}
                     />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
+
+                <FormField
+                control={form.control}
+                name="profile_photo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <UploadButton
+                        className="text-sm h-11 ut-button:bg-transparent border-y border-zinc-300 dark:border-neutral-700 ut-button:text-blue-500 ut-button:font-bold ut-allowed-content:hidden ut-button:ring-0 ut-button:focus-visible:ring-0 ut-button:ring-offset-0 ut-button:w-full"
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          form.setValue("profile_photo", res[0].url);
+                          console.log("hi there",res[0].size);
+                          
+                          if (inputRef.current) {
+                            inputRef.current.click();
+                          }
+                        }}
+                        onUploadError={(error: Error) => {
+                          console.error(error);
+                        }}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+            <div className="w-full pt-6 px-4">
+              <FormField
+                control={form.control}
+                name="bio"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl>
+                      <Textarea
+                        rows={10}
+                        className="p-4 bg-zinc-100 rounded-[14px] justify-start items-start gap-2.5 inline-flex text-neutral-500 text-base font-normal border-none"
+                        {...field}
+                        placeholder="BIO"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
-        </div>
-        <FormError message={error} />
-        <FormSuccess message={success} />
-        <div className="px-4">
-          <Button
-            type="submit"
-            disabled={isPending}
-            className="h-14 py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight"
-          >
-            Continue
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+          <div className="px-4">
+            <Button
+              type="submit"
+              disabled={isPending}
+              className="h-14 py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight"
+            >
+              Continue
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

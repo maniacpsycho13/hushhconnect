@@ -56,6 +56,7 @@ export const getUserbyIdSocial = async (id : string )=>{
 // }
 
 import  { generate }   from "referral-codes";
+import { UpdateUser } from "../Validations/PostValidation";
 
 function generateReferralCode({username }: { username: string }) {
     
@@ -394,3 +395,86 @@ export async function createReferralbyUserId(id: string) {
         return { error: 'Error creating referral' };
     }
 }
+export async function updateProfile(values: z.infer<typeof UpdateUser>) {
+    const userId = await getUserId();
+    if(!userId)return null;
+  
+    const validatedFields = UpdateUser.safeParse(values);
+  
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: "Missing Fields. Failed to Update Profile.",
+      };
+    }
+  
+    const { bio, image, name, username } = validatedFields.data;
+  
+    try {
+      await db.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          username,
+          name,
+          image,
+          bio,
+        },
+      });
+      revalidatePath("/profile/"+userId);
+      return { message: "Updated Profile." };
+    } catch (error) {
+      return { message: "Database Error: Failed to Update Profile." };
+    }
+  }
+
+
+  export async function fetchProfile(id: string) {
+    noStore();
+  
+    try {
+      const data = await db.user.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          posts: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+          saved: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
+          followedBy: {
+            include: {
+              follower: {
+                include: {
+                  following: true,
+                  followedBy: true,
+                },
+              },
+            },
+          },
+          following: {
+            include: {
+              following: {
+                include: {
+                  following: true,
+                  followedBy: true,
+                },
+              },
+            },
+          },
+        },
+      });
+  
+      return data;
+    } catch (error) {
+      console.error("Database Error:", error);
+      throw new Error("Failed to fetch profile");
+    }
+  }
