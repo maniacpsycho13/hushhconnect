@@ -66,6 +66,7 @@ const ProfileCard = (props:UserDetails) => {
 
   return (
     <div>
+      
        <div className='bg-zinc-100 px-6 py-4'>
                 <div className='flex justify-between items-center'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition, ChangeEvent, useRef } from "react";
 import { z } from "zod";
+import Loader from "@/components/Loader/Loader";
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,7 +32,7 @@ import ProfileAvatar from "@/components/ProfileCard/ProfileAvatar";
 import UserAvatar from "@/components/Post/UserAvatar";
 import { UserWithExtras } from "@/lib/Validations/definitions";
 
-export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras}) {
+export function ProfilePicForm({ id, user }: { id: string, user: UserWithExtras }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -51,7 +52,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
       bio: "",
     },
   });
-    
+
   const onSubmit = async (values: z.infer<typeof ProfilePicValidation>) => {
     setError("");
     setSuccess("");
@@ -85,6 +86,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
       });
     });
   };
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleImage = (
@@ -108,7 +110,6 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
         setSelectedImage(imageDataUrl);
         form.setValue("profile_photo", imageDataUrl);
         console.log("Image selected from file input:", imageDataUrl);
-        
       };
 
       fileReader.readAsDataURL(file);
@@ -117,6 +118,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
 
   return (
     <div>
+      {isPending && <Loader />}
       {/* <div className="flex items-center gap-x-2 md:gap-x-5">
         <ProfileAvatar user={user}>
           <div className="md:w-20 flex md:justify-end">
@@ -147,7 +149,6 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                         alt="profile_icon"
                         width={84}
                         height={84}
-                        
                         priority
                         className="rounded-full object-contain"
                       />
@@ -180,8 +181,8 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
               )}
             /> */}
 
-                <div  className="bg-zinc-100 h-[6rem] w-full rounded-xl">
-                <FormField
+            <div className="bg-zinc-100 h-[6rem] w-full rounded-xl">
+              <FormField
                 control={form.control}
                 name="profile_photo"
                 render={({ field }) => (
@@ -192,8 +193,8 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                         endpoint="imageUploader"
                         onClientUploadComplete={(res) => {
                           form.setValue("profile_photo", res[0].url);
-                          console.log("hi there",res[0].size);
-                          
+                          console.log("hi there", res[0].size);
+
                           if (inputRef.current) {
                             inputRef.current.click();
                           }
@@ -206,7 +207,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
                   </FormItem>
                 )}
               />
-                </div>
+            </div>
 
             <div className="w-full pt-6 ">
               <div className="text-[#797979] text-center text-[15px] py-[8px] mx-[2.5rem] font-[400] mb-4">

@@ -10,7 +10,7 @@ import { addcommunity } from "../../../../public/community";
 export default function Page() {
     
   return (
-    <div className="px-6 pt-4 bg-gray-100 h-screen">
+    <div className="px-6 pt-4 bg-gray-100 h-auto">
         <div>
             <Link href={'/home/thread'}><Image src={backicon} alt="back"></Image></Link>
           </div>
