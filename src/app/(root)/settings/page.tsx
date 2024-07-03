@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { NextIcon, SettingIcon1, SettingIcon2, SettingIcon3, SettingIcon4, SettingIcon5, SettingIcon6, SettingIcon7, SettingIcon8 } from '../../../../public/Settings'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 const page = () => {
   return (
@@ -86,7 +87,9 @@ const page = () => {
                 <div className='mt-[8.03px] h-[45.98px] w-full pl-[15.33px] bg-white rounded-[9.58px] pr-[15px] items-center inline-flex justify-between '>
                     <div className='flex gap-[7.66px]'>
                         <Image src={SettingIcon8} alt='Manage'></Image>
-                        <div className=" text-indigo-950 text-base font-normal  leading-[22.99px]">Logout</div>
+                            <SignedIn>
+                            <UserButton/>
+                            </SignedIn> 
                     </div>
                     <div >
                         <Image src={NextIcon} alt='icon'></Image>
