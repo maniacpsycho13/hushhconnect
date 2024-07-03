@@ -10,6 +10,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
 
    if(!id)return null;
   const profile=await fetchProfile(id);
+  if(!profile)return null;
   return (
     <div>
         {children}
