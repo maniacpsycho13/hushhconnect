@@ -50,11 +50,11 @@ export function SocialForm({id}:{id:string}) {
   const form=useForm<z.infer<typeof SocialValidation>>({
     resolver: zodResolver(SocialValidation), 
     defaultValues: {
-      instagram: "",
-      twitter: "",
-      facebook: "",
-      linkedin: "",
-      youtube: "",
+      instagram: "https://www.instagram.com/",
+      twitter: "https://x.com/",
+      facebook: "https://facebook.com/",
+      linkedin: "https://www.linkedin.com/",
+      youtube: "https://www.youtube.com/",
     }
   })
   const onSubmit = (values: z.infer<typeof SocialValidation>) => {
@@ -105,7 +105,12 @@ export function SocialForm({id}:{id:string}) {
                   <FormItem>
                     
                     <FormControl>
-                      <Input placeholder="instagram.com/" type="text" {...field} disabled={isPending} className="w-full border-none h-full focus:border-none focus-visible:border-none shadow-none focus:outline-none text-zinc-400 text-sm font-normal " />
+                      <Input 
+                      placeholder="instagram.com/" 
+                      type="text" 
+                      {...field}
+                       disabled={isPending}
+                        className="w-full border-none h-full focus:border-none focus-visible:border-none shadow-none focus:outline-none text-zinc-400 text-sm font-normal " />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
