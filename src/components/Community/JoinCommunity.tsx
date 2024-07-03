@@ -20,9 +20,9 @@ export default function JoinCommunity({communityid,userid}:{communityid:string,u
           joinCommunity(communityid,userid).then((data)=>{
             setError(data?.error);
             setSuccess(data?.success);
-            if(data?.success){
-                router.push('/profle');
-            }
+            // if(data?.success){
+            //     // router.push('/profle');
+            // }
           })
         })
         
