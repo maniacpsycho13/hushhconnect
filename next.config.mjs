@@ -11,6 +11,10 @@ const nextConfig = {
         hostname: "files.edgestore.dev",
       },
       {
+        protocol:"https",
+        hostname:"img.clerk.com"
+      },
+      {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },

@@ -1,5 +1,6 @@
 import SimpleSlider from "@/components/Corousel/CenterMode";
 import { ProfilePicForm } from "@/components/form/AuthForm/Onboarding/ProfilePicForm";
+import { fetchProfile } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 
 export default async function page() {
@@ -7,7 +8,8 @@ export default async function page() {
   if (!session || !session.userId) {
     return null;
   }
-
+  const profile=await fetchProfile(session.userId);
+  if(!profile)return null;
   return (
     <div>
       <div className="mt-[70px] flex flex-col justify-center items-center ">
@@ -18,7 +20,7 @@ export default async function page() {
           Finish off your hushh with a profile picture and bio.
         </p>
       </div>
-      <ProfilePicForm id={session.userId} />
+      <ProfilePicForm id={session.userId} user={profile} />
     </div>
   );
 }
