@@ -52,9 +52,9 @@ export default function SharingReferral({Referral}:{Referral:string}) {
             </div>
             <div>
                 <EmailShareButton
-                    url={pathname}
+                    url={path}
                     subject={content}
-                    body="We appreciate your business card. Share it with anyone."
+                    body="Share it with anyone."
                 >
                 <EmailIcon size={32} round />
                 </EmailShareButton>
