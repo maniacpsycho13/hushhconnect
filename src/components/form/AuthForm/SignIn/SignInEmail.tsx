@@ -7,12 +7,16 @@ import Image from 'next/image';
 import { Back, Star, closeeye, openeye } from '../../../../../public/login';
 import Link from 'next/link';
 import { Icons } from '@/components/ui/icons';
+import { FormSuccess } from '../form-success';
+import { FormError } from '../form-error';
 
 export default function SignInEmail() {
   const { isLoaded, signIn, setActive } = useSignIn();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const router = useRouter();
+  const [error , setError] = React.useState<string | undefined>('')
+  const [success , setSuccess] = React.useState<string | undefined>('')
 
   const [type, setType] =React.useState ('password');
   const [icon,setIcon]= React.useState (closeeye);
@@ -53,11 +57,15 @@ export default function SignInEmail() {
         // If the status is not complete, check why. User may need to
         // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2));
+        // console.log(signInAttempt);
+        
+        // setError(signInAttempt.errors[0].message);
       }
     } catch (err: any) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
+      setError(err.errors[0].message);
     }finally{
       setIsLoading(false);
     }
@@ -115,6 +123,10 @@ export default function SignInEmail() {
           </button>
         </div>
       </form>
+      <br />
+      <br />
+      <FormSuccess message={success} />
+      <FormError message={error} />
       <div className='flex items-center justify-between mt-[38px] '>
         <div className="w-[35%] h-[0px] border border-zinc-300"></div>
         <div className="text-black/opacity-70 text-sm font-normal  leading-[17.50px]">Or Login with</div>
