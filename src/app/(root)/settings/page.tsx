@@ -7,7 +7,7 @@ import Link from 'next/link'
 const page = () => {
   return (
     <div>
-        <div className='px-6 py-4 bg-gray-100 h-screen w-screen'>
+        <div className='px-6 py-4 bg-gray-100 h-screen w-screen max-w-[460px] mx-auto'>
             <div className='flex justify-between'>
                 <h2 className='text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>Profile</h2>
                 <div className='flex  flex-col items-center'>

@@ -46,7 +46,7 @@ export default async function layout({ children, params }: { children: React.Rea
       // console.log(userdetails);
       
       return (
-        <div >
+        <div className="h-screen bg-zinc-100 ">
 
 
       <ProfileCard {...userdetails}/>
