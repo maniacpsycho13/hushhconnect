@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss"
 
 const config = {
+  
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -18,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        'mobile': '460px',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

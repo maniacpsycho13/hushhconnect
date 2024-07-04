@@ -45,7 +45,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
           <div className={`ml-auto ${isProfileActive ? 'border-2 border-rose-500 rounded-full' : ''}`}>
             <Link href={`/profile/${id}/threads`}>
              
-                 <Image src={profile?.image || profileicon} alt='nav' height={24} width={24} /> 
+                 <Image src={profile?.image || profileicon} alt='nav' height={24} width={24} className='rounded-full'/> 
              
             </Link>
           </div>
@@ -70,7 +70,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
               </div>
             )}
             {communityid && (
-              <div className='text-white mb-4 flex gap-[24px] flex-col items-center'>
+              <div className='text-white mb-4 flex gap-[24px] flex-col items-center '>
                 <Link href={`/community/${communityid}/create/threads`} onClick={handleDelayedToggle}>
                   <p className="text-white/opacity-95 text-base font-medium leading-[19px] transition-opacity duration-300 ease-in-out">Threads</p>
                 </Link>

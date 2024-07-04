@@ -65,9 +65,9 @@ const ProfileCard = (props:UserDetails) => {
       };
 
   return (
-    <div>
+    <div className=''>
       
-       <div className='bg-zinc-100 px-6 py-4'>
+       <div className='bg-zinc-100 px-6 py-4 h-full'>
                 <div className='flex justify-between items-center'>
                 <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
                     <div className='flex gap-4 items-center'>
@@ -80,9 +80,9 @@ const ProfileCard = (props:UserDetails) => {
                         </div>
                      </Link>
                      <div onClick={handleToggleMenu} className="cursor-pointer">
-                <Image src={menu} alt='menu'></Image>
+                <Image src={menu} alt='menu' className='mobile:hidden'></Image>
             </div>
-            <div className={`menu-content ${showMenu ? 'open' : 'close'}`}>
+            <div className={`menu-content ${showMenu ? 'open' : 'close'} `} >
                 <Link href={'/settings'}><Image src={user} alt="user" /></Link>
                 <Link href={'/search'}><Image src={find} alt="find" /></Link>
             </div>
@@ -196,8 +196,8 @@ const ProfileCard = (props:UserDetails) => {
                             <Image src={props.profilePic || hushhprofile} width={68.64} height={68.64} alt="profile" className="w-[68.64px] h-[68.64px] rounded-full" />
                             <p className='text-black text-lg font-semibold leading-[33.29px]'>{props.name}{props.lastname}</p>
                         </div>
-                        <div className='relative'>
-                            <Image src={hushhCard} alt="card" className="w-full  relative" />
+                        <div className='relative '>
+                            <Image src={hushhCard} alt="card" className="w-full  relative rounded-xl  " />
                             <div className='absolute top-[16px] left-[24px] flex flex-col gap-[3.5rem] '>
                                <div>
                                 <p className="text-white text-2xl font-normal ">{props.name}{props.lastname}</p>
