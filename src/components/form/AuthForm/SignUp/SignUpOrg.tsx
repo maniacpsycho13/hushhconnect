@@ -85,7 +85,7 @@ export default function SignUpPage() {
                         </div>
                       </Link>
 
-                      <Link href={'sign-up/phone'} className='h-[54px] px-[19px]  bg-white rounded-[28px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex mt-[14px]'>
+                      <Link href={'sign-up/email'} className='h-[54px] px-[19px]  bg-white rounded-[28px] border border-zinc-300 justify-start items-center gap-2.5 inline-flex mt-[14px]'>
                         <div className='flex text-black text-base font-semibold items-center gap-[14px] leading-tight'>
                         <Image src={phone} alt='apple'></Image>
                         <div>Continue With Phone</div>
