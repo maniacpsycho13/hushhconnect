@@ -85,11 +85,11 @@ async function Post({ post }: { post: PostWithExtras }) {
       <PostActions post={post} userId={userId} className="px-3 sm:px-0" />
 
       {post.caption && (
-        <div className="text-sm leading-none space-x-2 font-medium px-3 sm:px-0">
+        <div className="text-sm leading-none  font-medium px-3 sm:px-0">
           <Link href={`/profile/${userId}/threads`} className="font-bold">
             {username}
           </Link>
-          <p>{post.caption}</p>
+          <p className="text-[0.7rem] font-normal leading-4">{post.caption}</p>
         </div>
       )}
 
