@@ -14,12 +14,12 @@ import {
   
 import { useRouter, usePathname } from 'next/navigation'
 
-export default function SharingCard() {
+export default function SharingReferral({Referral}:{Referral:string}) {
     const router = useRouter();
     const pathname = usePathname();
     console.log(pathname);
-    const content="Hushh Business Card"
-    const path='https://hushhvivaconnect.shop'+pathname
+    const content=Referral
+    const path='https://hushhvivaconnect.shop'
 
     return(
         <div className='flex gap-3 justify-center items-center'>

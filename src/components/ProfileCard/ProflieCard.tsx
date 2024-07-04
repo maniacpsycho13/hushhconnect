@@ -93,7 +93,7 @@ const ProfileCard = (props:UserDetails) => {
                     <div className='flex flex-col justify-center items-center'>
                         <Image src={props.profilePic || hushhprofile} alt="profile" width={108.645} height={108.645} className="w-[108.645px] h-[108.645px] rounded-full" />
                         <div className='flex flex-col justify-center items-center'>
-                            <h2 className='text-[18px] text-black font-[600] inline'>{props.name}{props.lastname}</h2>
+                            <h2 className='text-[18px] text-black font-[600] inline'>{props.name} {props.lastname}</h2>
                             <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[600] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>view hushh card</p>
                         </div>
                     </div>

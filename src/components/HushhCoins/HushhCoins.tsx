@@ -6,6 +6,7 @@ import { Coin, gift, medal, whitebackicon, copyicon, referal } from '../../../pu
 import { hushhprofile } from '../../../public/profile'
 import Link from 'next/link'
 import { User } from '@prisma/client'
+import { SharingRefOption } from '../ProfileCard/SharingRefOption'
 
 export default function HushhCoins({coins, referralcode ,users}:{coins:number, referralcode:string, users:User[]}) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -64,7 +65,7 @@ export default function HushhCoins({coins, referralcode ,users}:{coins:number, r
 
         <div className='mt-[12px]'>
             <div className="w-full py-[12px] flex justify-center items-center bg-gradient-to-l from-rose-600 to-blue-700 rounded-[5px] text-white text-sm font-semibold leading-[21px]">
-                Refer friends now
+                <SharingRefOption referral={referralcode}/>
             </div>
         </div>
 

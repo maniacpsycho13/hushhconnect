@@ -6,8 +6,6 @@ import { fetchProductsByUserId } from "@/lib/Actions/product.action";
 import { getUserbyId, getUserbyIdSocial } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 import ProfileLoginCard from "@/components/ProfileCard/ProfileLoginCard";
-import axios from "axios";
-
 export type UserDetails={
   id:string
   username:string | null
