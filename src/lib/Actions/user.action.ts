@@ -90,7 +90,11 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
     if(user1===null){
         return {error:"Not Logged In"}
     }
+    console.log("outside loop");
+    
     if(!existingUser){
+        console.log("inside loop");
+        
         await db.user.create({
             data:{
                 id,
@@ -137,6 +141,8 @@ export async function usernameupdate(values: z.infer<typeof UsernameValidation>,
         revalidatePath(pathname);
         return {success:"Usename Added 1"}
     }
+    console.log("after loop");
+    
 
     const newuser=await getUserbyId(id);
     if(!newuser){
