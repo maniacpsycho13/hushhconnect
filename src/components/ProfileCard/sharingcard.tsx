@@ -52,7 +52,7 @@ export default function SharingCard() {
             </div>
             <div>
                 <EmailShareButton
-                    url={pathname}
+                    url={path}
                     subject={content}
                     body="We appreciate your business card. Share it with anyone."
                 >
