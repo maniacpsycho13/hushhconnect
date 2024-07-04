@@ -83,12 +83,12 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white '>
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <Link href={'thanks'}><Image src={backicon} alt="backicon" ></Image></Link>
-            {/* <Link href={'profilepic'}><p className="text-center text-gray-900 text-[15px] font-medium">Skip</p></Link> */}
-          </div>
+            <Link href={'profilepic'}><p className="text-center text-gray-900 text-[15px] font-medium">Skip</p></Link>
+          </div> */}
 
-          <div className="text-center text-gray-900 text-xl font-bold mt-[31px] ">Let &apos;s make it yours</div>
+          <div className="text-center text-gray-900 text-xl font-bold mt-3 ">Let &apos;s make it yours</div>
           <div className=" mt-[8px] text-center text-neutral-500 text-sm font-normal  leading-tight">Add your own content below. You can also further customize your links and appearance later.</div>
 
           <div className="text-center text-gray-900 text-[15px] font-semibold mt-[31px] leading-tight">Replace with your content</div>
