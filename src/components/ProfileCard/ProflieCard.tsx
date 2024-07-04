@@ -27,7 +27,7 @@ const ProfileCard = (props:UserDetails) => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const { Canvas } = useQRCode();
     const pathname = usePathname();
-    const path='https://hushhconnect.vercel.app/'+pathname
+    const path='https://hushhvivaconnect.shop/'+pathname
 
     useEffect(() => {
       const handleSubmit = async () => {
@@ -99,13 +99,26 @@ const ProfileCard = (props:UserDetails) => {
                     </div>
 
                     <div className=' my-4 pl-5'>
-                    <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000}  >
-                        {props.socialmedia?.map((item:any) => (
-                              <Link href={item.url} key={item.platform}>
-                              <Image src={platformIcons[item.platform]} width={46} height={46} alt={item.platform} />
+                      <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000}>
+                        {props.socialmedia?.map((item: any) => {
+                          const isComUrl = item.url.endsWith('.com/');
+                          const iconStyle = isComUrl ? { filter: 'grayscale(100%)' } : {};
+
+                          return (
+                            <Link href={isComUrl ? `/edit/${props.id}/social` : item.url} key={item.platform}>
+                              
+                                <Image 
+                                  src={platformIcons[item.platform]} 
+                                  width={46} 
+                                  height={46} 
+                                  alt={item.platform} 
+                                  style={iconStyle} 
+                                />
+                              
                             </Link>
-                        ))}
-                    </Carousel>
+                          );
+                        })}
+                      </Carousel>
 
                     </div>
 

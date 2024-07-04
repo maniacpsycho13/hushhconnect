@@ -17,12 +17,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUploadThing } from "@/lib/uploadthing";
+import { UploadButton, useUploadThing } from "@/lib/uploadthing";
 import { isBase64Image } from "@/lib/utils";
 
 import { CreateProduct } from "@/lib/Validations/ProductValidation";
 import { createProduct } from "@/lib/Actions/product.action";
 import Link from "next/link";
+import { FadeLoader } from "react-spinners";
 
 const AddCart = ({ communityId }: { communityId?: string }) => {
   const router = useRouter();
@@ -32,6 +33,8 @@ const AddCart = ({ communityId }: { communityId?: string }) => {
 
   const [files, setFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | undefined>("");
+  const [isUploading, setIsUploading] = useState(false); // State for managing upload status
 
   const form = useForm<z.infer<typeof CreateProduct>>({
     resolver: zodResolver(CreateProduct),
@@ -124,39 +127,51 @@ const AddCart = ({ communityId }: { communityId?: string }) => {
             </button>
           </div>
 
-          <FormField
-            control={form.control}
-            name="fileUrl"
-            render={({ field }) => (
-              <FormItem className="flex items-center justify-center gap-4 mt-[15px] w-full">
-                <FormLabel className="h-[155px] bg-zinc-300 opacity-80 rounded-lg w-full">
-                  {field.value ? (
-                    <Image
-                      src={field.value}
-                      alt="profile_icon"
-                      width={96}
-                      height={96}
-                      priority
-                      className="object-contain h-full w-full "
-                    />
-                  ) : (
-                    <div className="text-center text-black mt-auto opacity-95 text-xs font-medium leading-[33.29px]">
-                      Upload Product Image
-                    </div>
-                  )}
-                </FormLabel>
-                <FormControl className="flex-1 text-base-semibold text-gray-200">
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    placeholder="Add Product photo"
-                    className="account-form_image-input hidden"
-                    onChange={(e) => handleImage(e, field.onChange)}
-                  />
-                </FormControl>
-              </FormItem>
+          <div  className="mx-auto">
+                <FormField
+                control={form.control}
+                name="fileUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      {isUploading ? (
+                        <FadeLoader color="rgba(200, 73, 168, 1)" />
+                      ) : (
+                        <UploadButton
+                          className="p-1 rounded-xl text-[10px] ut-button:bg-red-500 ut-button:ut-readying:bg-red-500/50 custom-class"
+                          endpoint="imageUploader"
+                          onClientUploadComplete={(res) => {
+                            setIsUploading(false); 
+                            form.setValue("fileUrl", res[0].url);
+                            setSelectedImage(res[0].url);
+                            console.log("Image uploaded:", res[0].url);
+                          }}
+                          onUploadError={(error: Error) => {
+                            setIsUploading(false); 
+                            console.error(error);
+                          }}
+                          onUploadBegin={()=>setIsUploading(true)}
+                        />
+                      )}
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {selectedImage && (
+              <div  className="relative h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
+              <Image
+              src={selectedImage}
+              alt="profile_icon"
+              layout="fill"
+              objectFit="contain"
+              priority
+              className="rounded-full"
+            />
+
+            </div>
             )}
-          />
 
           <div className="text-black mt-[29.3px] mb-[5px] text-[10.88px] font-normal uppercase leading-[13.40px]">
             Product information

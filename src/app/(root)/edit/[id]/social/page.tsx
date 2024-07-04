@@ -7,7 +7,7 @@ export default async function page() {
   return (
     <div className="px-6 py-4"> 
 
-        <SocialForm id={session.userId} isEditing={false}/>
+        <SocialForm id={session.userId} isEditing={true}/>
     </div>
   )
 }
