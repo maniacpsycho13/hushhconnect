@@ -23,7 +23,7 @@ const Layout = async ({ children , params}: { children: React.ReactNode,params:{
   // if(!id) notFound();
   return (
     <div>
-        <div className="px-6 pt-4 bg-zinc-100 ">
+        <div className="px-6 pt-4 bg-zinc-100 h-full">
           <div>
             <Link href={'/allcomm'}><Image src={backicon} alt="back"></Image></Link>
           </div>
@@ -38,7 +38,7 @@ const Layout = async ({ children , params}: { children: React.ReactNode,params:{
 
           <div className="pt-4">
             <div className="flex justify-center">
-              <Image src={community.image || hushhprofile} alt="profile"  width={108} height={108} className="w-[108px] h-[108px]  rounded-full"></Image>
+              <Image src={community.image || hushhprofile} alt="profile"  width={108} height={108} className="w-[108px] h-[108px]  rounded-full border-gray-200 border-2"></Image>
             </div>
           </div>
        

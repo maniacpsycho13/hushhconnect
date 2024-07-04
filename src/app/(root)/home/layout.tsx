@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div>
-      <div className='px-6 pt-4'>
+      <div className='px-6 pt-4 '>
         <div className='flex justify-between items-center'>
           <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF] text-xl font-semibold">Hushh Connect</div>
           <div className='flex gap-[26px] pt-[6px]'>
