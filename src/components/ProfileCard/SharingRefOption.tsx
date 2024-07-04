@@ -20,7 +20,7 @@ import SharingReferral from "./SharingReferral";
       <AlertDialog>
         <AlertDialogTrigger asChild>
           
-        <Image src={shareicon} alt="card" className="" />
+        <div className="text-white text-sm font-semibold  leading-[21px]">Refer friends now</div>
           
         </AlertDialogTrigger>
         <AlertDialogContent>

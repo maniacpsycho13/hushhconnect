@@ -65,7 +65,9 @@ export default function HushhCoins({coins, referralcode ,users}:{coins:number, r
 
         <div className='mt-[12px]'>
             <div className="w-full py-[12px] flex justify-center items-center bg-gradient-to-l from-rose-600 to-blue-700 rounded-[5px] text-white text-sm font-semibold leading-[21px]">
+                
                 <SharingRefOption referral={referralcode}/>
+               
             </div>
         </div>
 
