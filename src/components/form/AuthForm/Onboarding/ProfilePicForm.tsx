@@ -83,7 +83,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
 
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      file.size > 500000 && setError("Profile Picture too large (>1mb)");
+      file.size > 500000 && setError("Profile Picture too large (>5mb)");
       setFiles([file]);
 
       if (!file.type.includes("image")) return;
