@@ -32,7 +32,7 @@ import { socialupdate } from "@/lib/Actions/user.action"
 import { Insta, TemplateButton, linkedin, twitter, urlImage, youtube } from "../../../../public/Social"
 import Link from "next/link"
 
-export function SocialForm({id}:{id:string}) {
+export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -67,7 +67,8 @@ export function SocialForm({id}:{id:string}) {
         setError(data?.error);
         setSuccess(data?.success);
         if(data?.success){
-            router.push('/onboarding/profilepic');
+          if(isEditing)router.push('/profile/'+id+'/threads');
+          else router.push('/onboarding/profilepic');
         }
       })
     })
