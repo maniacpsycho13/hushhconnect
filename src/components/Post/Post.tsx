@@ -89,7 +89,7 @@ async function Post({ post }: { post: PostWithExtras }) {
           <Link href={`/profile/${userId}/threads`} className="font-bold">
             {username}
           </Link>
-          <p className="text-[0.7rem] font-normal leading-4">{post.caption}</p>
+          <p className="text-[0.7rem] font-normal leading-4 text-justify">{post.caption}</p>
         </div>
       )}
 
