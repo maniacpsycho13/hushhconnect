@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import editbox2 from "@/../public/editbox2.svg";
 
 import {
@@ -127,7 +128,7 @@ const AddCart = ({ communityId }: { communityId?: string }) => {
             </button>
           </div>
 
-          <div  className="mx-auto">
+          <div  className="mx-auto mt-2">
                 <FormField
                 control={form.control}
                 name="fileUrl"
@@ -160,16 +161,16 @@ const AddCart = ({ communityId }: { communityId?: string }) => {
             </div>
 
             {selectedImage && (
-              <div  className="relative h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
-              <Image
-              src={selectedImage}
-              alt="profile_icon"
-              layout="fill"
-              objectFit="contain"
-              priority
-              className="rounded-full"
-            />
-
+              <div className="h-[155px] overflow-hidden rounded-md">
+              <AspectRatio ratio={16 / 9} className="w-full h-[155px] rounded-xl text-black">
+                <Image
+                  src={selectedImage}
+                  alt="Post preview"
+                  fill
+                  className="rounded-md object-cover h-full w-full"
+                  style={{ objectFit: 'contain' }}
+                />
+              </AspectRatio>
             </div>
             )}
 

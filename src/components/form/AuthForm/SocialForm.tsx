@@ -83,12 +83,12 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="">
       <div className='bg-white '>
-          <div className="flex justify-between">
+          {/* <div className="flex justify-between">
             <Link href={'thanks'}><Image src={backicon} alt="backicon" ></Image></Link>
-            {/* <Link href={'profilepic'}><p className="text-center text-gray-900 text-[15px] font-medium">Skip</p></Link> */}
-          </div>
+            <Link href={'profilepic'}><p className="text-center text-gray-900 text-[15px] font-medium">Skip</p></Link>
+          </div> */}
 
-          <div className="text-center text-gray-900 text-xl font-bold mt-[31px] ">Let &apos;s make it yours</div>
+          <div className="text-center text-gray-900 text-xl font-bold mt-3 ">Let &apos;s make it yours</div>
           <div className=" mt-[8px] text-center text-neutral-500 text-sm font-normal  leading-tight">Add your own content below. You can also further customize your links and appearance later.</div>
 
           <div className="text-center text-gray-900 text-[15px] font-semibold mt-[31px] leading-tight">Replace with your content</div>
@@ -96,7 +96,7 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
         </div>
         
         <div className="w-full pt-4 flex flex-col gap-[9px]">
-        <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full">
+        <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full gap-2">
           <Image src={Insta} alt="instagram"></Image>
             <div className="w-full">
               <FormField
@@ -120,7 +120,7 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
             </div>
         </div> 
 
-          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full">
+          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full gap-2">
             <Image src={twitter} alt="instagram"></Image>
             <div className="w-full">
               <FormField
@@ -139,7 +139,7 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
             </div>
           </div>
 
-          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full">
+          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full gap-2">
           <Image src={youtube} alt="instagram"></Image>
             <div className="w-full">
               <FormField
@@ -157,7 +157,7 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
             />  
             </div>
           </div>
-          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full">
+          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full gap-2">
           <Image src={linkedin} alt="instagram"></Image>
             <div className="w-full">
               <FormField
@@ -180,7 +180,7 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
 
           <div className="text-center text-gray-900 text-[15px] font-semibold mt-[47px] leading-tight">Add any other links</div>
 
-          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full mt-4">
+          <div className="h-[50px] px-4 bg-zinc-100 rounded-[14px] justify-start items-center  inline-flex w-full mt-4 gap-2">
             <Image src={urlImage} alt="instagram"></Image>
               <div className="w-full">
                 <FormField

@@ -8,7 +8,7 @@ const Leaderboard = () => {
   return (
     <div className='bg-zinc-100  pt-4 h-screen'>
         <div className='px-6'>
-            <Link href={'/hushhcoins'}><Image src={backicon} alt='icon'></Image></Link>
+            <Link href={'/home/thread'}><Image src={backicon} alt='icon'></Image></Link>
         </div>
         <div className='flex justify-center px-6'>
             <div className="text-center  text-base font-bold bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF] w-[35%] leading-[23.04px]">Leaderboard</div>
