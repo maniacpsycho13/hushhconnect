@@ -17,6 +17,8 @@ import Link from "next/link";
 import { useOptimistic, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Image from "next/image";
+import { hushhprofile } from "../../../public/profile";
 
 function Comments({
   postId,
@@ -66,12 +68,17 @@ function Comments({
         return (
           <div
             key={i}
-            className="text-sm flex items-center space-x-2 font-medium"
+            className="text-sm   font-medium flex gap-2"
           >
-            <Link href={`/dashboard/${username}`} className="font-semibold">
-              {username}
-            </Link>
-            <p className="text-[0.7rem] font-normal leading-4 text-justify  ">{comment.body}</p>
+            <div className="relative w-[30%]  rounded-full overflow-hidden mt-1">
+              <Image src={ comment.user.image || hushhprofile } alt='image' width={36} height={36} objectFit="contain" className="rounded-full min-w-[33px] min-h-[33px] max-w-[33px] max-h-[33px]"></Image>
+            </div>
+           <div>
+             <Link href={`/dashboard/${username}`} className="font-bold text-[0.7rem] text-black">
+                {username}
+              </Link>
+              <p className="text-[0.8rem] font-normal leading-4 text-justify  ">{comment.body}</p>
+           </div>
           </div>
         );
       })}
