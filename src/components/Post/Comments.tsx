@@ -71,7 +71,7 @@ function Comments({
             <Link href={`/dashboard/${username}`} className="font-semibold">
               {username}
             </Link>
-            <p>{comment.body}</p>
+            <p className="text-[0.7rem] font-normal leading-4 text-justify  ">{comment.body}</p>
           </div>
         );
       })}
