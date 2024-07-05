@@ -51,7 +51,7 @@ function Comments({
   const commentsCount = optimisticComments.length;
 
   return (
-    <div className="space-y-0.5 px-3 sm:px-0">
+    <div className="space-y-1 px-3 sm:px-0">
       {commentsCount > 1 && (
         <Link
           scroll={false}
@@ -70,10 +70,10 @@ function Comments({
             key={i}
             className="text-sm   font-medium flex gap-2"
           >
-            <div className="relative w-[30%]  rounded-full overflow-hidden mt-1">
+            <div className="relative  rounded-full overflow-hidden mt-1">
               <Image src={ comment.user.image || hushhprofile } alt='image' width={36} height={36} objectFit="contain" className="rounded-full min-w-[33px] min-h-[33px] max-w-[33px] max-h-[33px]"></Image>
             </div>
-           <div>
+           <div className="w-[90%]">
              <Link href={`/dashboard/${username}`} className="font-bold text-[0.7rem] text-black">
                 {username}
               </Link>
