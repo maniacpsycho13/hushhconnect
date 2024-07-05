@@ -14,19 +14,19 @@ function PostsGrid({ posts }: { posts: PostWithExtras[] | undefined }) {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-0.5">
+    <div className="grid grid-cols-3 gap-0.5 pb-20">
       {posts?.map((post) => (
         <Link
           href={`/dashboard/p/${post.id}`}
           key={post.id}
-          className="relative flex items-center justify-center h-44 md:h-64 lg:h-80 group col-span-1"
+          className="relative flex items-center justify-center h-36 md:h-64 lg:h-80 group col-span-1"
         >
           {post.fileUrl && (
             <Image
             src={post.fileUrl}
             fill
             alt="Post preview"
-            className="object-cover -z-10 transition group-hover:filter group-hover:blur-[2px] group-hover:brightness-90"
+            className=" -z-10 transition group-hover:filter group-hover:blur-[2px] group-hover:brightness-90 object-contain"
           />
           )
 
