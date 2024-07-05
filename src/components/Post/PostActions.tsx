@@ -1,11 +1,12 @@
 import { PostWithExtras } from "@/lib/Validations/definitions";
 import { cn } from "@/lib/utils";
 import ActionIcon from "./ActionIcon";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import Link from "next/link";
 import LikeButton from "./Like";
 import ShareButton from "./ShareButton";
 import BookmarkButton from "./BookmarkButton";
+import { SharingPostOption } from "../ProfileCard/SharingPostoption";
 
 type Props = {
   post: PostWithExtras;
@@ -22,7 +23,8 @@ function PostActions({ post, userId, className }: Props) {
           <MessageCircle className={"h-6 w-6"} />
         </ActionIcon>
       </Link>
-      <ShareButton postId={post.id} />
+      <SharingPostOption id={post.id}/>
+      {/* <ShareButton postId={post.id} /> */}
       <BookmarkButton post={post} userId={userId} />
     </div>
   );

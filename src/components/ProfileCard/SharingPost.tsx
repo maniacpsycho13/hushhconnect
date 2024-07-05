@@ -14,12 +14,12 @@ import {
   
 import { useRouter, usePathname } from 'next/navigation'
 
-export default function SharingReferral({Referral}:{Referral:string}) {
+export default function SharingPost({id}:{id:string}) {
     const router = useRouter();
     const pathname = usePathname();
     const [copySuccess, setCopySuccess] = useState('');
-    const content = Referral;
-    const path = 'https://hushhvivaconnect.shop';
+    const content = "Share your Post";
+    const path = "http://hushhvivaconnect.shop/post/" + id;
 
     const copyToClipboard = async () => {
         try {
@@ -32,7 +32,7 @@ export default function SharingReferral({Referral}:{Referral:string}) {
         }
     }
 
-    return (
+    return(
         <div className='flex flex-col gap-3 justify-center items-center'>
             <div className='flex gap-3'>
                 <WhatsappShareButton
