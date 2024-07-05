@@ -46,7 +46,7 @@ const AllRequests = ({ communityId , userid}: { communityId: string, userid: str
     };
 
     return (
-        <div className='bg-zinc-100 px-6 h-screen py-4'>
+        <div className='bg-zinc-100 px-6 h-screen overflow-auto py-4'>
             <div className="text-black text-sm font-medium">Join Requests</div>
             {joinRequests.length > 0 ? (
                 <div className=' mt-[12px]'>

@@ -11,7 +11,7 @@ export default async function Page({params}:{params:{id:string}})  {
      if(!community || !userid) return null;
      const role=await checkUserRole(community.id,userid);
   return (
-    <div>
+    <div className="">
         {role.role==='admin' && (
           <AllRequests communityId={params.id} userid={userid}/>
         )}
