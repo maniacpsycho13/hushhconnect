@@ -2,7 +2,7 @@ import Post from "@/components/Post/Post";
 
 import { fetchPostsByUserId } from "@/lib/Actions/post.action";
 import { fetchProductsByUserId } from "@/lib/Actions/product.action";
-import { getUserbyId, getUserbyIdSocial } from "@/lib/Actions/user.action";
+import { getUserbyId, getUserbyIdSocial, getUserIdbyUsername } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 import ProfileLoginCard from "@/components/ProfileCard/ProfileLoginCard";
 import ProfileCard2 from "@/components/ProfileCard/ProfileCard2";
@@ -21,17 +21,15 @@ export type UserDetails={
 }
 
 export default async function page( {params}:{params : {id : string}} ) {
-  // const session = await auth();
-  // if(!session || !session.userId) return null;
-  // logic specify user id
 
 
+  const userId=await getUserIdbyUsername(params.id)
+  if(!userId) return null;
+  params.id=userId
   const session = await auth();
   const user=await getUserbyIdSocial(params.id);
   const posts=await fetchPostsByUserId(params.id);
   const products=await fetchProductsByUserId(params.id);
-  // console.log(user);
-  // console.log(user.socialmedia);
   console.log(products);
   
   if(!user) return null

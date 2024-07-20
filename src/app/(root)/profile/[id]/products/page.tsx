@@ -2,10 +2,14 @@ import Post from '@/components/Post/Post';
 import { PostsSkeleton } from '@/components/Post/Skeletons';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import { fetchProductsByUserId } from '@/lib/Actions/product.action';
+import { getUserIdbyUsername } from '@/lib/Actions/user.action';
 import React, { Suspense } from 'react'
 
 export default async function page({ params }: { params: { id: string } }) {
 
+  const userId=await getUserIdbyUsername(params.id)
+  if(!userId) return null;
+  params.id=userId
   const products=await fetchProductsByUserId(params.id);
 
 

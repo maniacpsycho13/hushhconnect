@@ -10,6 +10,7 @@ import { SharingRefOption } from '../ProfileCard/SharingRefOption'
 
 export default function HushhCoins({coins, referralcode ,users}:{coins:number, referralcode:string, users:User[]}) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const publicURL=process.env.NEXT_PUBLIC_BASE_URL || "localhost:3000"
 
   const handleCopy = () => {
     if (inputRef.current) {
@@ -53,8 +54,8 @@ export default function HushhCoins({coins, referralcode ,users}:{coins:number, r
             type="text"
             ref={inputRef}
             className='h-full w-full bg-white opacity-95'
-            placeholder={referralcode}
-            defaultValue={referralcode}
+            placeholder={publicURL+"?referralCode="+referralcode}
+            defaultValue={publicURL+"?referralCode="+referralcode}
             readOnly
             
           />

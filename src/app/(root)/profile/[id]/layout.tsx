@@ -3,7 +3,7 @@ import ProductCard from "@/components/ProductCard/ProductCard";
 import ProfileCard from "@/components/ProfileCard/ProflieCard";
 import { fetchPostsByUserId } from "@/lib/Actions/post.action";
 import { fetchProductsByUserId } from "@/lib/Actions/product.action";
-import { getUserbyId, getUserbyIdSocial } from "@/lib/Actions/user.action";
+import { getUserbyId, getUserbyIdSocial, getUserIdbyUsername } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 import ProfileLoginCard from "@/components/ProfileCard/ProfileLoginCard";
 export type UserDetails={
@@ -21,6 +21,9 @@ export type UserDetails={
 export default async function layout({ children, params }: { children: React.ReactNode , params : {id : string}}) {
     
     const session = await auth();
+    const userId=await getUserIdbyUsername(params.id)
+    if(!userId) return null;
+    params.id=userId
     const user=await getUserbyIdSocial(params.id);
     const posts=await fetchPostsByUserId(params.id);
     const products=await fetchProductsByUserId(params.id);

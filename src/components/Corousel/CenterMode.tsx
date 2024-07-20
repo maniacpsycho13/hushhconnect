@@ -146,4 +146,5 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({ className, style, onClick }) =>
   );
 };
 
-export default SimpleSlider;
+export default SimpleSlider;  
+      

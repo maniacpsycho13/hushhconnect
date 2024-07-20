@@ -44,7 +44,7 @@ export default function SignUpPage() {
                                 ) : (
                                   <div className='flex text-black text-base font-semibold items-center gap-[14px] leading-tight'>
                                     {/* <Icons.apple className="" /> */}
-                                    <Image src={google} alt='apple'></Image>
+                                    <Image src={google} alt='google'></Image>
                                     Continue with Google
                                   </div>
                                 )

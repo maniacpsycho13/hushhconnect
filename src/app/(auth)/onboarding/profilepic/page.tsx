@@ -9,10 +9,11 @@ export default async function page() {
     return null;
   }
   const profile=await fetchProfile(session.userId);
+  
   if(!profile)return null;
   return (
     <div>
-      <ProfilePicForm id={session.userId} user={profile} />
+      <ProfilePicForm id={session.userId} user={profile}/>
     </div>
   );
 }

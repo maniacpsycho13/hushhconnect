@@ -18,6 +18,16 @@ export const getUserbyEmail =async (email : string )=>{
     }
 }
 
+export const getUserIdbyUsername =async (username : string )=>{
+    noStore();
+    try {
+        const user =await db.user.findUnique({where : {username}})
+        return user?.id;
+    } catch (error) {
+        return null; 
+    }
+}
+
 export const getUserbyId = async (id : string )=>{
     noStore();
     try {
@@ -304,9 +314,9 @@ export async function whetherboarded(id: string | null) {
         return false;
     }
     if(existingUser.isboarded){
-        return true;
+        return existingUser;
     }
-    return false;
+    return null;
 }
 
 
