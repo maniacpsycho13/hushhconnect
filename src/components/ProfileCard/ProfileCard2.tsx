@@ -18,9 +18,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useQRCode } from "next-qrcode";
 import { useRouter, usePathname } from 'next/navigation'
+import { copyblackicon, linkicon } from '../../../public/signup'
 
 
-const ProfileCard = (props:UserDetails) => {
+const ProfileCard2 = (props:UserDetails) => {
 
     const [showCard, setShowCard] = useState<boolean>(false);
     const [googleWallet,setGoogleWallet] = useState<string>("");
@@ -67,125 +68,64 @@ const ProfileCard = (props:UserDetails) => {
   return (
     <div className=''>
       
-       <div className='bg-zinc-100 px-6 py-4 h-full'>
-                <div className='flex justify-between items-center'>
-                <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60]  to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
-                    <div className='flex gap-4 items-center'>
-                     <Link href={`/hushhcoins/${props.id}`}>
-                        <div className='w-[62.33px] h-[30.68px] bg-gradient-to-l from-rose-600 to-blue-700 rounded-[118.88px] justify-center flex items-center gap-[4px]'>
-                          <div>
-                            <Image src={Coin} alt='coin' className='w-[14.25px] h-[14.25px]'></Image>
-                          </div>
-                          <div className="text-white text-base font-semibold ">{props.coins}</div>
-                        </div>
-                     </Link>
-                     <div onClick={handleToggleMenu} className="cursor-pointer">
-                <Image src={menu} alt='menu' className='mobile:hidden'></Image>
-            </div>
-            <div className={`menu-content ${showMenu ? 'open' : 'close'} `} >
-                <Link href={'/settings'}><Image src={user} alt="user" /></Link>
-                <Link href={'/search'}><Image src={find} alt="find" /></Link>
-            </div>
-                    </div>
-                </div>
-
-                <div className='mt-4'>
-                    {/* <div className='flex flex-col justify-center items-center'>
+       <div className='bg-zinc-100 px-6 pb-4 h-full'>
+                <div className=''>
+                    <div className='flex  items-center gap-[8px]'>
                         <Image src={props.profilePic || hushhprofile} alt="profile" width={108.645} height={108.645} className="w-[108.645px] h-[108.645px] rounded-full" />
-                        <div className='flex flex-col justify-center items-center'>
-                            <h2 className='text-[18px] text-black font-[600] inline'>{props.name} {props.lastname}</h2>
-                            <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[600] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>view hushh card</p>
+                        <div className='flex flex-col '>
+                            <h2 className='text-lg text-black font-[600] '>{props.name} {props.lastname}</h2>
+                            {/* <p onClick={handleToggle} className='cursor-pointer text-[12px] font-[600] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF]'>view hushh card</p> */}
+                            <div className='mt-[4px]'>
+                                <p className=' text-neutral-500 text-xs font-light  leading-[18px]'>{props.bio}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div className=' my-4 pl-5'>
-                      <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000}>
+                    <div className=' my-4'>
+                      {/* <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000}> */}
                         {props.socialmedia?.map((item: any) => {
                           const isComUrl = item.url.endsWith('.com/');
                           const iconStyle = isComUrl ? { filter: 'grayscale(100%)' } : {};
+                          const displayUrl = item.url.replace(/^https:\/\/www\./, '');
 
                           return (
-                            <Link href={isComUrl ? `/edit/${props.id}/social` : item.url} key={item.platform}>
+                            // <Link href={isComUrl ? `/edit/${props.id}/social` : item.url} >
                               
-                                <Image 
-                                  src={platformIcons[item.platform]} 
-                                  width={46} 
-                                  height={46} 
-                                  alt={item.platform} 
-                                  style={iconStyle} 
-                                />
+                                <div className='mb-4 flex items-center' key={item.platform}>
+                                    <div>
+                                        <Image 
+                                        src={platformIcons[item.platform]} 
+                                        width={24} 
+                                        height={24} 
+                                        alt={item.platform} 
+                                        style={iconStyle} 
+                                        />
+                                    </div>
+                                    <div>
+                                        <div className="text-zinc-400 text-xs font-normal overflow-hidden w-[156px] mx-2 h-4 space-nowrap">{displayUrl}</div>
+                                    </div>
+                                    <div className='p-1 bg-white rounded-full ml-4 mr-[8px]'>
+                                        <Image src={copyblackicon} alt='copy'></Image>
+                                    </div>
+                                    <div className='p-1 bg-white rounded-full mr-[8px]'>
+                                        <Image src={linkicon} alt='copy'></Image>
+                                    </div>
+                                    <div className=" h-[19.87px] p-[5.44px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-md justify-center items-center gap-[6.79px] inline-flex">
+                                        <div className="text-center text-white text-[11px] font-semibold  leading-3">Edit link</div>
+                                    </div>
+                                </div>
                               
-                            </Link>
+                            // </Link>
                           );
                         })}
-                      </Carousel>
+                      {/* </Carousel> */}
 
                     </div>
-
-                    <div className=' rounded-xl p-4 mx-[5px]'>
-                        <p className='text-center text-[#171717] text-[12px] font-medium'>{props.bio}</p>
-                    </div> */}
 
                     
 
 {/* ------------------------------------------------------------------------------------------------------------ */}
-      <div className='mt-[16.14px]'>
-        <Tabs defaultValue='threads' className='w-full'>
-           <TabsList className='flex bg-transparent gap-[10px]' >
-            {profileTabs.map((tab) => (
-              <Link href={tab.value} key={tab.label}>
-                  <TabsTrigger key={tab.label} value={tab.value} className='tab'>
-                    <p className=''>{tab.label}</p>
-                  </TabsTrigger>
-              </Link>
-            ))}
-          </TabsList> 
-          
-            <TabsContent
-              key={`content-threads`}
-              value="threads"
-              className='w-full text-light-1'
-            >
-              {/* {props.posts?.map((post:any) => ( */}
-              {/* <ThreadsTab
-                currentUserId={user.id}
-                accountId={userInfo.id}
-                accountType='User'
-              />  */}
-            </TabsContent>
-
-            <TabsContent
-              key={`content-Product`}
-              value="Product"
-              className='w-full text-light-1'
-            >
-              {/* <div><ProductsTab 
-                currentUserId={user.id}
-                accountId={userInfo.id}
-                accountType='User'></ProductsTab></div> */}
-
-            </TabsContent>
-
-            <TabsContent
-              key={`content-Meeting`}
-              value="Meeting"
-              className='w-full text-light-1'
-            >
-              {/* <Payment></Payment> */}
-              {/* <div className="text-white my-8">
-                <div>Note:</div>
-                <br />
-                <ul className="list-disc ml-4"> 
-                  <li>Please Add your email in Guest Section</li>
-                </ul>
-              </div>
-              <div></div> */}
-              
-            </TabsContent>
-
-
-        </Tabs>
-      </div>
+      
 
 {/* ----------------------------------------------------------------------------------------------------------------------- */}
 
@@ -255,4 +195,4 @@ const ProfileCard = (props:UserDetails) => {
   )
 }
 
-export default ProfileCard
+export default ProfileCard2

@@ -31,6 +31,8 @@ import SimpleSlider from "@/components/Corousel/CenterMode";
 import ProfileAvatar from "@/components/ProfileCard/ProfileAvatar";
 import UserAvatar from "@/components/Post/UserAvatar";
 import { UserWithExtras } from "@/lib/Validations/definitions";
+import { arrowleft, ImageUpload } from "../../../../../public/signup";
+import Link from "next/link";
 
 export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras}) {
   const searchParams = useSearchParams();
@@ -101,8 +103,33 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
   };
 
   return (
-    <div>
+    <div className="px-6 py-4">
       {isPending && <Loader />}
+
+      <div className="flex justify-between">
+        <Link href={'yourself'}>
+          <div className=" px-2.5 py-[3px] bg-white rounded-[51px] border border-neutral-200 justify-start items-center gap-1 inline-flex">
+            <Image src={arrowleft} alt="back"></Image>
+            <div className="text-black text-[13px] font-normal leading-snug">Yourself</div>
+          </div>
+        </Link>
+
+        <div className="text-center text-gray-900 text-[15px] font-medium ">Skip</div>
+      
+      </div>
+
+      <div className="mt-[31px] flex flex-col justify-center items-center ">
+        <p className="text-[#1A1C29] text-[20px] font-bold text-center">
+          Final Touches
+        </p>
+        <p className="text-[#797979] text-center text-[15px] py-[8px] mx-[2.5rem] font-[400]">
+          Finish off your hushh with a profile picture and bio.
+        </p>
+      </div>
+      <div className="flex justify-center">
+        {!selectedImage && <Image src={ImageUpload} alt="image upload placeholder" />}
+      </div>
+      
       {/* <div className="flex items-center gap-x-2 md:gap-x-5">
         <ProfileAvatar user={user}>
           <div className="md:w-20 flex md:justify-end">
@@ -120,7 +147,20 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
       </div> */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="w-full flex flex-col items-center px-6 ">
+          <div className="w-full flex flex-col items-center  ">
+          {selectedImage && (
+              <div  className="relative h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
+              <Image
+              src={selectedImage}
+              alt="profile_icon"
+              layout="fill"
+              objectFit="contain"
+              priority
+              className="rounded-full"
+            />
+
+            </div>
+            )}
             {/* <FormField
               control={form.control}
               name="profile_photo"
@@ -198,19 +238,6 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
               />
             </div>
 
-            {selectedImage && (
-              <div  className="relative h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
-              <Image
-              src={selectedImage}
-              alt="profile_icon"
-              layout="fill"
-              objectFit="contain"
-              priority
-              className="rounded-full"
-            />
-
-            </div>
-            )}
 
             <div className="w-full pt-6 ">
               
@@ -235,7 +262,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <div className="px-4">
+          <div>
             <Button
               type="submit"
               disabled={isPending}

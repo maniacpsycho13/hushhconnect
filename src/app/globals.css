@@ -115,39 +115,36 @@
 .rdp-vhidden {
   @apply hidden;
 }
-
-.custom-class {
-  background-color: none;
-}
- 
-.custom-class {
-  background-color: none;
-}
  
 /* applied to button */
+
+
 .custom-class > *[data-ut-element="button"] {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #2020ED;
-  background-color: var(--Linear, linear-gradient(268deg, #E0055F 1.32%, #2020ED 95.37%));
+  color: #797979;
+  border: 1px solid #797979;
+  background-color: transparent;
 }
  
 /* applied to button when uploading */
 .custom-class > *[data-ut-element="button"][data-state="readying"] {
-  background-color: var(--Linear, linear-gradient(268deg, #E0055F 1.32%, #2020ED 95.37%));
-  color: rgb(0 0 0 / 0.5);
-  cursor: #2020ED;
+
+  color: #797979;
+  border: 1px solid #797979;
+  background-color: transparent;
 }
  
 /* applied to the button when uploading */
 .custom-class > *[data-ut-element="button"][data-state="uploading"] {
-  background-color: var(--Linear, linear-gradient(268deg, #E0055F 1.32%, #2020ED 95.37%));
-  color: #2020ED;
-  cursor: not-allowed;
+  color: #797979;
+  border: 1px solid #797979;
+  background-color: transparent;
 }
  
 /* applied to the upload indicator when uploading */
 .custom-class > *[data-ut-element="button"][data-state="uploading"]::after {
-  background-color: var(--Linear, linear-gradient(268deg, #E0055F 1.32%, #2020ED 95.37%));
-  color: #2020ED;
+  color: #797979;
+  border: 1px solid #797979;
+  background-color: transparent;
 }
