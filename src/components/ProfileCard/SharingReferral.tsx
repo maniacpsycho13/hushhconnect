@@ -19,7 +19,7 @@ export default function SharingReferral({Referral}:{Referral:string}) {
     const pathname = usePathname();
     const [copySuccess, setCopySuccess] = useState('');
     const content = Referral;
-    const path = 'https://hushhvivaconnect.shop';
+    const path = process.env.NEXT_PUBLIC_BASE_URL + pathname;
 
     const copyToClipboard = async () => {
         try {

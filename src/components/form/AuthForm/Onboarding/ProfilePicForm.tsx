@@ -34,7 +34,7 @@ import { UserWithExtras } from "@/lib/Validations/definitions";
 import { arrowleft, ImageUpload } from "../../../../../public/signup";
 import Link from "next/link";
 
-export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras}) {
+export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras} ) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -47,6 +47,8 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
   const [isPending, startTransition] = useTransition();
   const [selectedImage, setSelectedImage] = useState<string | undefined>("");
   const [isUploading, setIsUploading] = useState(false); // State for managing upload status
+
+
 
   const form = useForm<z.infer<typeof ProfilePicValidation>>({
     resolver: zodResolver(ProfilePicValidation),
@@ -67,7 +69,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
         setError(data?.error);
         setSuccess(data?.success);
         if (data?.success) {
-          router.push(`/profile/${id}/threads`);
+          router.push(`/profile/${user.username}/threads`);
         }
       });
     });
@@ -114,7 +116,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras})
           </div>
         </Link>
 
-        <div className="text-center text-gray-900 text-[15px] font-medium ">Skip</div>
+        <Link href={`/profile/${user.username}/threads`}  className="text-center text-gray-900 text-[15px] font-medium ">Skip</Link>
       
       </div>
 

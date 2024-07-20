@@ -39,12 +39,14 @@ export function UsernameForm({id}:{id:string}) {
   const [error , setError] = useState<string | undefined>('')
   const [success , setSuccess] = useState<string | undefined>('')
   const [isPending, startTransition] = useTransition()
+  const referralcode=localStorage.getItem('referralCode');
+  localStorage.removeItem('referralCode');
   // ...
   const form=useForm<z.infer<typeof UsernameValidation>>({
     resolver: zodResolver(UsernameValidation), 
     defaultValues: {
       username: "",
-      code :undefined
+      code : referralcode?referralcode:undefined,
     }
   })
 
@@ -99,7 +101,7 @@ export function UsernameForm({id}:{id:string}) {
           <div className='w-[40%] mt-4 ml-4 mb-4'>
                 <p className='text-[14px] font-[400] mx-auto bg-clip-text text-transparent bg-gradient-to-l from-[#E0055F] to-[#2020ED]'>usename available</p>
           </div>
-          <FormField
+          {/* <FormField
             control={form.control}
             name="code"
             render={({ field }) => (
@@ -110,7 +112,7 @@ export function UsernameForm({id}:{id:string}) {
                 <FormMessage />
               </FormItem>
             )}
-          />  
+          />   */}
           </div>
         <FormError message={error} />
         <FormSuccess message={success} />
