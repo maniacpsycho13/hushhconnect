@@ -72,6 +72,13 @@ const YourDetails = () => {
                     Continue
                 </div></Link>
             </div>
+
+           <div className=' mt-[12px]'>
+            <Link href={'thanks'}>
+                <div className="text-neutral-400 text-base font-semibold text-center">Skip</div>
+            </Link>
+           </div>
+
         </div>
     );
 };
