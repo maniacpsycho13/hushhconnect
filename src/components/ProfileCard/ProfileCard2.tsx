@@ -147,7 +147,7 @@ const ProfileCard2 = (props:UserDetails) => {
                         </div>
                         <div className='flex justify-center items-center mt-[-0.8rem] flex-col'>
                             <Image src={props.profilePic || hushhprofile} width={68.64} height={68.64} alt="profile" className="w-[68.64px] h-[68.64px] rounded-full" />
-                            <p className='text-black text-lg font-semibold leading-[33.29px]'>{props.name}{props.lastname}</p>
+                            <p className='text-black text-lg font-semibold leading-[33.29px]'>{props.name+""}{props.lastname}</p>
                         </div>
                         <div className='relative '>
                             <Image src={hushhCard} alt="card" className="w-full  relative rounded-xl  " />
