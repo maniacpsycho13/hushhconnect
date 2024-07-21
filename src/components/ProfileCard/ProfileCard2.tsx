@@ -18,7 +18,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useQRCode } from "next-qrcode";
 import { useRouter, usePathname } from 'next/navigation'
-import { copyblackicon, linkicon } from '../../../public/signup'
+import { arrowleft, BoldArrow, copyblackicon, linkicon } from '../../../public/signup'
 
 
 const ProfileCard2 = (props:UserDetails) => {
@@ -79,6 +79,24 @@ const ProfileCard2 = (props:UserDetails) => {
                                 <p className=' text-neutral-500 text-xs font-light  leading-[18px]'>{props.bio}</p>
                             </div>
                         </div>
+                    </div>
+
+                    <div>
+
+                      <div className='flex justify-between mt-4 items-center'>
+                      <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Tell us about yourself</div>
+                      <div>
+                        <Image src={BoldArrow} alt='arrow'></Image>
+                      </div>
+                      </div>
+
+                      <div className='flex justify-between mt-4 items-center'>
+                      <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Add Bio</div>
+                      <div>
+                        <Image src={BoldArrow} alt='arrow'></Image>
+                      </div>
+                      </div>
+                      
                     </div>
 
                     <div className=' my-4'>
