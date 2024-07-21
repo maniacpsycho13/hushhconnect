@@ -46,7 +46,7 @@ const Template = ({ id ,user }: { id: string ,user:UserWithExtras} ) => {
           <Image src={profile.cardImage} alt="card" className="w-full relative rounded-xl" />
           <div className='absolute top-[16px] left-[16px] flex items-center gap-2'>
             <div>
-              <Image src={user.image}  alt='profile' width={33} height={33} className='rounded-full' />
+              <Image src={user.image || hushhprofile}  alt='profile' width={33} height={33} className='rounded-full' />
             </div>
             <div className='flex flex-col gap-[3.5rem]'>
               <div>
