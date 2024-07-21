@@ -31,7 +31,7 @@ export default async function page({ params }: { params: { id: string } }) {
        </Link>
       ): (
         <div>
-          <div className="flex items-center justify-between px-4">
+          {/* <div className="flex items-center justify-between px-4">
             <div className="text-center text-neutral-500 text-sm font-medium">Product</div>
 
               <Link href={"/createproduct"}>
@@ -41,7 +41,7 @@ export default async function page({ params }: { params: { id: string } }) {
                 </div>
                </div>
               </Link>
-            </div>
+            </div> */}
           <div className='grid grid-cols-2 '>
             <Suspense fallback={<PostsSkeleton/>}>
               {products?.map((post:any) => (
