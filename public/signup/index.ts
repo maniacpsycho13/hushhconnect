@@ -7,6 +7,7 @@ import copyblackicon from "./copyblackicon.svg"
 import linkicon from "./linkicon.svg"
 import coloredShare from "./coloredShare.svg"
 import BoldArrow from "./BoldArrow.svg"
+import ProductBox from "./ProductBox.svg"
 
 export{
     hushhS,
@@ -17,5 +18,6 @@ export{
     copyblackicon,
     linkicon,
     coloredShare,
-    BoldArrow
+    BoldArrow,
+    ProductBox
 }
