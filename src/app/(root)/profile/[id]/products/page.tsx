@@ -32,12 +32,14 @@ export default async function page({ params }: { params: { id: string } }) {
       ): (
         <div>
           <div className="flex items-center justify-between px-4">
-            <div className="text-center text-neutral-500 text-xs font-medium">Product</div>
+            <div className="text-center text-neutral-500 text-sm font-medium">Product</div>
 
               <Link href={"/createproduct"}>
-                <div className=" h-7 p-2 rounded-lg border border-rose-500 justify-center items-center gap-2.5 inline-flex">
-                  <div className="text-center text-neutral-500 text-[11px] font-semibold  leading-3">Add Product</div>
+              <div className='bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] p-[2px] text-sm'>
+                <div className='bg-[#F4F4F5] rounded-[10px] px-2 py-1'>
+                  <div className='text-center text-neutral-500 text-sm font-semibold'>Add Product</div>
                 </div>
+               </div>
               </Link>
             </div>
           <div className='grid grid-cols-2 '>

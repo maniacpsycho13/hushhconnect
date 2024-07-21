@@ -69,7 +69,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras} 
         setError(data?.error);
         setSuccess(data?.success);
         if (data?.success) {
-          router.push(`/profile/${user.username}/threads`);
+          router.push(`/profile/${user.username}`);
         }
       });
     });
@@ -116,7 +116,7 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras} 
           </div>
         </Link>
 
-        <Link href={`/profile/${user.username}/threads`}  className="text-center text-gray-900 text-[15px] font-medium ">Skip</Link>
+        <Link href={`/profile/${user.username}`}  className="text-center text-gray-900 text-[15px] font-medium ">Skip</Link>
       
       </div>
 

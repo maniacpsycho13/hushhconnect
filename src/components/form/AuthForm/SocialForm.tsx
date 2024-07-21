@@ -97,7 +97,9 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
           </div>
         </Link>
 
-        <div  className="text-center text-gray-900 text-[15px] font-medium ">Skip</div>
+        <div className="">
+          <button type="submit" disabled={isPending} className="text-center text-gray-900 text-[15px] font-medium">Skip</button>
+        </div>
       
       </div>
 

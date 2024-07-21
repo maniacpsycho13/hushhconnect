@@ -112,19 +112,23 @@ const ProfileCard2 = (props: UserDetails) => {
                     </div>
 
                     <div>
-                        <div className='flex justify-between mt-4 items-center'>
-                            <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Tell us about yourself</div>
-                            <div>
-                                <Image src={BoldArrow} alt='arrow'></Image>
+                        <Link href={'#'}>
+                            <div className='flex justify-between mt-4 items-center'>
+                                <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Tell us about yourself</div>
+                                <div>
+                                    <Image src={BoldArrow} alt='arrow'></Image>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
 
-                        <div className='flex justify-between mt-4 items-center'>
-                            <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Add Bio</div>
-                            <div>
-                                <Image src={BoldArrow} alt='arrow'></Image>
+                        <Link href={'/onboarding/profilepic'}>
+                            <div className='flex justify-between mt-4 items-center'>
+                                <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Add Bio or profile image</div>
+                                <div>
+                                    <Image src={BoldArrow} alt='arrow'></Image>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className=' my-4'>

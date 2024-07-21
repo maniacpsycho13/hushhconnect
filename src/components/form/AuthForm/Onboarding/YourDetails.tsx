@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { Back, Star } from '../../../../../public/login';
 import Link from 'next/link';
+import { arrowleft } from '../../../../../public/signup';
 
 const YourDetails = () => {
     const items = ['Business', 'Influencer & Digital Creator', 'Personal', 'Education', 'Entertainment', 'Fashion and Beauty', 'Food & Beverage', 'Government & politics', 'Health & fitness', 'Non-Profit', 'Other', 'Tech', 'Travel'];
@@ -31,7 +32,17 @@ const YourDetails = () => {
     return (
         <div>
             <div className='px-6 py-4'>
-                <Link href='basicdetails'><Image src={Back} alt='backicon' /></Link>
+            <div className="flex justify-between">
+                <Link href={'basicdetails'}>
+                    <div className=" px-2.5 py-[3px] bg-white rounded-[51px] border border-neutral-200 justify-start items-center gap-1 inline-flex">
+                        <Image src={arrowleft} alt="back"></Image>
+                        <div className="text-black text-[13px] font-normal leading-snug">Basic details</div>
+                    </div>
+                </Link>
+
+                <Link href={'thanks'}  className="text-center text-gray-900 text-[15px] font-medium ">Skip</Link>
+      
+            </div>
                 <div className='mt-4'>
                     <div className="text-gray-900 text-xl font-bold text-center">Tell us about yourself</div>
                     <div className="text-center text-neutral-500 text-[15px] font-normal mt-[8px] leading-tight">This will personalize your hushh connect experience.</div>
@@ -73,11 +84,7 @@ const YourDetails = () => {
                 </div></Link>
             </div>
 
-           <div className=' mt-[12px]'>
-            <Link href={'thanks'}>
-                <div className="text-neutral-400 text-base font-semibold text-center">Skip</div>
-            </Link>
-           </div>
+          
 
         </div>
     );

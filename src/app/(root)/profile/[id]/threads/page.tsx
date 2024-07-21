@@ -25,11 +25,13 @@ export default async function page({ params }: { params: { id: string } }) {
       )}
       <Suspense fallback={<PostsSkeleton />}>
       <div className="flex items-center justify-between px-4">
-        <div className="text-center text-neutral-500 text-xs font-medium">Thread</div>
+        <div className="text-center text-neutral-500 text-sm font-semibold">Thread</div>
 
         <Link href={"/create"}>
-          <div className=" h-7 p-2 rounded-lg border border-rose-500 justify-center items-center gap-2.5 inline-flex">
-            <div className="text-center text-neutral-500 text-[11px] font-semibold  leading-3">Add Thread</div>
+          <div className='bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] p-[2px] text-sm'>
+            <div className='bg-[#F4F4F5] rounded-[10px] px-2 py-1'>
+              <div className='text-center text-neutral-500 text-sm font-semibold'>Add Thread</div>
+            </div>
           </div>
         </Link>
       </div>

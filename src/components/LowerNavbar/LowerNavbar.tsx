@@ -42,7 +42,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
     return pathname.startsWith(basepath) ? activeIcon : defaultIcon;
   }
 
-  const isProfileActive = pathname.startsWith(`/profile/${id}`);
+  const isProfileActive = pathname.startsWith(`/profile/`);
 
   return (
     <div className='h-full '>
@@ -63,7 +63,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
              
                  <Image src={profile?.image || profileicon} alt='nav' height={24} width={24} className='rounded-full'/> 
              
-            </Link>
+            </Link> 
           </div>
         </div>
         <div className='flex absolute justify-center w-full mx-auto mt-[-1.5rem] z-20 transition-all duration-300 ease-in-out'>
@@ -225,12 +225,12 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
             </div>
 
            <div className='mt-4'>
-           <Link href={'#'}>
+           <div  onClick={handleToggleonQR}>
               <div className=" pl-2.5 pr-3 py-[3px] bg-white rounded-[51px] border border-neutral-200 justify-evenly items-center  inline-flex">
                 <Image src={arrowleft} alt="back"></Image>
                 <div className="text-black text-[20px] font-normal leading-snug">Go Back</div>
               </div>
-            </Link>
+            </div>
            </div>
           </div>
         </div>
