@@ -130,10 +130,10 @@ const ProfileCard = (props:UserDetails) => {
 
 {/* ------------------------------------------------------------------------------------------------------------ */}
       <div className='mt-[16.14px]'>
-        <Tabs defaultValue='threads' className='w-full'>
+        <Tabs defaultValue='' className='w-full'>
            <TabsList className='flex bg-transparent gap-[10px]' >
             {profileTabs.map((tab) => (
-              <Link href={tab.value} key={tab.label}>
+              <Link href={"/profile/"+props.username+"/"+tab.value} key={tab.label}>
                   <TabsTrigger key={tab.label} value={tab.value} className='tab'>
                     <p className=''>{tab.label}</p>
                   </TabsTrigger>

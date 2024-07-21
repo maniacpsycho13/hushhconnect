@@ -67,6 +67,7 @@ export const getUserbyIdSocial = async (id : string )=>{
 
 import  { generate }   from "referral-codes";
 import { UpdateUser } from "../Validations/PostValidation";
+import { SocialMedia } from "@prisma/client";
 
 function generateReferralCode({username }: { username: string }) {
     
@@ -222,6 +223,29 @@ export async function socialupdate(values: z.infer<typeof SocialValidation>, id:
 
     revalidatePath(pathname);
     return { success: "Social Media Added" };
+}
+
+export async function socialMediaUpdate(values: SocialMedia[] , id: string | null, pathname: string) {
+    if(!id)return {error:"Not Logged In"};
+    console.log(values);
+
+    try {
+        values.map(async (value)=>{
+            await db.socialMedia.update({
+                where:{
+                    id:value.id
+                },
+                data:{
+                    url:value.url
+                }
+            })
+        })
+        return {success:"Social Media Added"};
+    } catch (error) {
+        console.log(error);
+        
+        return {error:"Something went wrong"};
+    }
 }
 
 
