@@ -59,7 +59,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
             <Image src={getIcon('/allcomm', community, coloredmeet)} alt='nav'/>
           </Link>
           <div className={`ml-auto ${isProfileActive ? 'border-2 border-rose-500 rounded-full' : ''}`}>
-            <Link href={`/profile/${profile?.username}`}>
+            <Link href={`/profile/${profile?.username}/threads`}>
              
                  <Image src={profile?.image || profileicon} alt='nav' height={24} width={24} className='rounded-full'/> 
              
