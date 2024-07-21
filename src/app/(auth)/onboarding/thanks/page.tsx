@@ -33,7 +33,7 @@ export default async function Page(){
           <div className="w-[80%] text-neutral-500 text-[15px] font-normal  leading-tight">Lets set you up for your connect card this is your one stop place for all your social engagement and lead generation</div>
         </div>
         <div className="w-full h-[54px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[14px] justify-center items-center gap-2.5 inline-flex mt-12">
-            <Link href={'profilepic'}><div className="text-white text-base font-semibold ">Continue </div></Link>
+            <Link href={'template'}><div className="text-white text-base font-semibold ">Continue </div></Link>
         </div>
     </div>
   )

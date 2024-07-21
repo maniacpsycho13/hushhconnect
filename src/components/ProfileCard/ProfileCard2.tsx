@@ -18,7 +18,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useQRCode } from "next-qrcode";
 import { useRouter, usePathname } from 'next/navigation'
-import { copyblackicon, linkicon } from '../../../public/signup'
+import { arrowleft, BoldArrow, copyblackicon, linkicon } from '../../../public/signup'
 
 
 const ProfileCard2 = (props:UserDetails) => {
@@ -81,6 +81,24 @@ const ProfileCard2 = (props:UserDetails) => {
                         </div>
                     </div>
 
+                    <div>
+
+                      <div className='flex justify-between mt-4 items-center'>
+                      <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Tell us about yourself</div>
+                      <div>
+                        <Image src={BoldArrow} alt='arrow'></Image>
+                      </div>
+                      </div>
+
+                      <div className='flex justify-between mt-4 items-center'>
+                      <div className=" text-zinc-400 text-xs font-extrabold  leading-[18px]">Add Bio</div>
+                      <div>
+                        <Image src={BoldArrow} alt='arrow'></Image>
+                      </div>
+                      </div>
+                      
+                    </div>
+
                     <div className=' my-4'>
                       {/* <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000}> */}
                         {props.socialmedia?.map((item: any) => {
@@ -91,7 +109,7 @@ const ProfileCard2 = (props:UserDetails) => {
                           return (
                             // <Link href={isComUrl ? `/edit/${props.id}/social` : item.url} >
                               
-                                <div className='mb-4 flex items-center' key={item.platform}>
+                                <div className='mb-4 flex justify-between items-center' key={item.platform}>
                                     <div>
                                         <Image 
                                         src={platformIcons[item.platform]} 
@@ -104,10 +122,10 @@ const ProfileCard2 = (props:UserDetails) => {
                                     <div>
                                         <div className="text-zinc-400 text-xs font-normal overflow-hidden w-[156px] mx-2 h-4 space-nowrap">{displayUrl}</div>
                                     </div>
-                                    <div className='p-1 bg-white rounded-full ml-4 mr-[8px]'>
+                                    <div className='p-1 bg-white rounded-full ml-4 '>
                                         <Image src={copyblackicon} alt='copy'></Image>
                                     </div>
-                                    <div className='p-1 bg-white rounded-full mr-[8px]'>
+                                    <div className='p-1 bg-white rounded-full '>
                                         <Image src={linkicon} alt='copy'></Image>
                                     </div>
                                     <div className=" h-[19.87px] p-[5.44px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-md justify-center items-center gap-[6.79px] inline-flex">

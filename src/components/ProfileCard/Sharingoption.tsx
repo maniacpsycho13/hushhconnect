@@ -19,7 +19,11 @@ import { shareicon } from "../../../public/profile";
       <AlertDialog>
         <AlertDialogTrigger asChild>
           
-        <Image src={shareicon} alt="card" className="" />
+        <div className=" h-11 w-[145px] bg-gradient-to-l from-rose-600 to-blue-700 rounded-xl justify-center items-center gap-[15.61px] inline-flex">
+          <div className="text-center text-white text-[17.17px] font-semibold">
+            Share Card
+          </div>
+        </div>
           
         </AlertDialogTrigger>
         <AlertDialogContent>
