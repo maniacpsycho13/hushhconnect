@@ -149,12 +149,12 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
                                   <Image src={HushhCard1} alt="card" className="w-full relative rounded-xl max-w-" />
                                   <div className='absolute top-[16px] left-[16px] flex items-center gap-2'>
                                     <div>
-                                      <Image src={hushhprofile}  alt='profile' width={33} height={33} className='rounded-full' />
+                                      <Image src={profile?.image || hushhprofile}  alt='profile' width={33} height={33} className='rounded-full' />
                                     </div>
                                     <div className='flex flex-col gap-[3.5rem]'>
                                       <div>
-                                        <p className="text-white text-2xl font-normal">Anmol Singh</p>
-                                        <p className="text-white text-[8.85px] font-medium">anmolrajawat1234@gmail.com</p>
+                                        <p className="text-white text-2xl font-normal">{profile?.name}</p>
+                                        <p className="text-white text-[8.85px] font-medium">{profile?.email}</p>
                                       </div>
                                     </div>
                                   </div>
