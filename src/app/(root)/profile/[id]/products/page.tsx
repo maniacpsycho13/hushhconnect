@@ -44,6 +44,16 @@ export default async function page({ params }: { params: { id: string } }) {
             </div> */}
           <div className='grid grid-cols-2 '>
             <Suspense fallback={<PostsSkeleton/>}>
+              <div className='p-4 h-full w-full'>
+                <div className='bg-gradient-to-l from-rose-500 to-purple-500 p-1 w-full h-full rounded-2xl'>
+                  <Link href={'/createproduct'}>
+                    <div className='bg-[#F4F4F5] w-full h-full rounded-2xl flex items-center flex-col text-[20px] py-12'>
+                      <p>Tap To</p>
+                      <p>Add Product</p>
+                    </div>
+                  </Link>
+                </div>
+              </div>
               {products?.map((post:any) => (
               <ProductCard key={post.id} fileUrl={post.fileUrl} title={post.title} price={post.price} currency={post.currency} link={post.link} />
               ))}
