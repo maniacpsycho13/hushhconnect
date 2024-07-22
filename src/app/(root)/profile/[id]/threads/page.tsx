@@ -26,9 +26,11 @@ export default async function page({ params }: { params: { id: string } }) {
       ):(
       <Suspense fallback={<Loader/>}>
       <div className="flex justify-center mt-4 mb-8">
-            <div className="px-6 py-4 bg-blue-600 rounded-[44px] justify-center items-center gap-2.5 inline-flex">
-              <div className="text-white text-base font-normal">Add thread</div>
-            </div>
+            <Link href={'/create'}>
+              <div className="px-6 py-4 bg-blue-600 rounded-[44px] justify-center items-center gap-2.5 inline-flex">
+                <div className="text-white text-base font-normal">Add thread</div>
+              </div>
+            </Link>
           </div>
         {posts?.map((post: any) => (
           <Post key={post.id} post={post} />

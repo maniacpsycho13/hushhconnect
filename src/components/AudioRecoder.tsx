@@ -55,13 +55,13 @@ export default function AudioRecorder({ setCaption, setFileUrl }:any) {
   };
 
   return (
-    <div>
-      <button onClick={startRecording} disabled={isRecording}>
+    <div className='flex justify-center'>
+      <button onClick={startRecording} disabled={isRecording} className='bg-gradient-to-l from-rose-600 to-blue-700 px-4 py-2 text-white rounded-xl'>
         {isRecording ? 'Recording...' : 'Start Recording'}
       </button>
-      {transcription && <p>Transcription: {transcription}</p>}
+      {/* {transcription && <p>Transcription: {transcription}</p>}
       {generatedText && <p>Generated Text: {generatedText}</p>}
-      {generatedImage && <div><Image src={generatedImage} alt="Generated Image" width={200} height={200}/></div>}
+      {generatedImage && <div><Image src={generatedImage} alt="Generated Image" width={200} height={200}/></div>} */}
     </div>
   );
 }
