@@ -116,26 +116,28 @@ function CreatePage() {
                     />
                   )}
                 </FormControl>
-                <FormDescription>
-                  Upload a picture to post (Optional).
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+            <div className="mt-6">
+              <h2 className="text-sm font-semibold mb-2 text-center">Generate Post with the help of AI</h2>
+                <AudioRecorder setCaption={setCaption} setFileUrl={setFileUrl} />
+              </div>
 
           <FormField
             control={form.control}
             name="caption"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="caption">About thread</FormLabel>
+                <p className="text-center text-sm font-semibold">Generate Post Manually</p>
                 <FormControl>
-                  <Input
-                    type="text"
+                  <textarea
                     id="caption"
-                    placeholder="Title"
-                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
+                    placeholder="Caption"
+                    rows={6}
+                    className="w-full px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
                     {...field}
                     required
                   />
@@ -144,19 +146,8 @@ function CreatePage() {
               </FormItem>
             )}
           />
-          <Input
-            type="text"
-            id="caption"
-            placeholder="Thread Content"
-            className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
-            required
-          />
         </form>
       </Form>
-      <div className="mt-6">
-        <h2 className="text-lg font-semibold mb-2">Generate Post with the help of AI</h2>
-        <AudioRecorder setCaption={setCaption} setFileUrl={setFileUrl} />
-      </div>
     </div>
   );
 }

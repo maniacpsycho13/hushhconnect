@@ -58,7 +58,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
         <Image src={lowerNav2} alt='nav' className='relative shadow-xl w-full transition-all duration-300 ease-in-out' />
         <div className='flex absolute w-full mt-[1.7rem] px-6 z-10 transition-all duration-300 ease-in-out'>
           <Link href={'/home/thread'}>
-            <Image src={getIcon('/home', homeicon, coloredhome)} alt='nav' />
+            <Image src={getIcon('/home', homeicon, coloredhome)} alt='nav'/>
           </Link>
           <Link href={`/activity/${id}`} className='ml-[16%]'>
             <Image src={getIcon(`/activity/${id}`, bell, coloredbell)} alt='nav' />

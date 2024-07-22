@@ -38,9 +38,11 @@ export default async function page({ params }: { params: { id: string } }) {
           <div>
             <Image src={ProductBox} alt='box'></Image>
           </div>
-           <div className="py-2 px-4 bg-blue-600 rounded-[44px] justify-center items-center gap-2.5 inline-flex">
-             <div className="text-white text-base font-normal">Add Product</div>
-           </div>
+          <Link href={'/createproduct'}>
+            <div className="py-2 px-4 bg-blue-600 rounded-[44px] justify-center items-center gap-2.5 inline-flex">
+              <div className="text-white text-base font-normal">Add Product</div>
+            </div>
+          </Link>
          </div>
               {products?.map((post:any) => (
               <ProductCard key={post.id} fileUrl={post.fileUrl} title={post.title} price={post.price} currency={post.currency} link={post.link} />
