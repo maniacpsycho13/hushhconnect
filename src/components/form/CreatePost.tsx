@@ -54,7 +54,7 @@ function CreatePage() {
       toast.error(<ErrorForm res={res} />);
     } else {
       toast.success("Post created successfully!");
-      router.push("/home/threads"); // Redirect to another page after successful post creation
+      router.push("/home/thread"); // Redirect to another page after successful post creation
     }
     setIsSubmitting(false);
   };
