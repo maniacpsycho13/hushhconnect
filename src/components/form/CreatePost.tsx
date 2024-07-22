@@ -25,6 +25,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 import ErrorForm from "@/components/ui/Error";
 import Link from "next/link";
+import AudioRecorder from "../AudioRecoder";
+ // Adjust the import path as necessary
 
 function CreatePage() {
   const router = useRouter();
@@ -38,6 +40,9 @@ function CreatePage() {
     },
   });
   const fileUrl = form.watch("fileUrl");
+
+  const setCaption = (caption: string) => form.setValue("caption", caption);
+  const setFileUrl = (url: string) => form.setValue("fileUrl", url);
 
   const handleSubmit = async (values: z.infer<typeof CreatePost>) => {
     setIsSubmitting(true);
@@ -148,6 +153,10 @@ function CreatePage() {
           />
         </form>
       </Form>
+      <div className="mt-6">
+        <h2 className="text-lg font-semibold mb-2">Generate Post with the help of AI</h2>
+        <AudioRecorder setCaption={setCaption} setFileUrl={setFileUrl} />
+      </div>
     </div>
   );
 }
