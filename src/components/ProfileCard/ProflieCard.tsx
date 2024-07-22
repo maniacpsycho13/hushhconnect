@@ -131,7 +131,7 @@ const ProfileCard = (props:UserDetails) => {
 
 {/* ------------------------------------------------------------------------------------------------------------ */}
       <div className='mt-[16.14px]'>
-        <Tabs defaultValue='' className='w-full'>
+        <Tabs defaultValue='threads' className='w-full'>
            <TabsList className='flex bg-transparent gap-[10px]' >
             {profileTabs.map((tab) => (
               <Link href={"/profile/"+props.username+"/"+tab.value} key={tab.label}>

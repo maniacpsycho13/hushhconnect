@@ -5,6 +5,8 @@ import { fetchProfile } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
 import { arrowleft } from '../../../../../public/signup';
 import Image from 'next/image';
+import { Suspense } from "react";
+import Loader from "@/components/Loader/Loader";
 
 export default async function page ()  {
   const session = await auth();
@@ -30,7 +32,9 @@ export default async function page ()  {
         <div className="text-center text-gray-900 text-xl font-bold mt-[24px] ">Templates</div>
 
         <div className="text-center text-neutral-500 text-sm font-normal mt-[8px] leading-tight">Add your own content below. You can also further customize your links and appearance later.</div>
-        <Template id={session.userId} user={profile}></Template>
+        <Suspense fallback={<Loader/>}>
+          <Template id={session.userId} user={profile}></Template>
+        </Suspense>
     </div>
   );
 }

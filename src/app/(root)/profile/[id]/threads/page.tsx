@@ -1,3 +1,4 @@
+import Loader from '@/components/Loader/Loader';
 import Post from '@/components/Post/Post';
 import { PostsSkeleton } from '@/components/Post/Skeletons';
 import { fetchPostsByUserId } from '@/lib/Actions/post.action';
@@ -23,7 +24,7 @@ export default async function page({ params }: { params: { id: string } }) {
           </div>
         </Link>
       )}
-      <Suspense fallback={<PostsSkeleton />}>
+      <Suspense fallback={<Loader/>}>
       <div className='p-4 h-[8rem] w-full'>
                 <div className='bg-gradient-to-l from-rose-500 to-purple-500 p-1 w-full h-full rounded-2xl'>
                   <Link href={'/create'}>

@@ -2,6 +2,9 @@ import SimpleSlider from "@/components/Corousel/CenterMode";
 import { ProfilePicForm } from "@/components/form/AuthForm/Onboarding/ProfilePicForm";
 import { fetchProfile } from "@/lib/Actions/user.action";
 import { auth } from "@clerk/nextjs/server";
+import { Suspense } from "react";
+import Loader from "@/components/Loader/Loader";
+
 
 export default async function page() {
   const session = await auth();
@@ -13,7 +16,10 @@ export default async function page() {
   if(!profile)return null;
   return (
     <div>
-      <ProfilePicForm id={session.userId} user={profile}/>
+      <Suspense fallback={<Loader />}>
+        <ProfilePicForm id={session.userId} user={profile}/>
+      </Suspense>
+
     </div>
   );
 }

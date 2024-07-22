@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { backicon } from "../../../../public/profilePage";
 import { addcommunity } from "../../../../public/community";
+import Loader from "@/components/Loader/Loader";
 
 export default function Page() {
     
@@ -22,7 +23,7 @@ export default function Page() {
                 <Link href={'/createcom'} ><Image src={addcommunity} alt="comm"></Image></Link>
             </div>
         </div>
-        <Suspense fallback={<UserSkeleton/>}>
+        <Suspense fallback={<Loader/>}>
 
         <AllCommunity/>
         </Suspense>
