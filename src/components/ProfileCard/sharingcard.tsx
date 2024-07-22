@@ -34,7 +34,7 @@ export default function SharingCard() {
 
     return (
         <div className='flex flex-col gap-3 justify-center items-center'>
-            <div className='flex gap-3'>
+            {/* <div className='flex gap-3'>
                 <WhatsappShareButton
                     url={path}
                     title={content}
@@ -62,7 +62,7 @@ export default function SharingCard() {
                 >
                     <EmailIcon size={32} round />
                 </EmailShareButton>
-            </div>
+            </div> */}
 
             <div className='flex items-center gap-2 mt-3'>
                 <input

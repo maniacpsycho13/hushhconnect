@@ -23,7 +23,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
 
   const { Canvas } = useQRCode();
   const pathname = usePathname();
-  const path='https://hushhvivaconnect.shop/'+pathname
+  const path='https://hushhvivaconnect.shop/'+`/profile/${profile?.username}/threads`
 
   const handleToggle = () => {
     setShowCard(!showCard);
@@ -37,6 +37,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
       setIsToggled(false);
     }, 300); 
   }
+
 
   const getIcon = (basepath: string, defaultIcon: any, activeIcon: any) => {
     return pathname.startsWith(basepath) ? activeIcon : defaultIcon;
@@ -146,7 +147,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
                         </div> */}
 
                         <div className='relative mt-6'>
-                                  <Image src={HushhCard1} alt="card" className="w-full relative rounded-xl max-w-" />
+                                  <Image src={HushhCard1} alt="card" className="w-full relative rounded-xl " />
                                   <div className='absolute top-[16px] left-[16px] flex items-center gap-2'>
                                     <div>
                                       <Image src={profile?.image || hushhprofile}  alt='profile' width={33} height={33} className='rounded-full' />
@@ -162,7 +163,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
 
                         <div className='flex justify-evenly mt-4'>
                           <div>
-                              <SharingOption/>
+                              <SharingOption profile={profile}/>
                           </div>
 
                           <div className=" h-11 p-[12.48px]  rounded-xl border-2 border-rose-600 justify-center items-center gap-[15.61px] inline-flex" onClick={handleToggleonQR}>

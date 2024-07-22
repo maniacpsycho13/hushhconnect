@@ -126,30 +126,12 @@ const ProfileCard = (props:UserDetails) => {
                         <p className='text-center text-[#171717] text-[12px] font-medium'>{props.bio}</p>
                     </div> 
 
-                    <div className='flex justify-evenly items-center'>
-
-                    <Link href={"/create"}>
-                        <div className='bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] p-[3px] text-sm'>
-                          <div className='bg-[#F4F4F5] rounded-[10px] px-4 py-1'>
-                            <div className='text-center text-black text-sm font-semibold'>Add Thread</div>
-                          </div>
-                        </div>
-                      </Link>
-
-                      <Link href={"/createproduct"}>
-                        <div className='bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] p-[3px] text-sm'>
-                          <div className='bg-[#F4F4F5] rounded-[10px] px-4 py-1'>
-                            <div className='text-center text-black text-sm font-semibold'>Add Product</div>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-
+                    
                     
 
 {/* ------------------------------------------------------------------------------------------------------------ */}
       <div className='mt-[16.14px]'>
-        <Tabs defaultValue='' className='w-full'>
+        <Tabs defaultValue='threads' className='w-full'>
            <TabsList className='flex bg-transparent gap-[10px]' >
             {profileTabs.map((tab) => (
               <Link href={"/profile/"+props.username+"/"+tab.value} key={tab.label}>
