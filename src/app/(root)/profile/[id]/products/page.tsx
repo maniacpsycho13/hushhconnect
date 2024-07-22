@@ -20,7 +20,7 @@ export default async function page({ params }: { params: { id: string } }) {
     <div className='bg-[#F4F4F5] px-4 pb-40'>
       {products.length==0 ? (
          <Link href={'/createproduct'}>
-         <div className="flex justify-center my-[6rem] flex-col items-center gap-4">
+         <div className="flex justify-center  flex-col items-center gap-4">
           <div>
             <Image src={ProductBox} alt='box'></Image>
           </div>
