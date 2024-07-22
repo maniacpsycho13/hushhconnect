@@ -23,7 +23,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
 
   const { Canvas } = useQRCode();
   const pathname = usePathname();
-  const path='https://hushhvivaconnect.shop/'+pathname
+  const path='https://hushhvivaconnect.shop/'+`/profile/${profile?.username}/threads`
 
   const handleToggle = () => {
     setShowCard(!showCard);
@@ -37,6 +37,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
       setIsToggled(false);
     }, 300); 
   }
+
 
   const getIcon = (basepath: string, defaultIcon: any, activeIcon: any) => {
     return pathname.startsWith(basepath) ? activeIcon : defaultIcon;
