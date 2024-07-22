@@ -519,3 +519,24 @@ export async function updateProfile(values: z.infer<typeof UpdateUser>) {
     //   throw new Error("Failed to fetch profile");
     }
   }
+
+
+  export async function templateUpdate(value:string|null,id:string) {
+    try {
+        if(!value)return {error:"Missing Field"};
+        console.log(value);
+        
+        await db.user.update({
+            where: {
+                id
+            },
+            data: {
+                cardImage:value
+            }
+        })
+        return {success:"Template Updated"}
+    } catch (error) {
+        console.log(error);
+        return {error:"Something went wrong"}
+    }
+}

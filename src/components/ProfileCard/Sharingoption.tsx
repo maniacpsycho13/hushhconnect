@@ -19,11 +19,14 @@ import { UserWithExtras } from "@/lib/Validations/definitions";
 import { useQRCode } from "next-qrcode";
 import { usePathname } from 'next/navigation'
 import { UserDetails } from "@/app/(root)/profile/[id]/page";
+import { profileData } from "../Template/Template";
 
 export function SharingOption({ profile }:{profile:UserWithExtras | undefined | null}) {
   const cardRef = useRef(null);
   const { Canvas } = useQRCode();
   const pathname = usePathname();
+  const ind=Number(profile?.cardImage) || 0
+  
   const path='https://hushhvivaconnect.shop/'+`/profile/${profile?.username}/threads`
 
   const handleShare = async () => {
@@ -64,7 +67,7 @@ export function SharingOption({ profile }:{profile:UserWithExtras | undefined | 
           <AlertDialogTitle>Share your business card</AlertDialogTitle>
           <AlertDialogDescription>
             <div ref={cardRef} className="relative">
-                <Image src={HushhCard1} alt="card" className="w-full relative rounded-xl max-w-[330px]" />
+                <Image src={profileData[ind].cardImage} alt="card" className="w-full relative rounded-xl max-w-[330px]" />
                   <div className="absolute top-[16px] left-[16px] flex items-center gap-2">
                     <div>
                       <Image src={profile?.image || hushhprofile} alt="profile" width={33} height={33} className="rounded-full" />

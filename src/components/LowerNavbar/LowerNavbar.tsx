@@ -14,6 +14,7 @@ import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, m
 import { SharingOption } from '../ProfileCard/Sharingoption'
 import { HushhCard1 } from '../../../public/hushhCards'
 import { UserDetails } from '@/app/(root)/profile/[id]/layout'
+import { profileData } from '../Template/Template'
 
 const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communityid?:string ,profile?:UserWithExtras | null }) => {
 
@@ -38,6 +39,11 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
       setIsToggled(false);
     }, 300); 
   }
+
+  const getCardImage = (cardImage: string | number) => {
+    const index = typeof cardImage === 'string' ? parseInt(cardImage, 10) : cardImage;
+    return profileData[index]?.cardImage || hushhprofile;
+  };
 
 
   const getIcon = (basepath: string, defaultIcon: any, activeIcon: any) => {
@@ -148,7 +154,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
                         </div> */}
 
                         <div className='relative mt-6'>
-                                  <Image src={HushhCard1} alt="card" className="w-full relative rounded-xl " />
+                                  <Image src={profileData[Number(profile?.cardImage)].cardImage||hushhCard} alt="card" className="w-full relative rounded-xl " />
                                   <div className='absolute top-[16px] left-[16px] flex items-center gap-2'>
                                     <div>
                                       <Image src={profile?.image || hushhprofile}  alt='profile' width={33} height={33} className='rounded-full' />

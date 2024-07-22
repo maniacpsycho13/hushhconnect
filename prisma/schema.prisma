@@ -24,6 +24,7 @@ model User {
   image              String?
   bio                String?
   googlewallet       String?
+  cardImage          String?
   coins              Int             @default(0)
   createdAt          DateTime        @default(now())
   updatedAt          DateTime        @updatedAt
