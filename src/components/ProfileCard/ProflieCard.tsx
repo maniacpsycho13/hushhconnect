@@ -20,7 +20,7 @@ import { useQRCode } from "next-qrcode";
 import { useRouter, usePathname } from 'next/navigation'
 
 
-const ProfileCard = (props:UserDetails) => {
+const ProfileCard = (props:any) => {
 
     const [showCard, setShowCard] = useState<boolean>(false);
     const [googleWallet,setGoogleWallet] = useState<string>("");
@@ -236,7 +236,7 @@ const ProfileCard = (props:UserDetails) => {
                             </div>
                             <div className='absolute top-[24px] right-[26px]'>
                                 
-                                <SharingOption/>
+                                <SharingOption profile={props}/>
                             </div>
                             <div>
                            

@@ -18,8 +18,9 @@ import SharingCard from "./sharingcard"; // Adjust path if necessary
 import { UserWithExtras } from "@/lib/Validations/definitions";
 import { useQRCode } from "next-qrcode";
 import { usePathname } from 'next/navigation'
+import { UserDetails } from "@/app/(root)/profile/[id]/page";
 
-export function SharingOption({ profile }:{profile:UserWithExtras}) {
+export function SharingOption({ profile }:{profile:UserWithExtras | undefined | null}) {
   const cardRef = useRef(null);
   const { Canvas } = useQRCode();
   const pathname = usePathname();

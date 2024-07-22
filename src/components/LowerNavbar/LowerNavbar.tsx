@@ -13,6 +13,7 @@ import { useQRCode } from "next-qrcode";
 import {AppleWallet, GoogleWallet, arrowcircle, find, hushhCard, hushhprofile, menu, name, shareicon, user} from "@/../public/profile"
 import { SharingOption } from '../ProfileCard/Sharingoption'
 import { HushhCard1 } from '../../../public/hushhCards'
+import { UserDetails } from '@/app/(root)/profile/[id]/layout'
 
 const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communityid?:string ,profile?:UserWithExtras | null }) => {
 

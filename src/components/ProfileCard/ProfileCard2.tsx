@@ -219,7 +219,7 @@ const ProfileCard2 = (props: UserDetails) => {
                                 </div>
                             </div>
                             <div className='absolute top-[24px] right-[26px]'>
-                                <SharingOption />
+                                <SharingOption profile={null} />
                             </div>
                             <div></div>
                         </div>
