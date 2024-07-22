@@ -22,6 +22,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
   const [showQR, setShowQR] = useState<boolean>(false);
   const [isToggled, setIsToggled] = useState(false);
   const [googleWallet,setGoogleWallet] = useState<string>("");
+  const ind=Number(profile?.cardImage) || 0
 
   const { Canvas } = useQRCode();
   const pathname = usePathname();
@@ -154,7 +155,7 @@ const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communi
                         </div> */}
 
                         <div className='relative mt-6'>
-                                  <Image src={profileData[Number(profile?.cardImage)].cardImage||hushhCard} alt="card" className="w-full relative rounded-xl " />
+                                  <Image src={profileData[ind].cardImage||hushhCard} alt="card" className="w-full relative rounded-xl " />
                                   <div className='absolute top-[16px] left-[16px] flex items-center gap-2'>
                                     <div>
                                       <Image src={profile?.image || hushhprofile}  alt='profile' width={33} height={33} className='rounded-full' />

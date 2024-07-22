@@ -26,11 +26,12 @@ import { z } from "zod";
 import ErrorForm from "@/components/ui/Error";
 import Link from "next/link";
 import AudioRecorder from "../AudioRecoder";
+import { Textarea } from "../ui/textarea";
  // Adjust the import path as necessary
 
 function CreatePage() {
   const router = useRouter();
-  const mount = useMount();
+  // const mount = useMount();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof CreatePost>>({
     resolver: zodResolver(CreatePost),
@@ -45,18 +46,19 @@ function CreatePage() {
   const setFileUrl = (url: string) => form.setValue("fileUrl", url);
 
   const handleSubmit = async (values: z.infer<typeof CreatePost>) => {
+    console.log(values);
+    
     setIsSubmitting(true);
     const res = await createPost(values);
     if (res) {
       toast.error(<ErrorForm res={res} />);
     } else {
       toast.success("Post created successfully!");
-      router.push("/"); // Redirect to another page after successful post creation
+      router.push("/home/threads"); // Redirect to another page after successful post creation
     }
     setIsSubmitting(false);
   };
 
-  if (!mount) return null;
 
   return (
     <div className="px-6 py-4">
@@ -133,7 +135,7 @@ function CreatePage() {
               <FormItem>
                 <p className="text-center text-sm font-semibold">Generate Post Manually</p>
                 <FormControl>
-                  <textarea
+                  <Textarea
                     id="caption"
                     placeholder="Caption"
                     rows={6}
