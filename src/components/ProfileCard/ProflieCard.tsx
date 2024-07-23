@@ -90,7 +90,7 @@ const ProfileCard = (props: any) => {
         console.error("Error writing NFC message:", error);
       }
     } else {
-      console.warn("NFC is not supported on this device.");
+      alert("nfc is not working in your mobile")
     }
   };
 
