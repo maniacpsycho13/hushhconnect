@@ -114,7 +114,7 @@ async function createPassObject(req: NextRequest, res: NextResponse) {
     });
   } catch (error) {
     console.error('Error creating pass:', error);
-    return NextResponse.json({ error: 'Error creating pass' }, { status: 500 });
+    return NextResponse.json({ error: 'Error creating pass,', message: error }, { status: 500 });
   }
 }
 export async function POST(req: NextRequest, res: NextResponse) {
