@@ -74,9 +74,9 @@ async function createPassObject(req: NextRequest, res: NextResponse) {
     const pass = await PKPass.from({
       model: passTemplatePath,
       certificates: {
-        wwdr: fs.readFileSync(wwdrCertificatePath),
-        signerCert: fs.readFileSync(certificatePath),
-        signerKey: fs.readFileSync(keyPath),
+        wwdr: Buffer.from(process.env.APPLE_WWDR_CERTIFICATE || '', 'utf-8'),
+        signerCert: Buffer.from(process.env.APPLE_SIGNER_CERTIFICATE || '', 'utf-8'),
+        signerKey: Buffer.from(process.env.APPLE_SIGNER_KEY || '', 'utf-8'),
         signerKeyPassphrase: process.env.CERTIFICATE_PASSPHRASE,
       }
     }, {
