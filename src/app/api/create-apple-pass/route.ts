@@ -109,7 +109,7 @@ async function createPassObject(req: NextRequest, res: NextResponse) {
       status: 200,
       headers: {
         'Content-Type': 'application/vnd.apple.pkpass',
-        'Content-Disposition': 'attachment; filename=hushh_wallet.pkpass'
+        'Content-Disposition': 'inline; filename=hushh_wallet.pkpass'
       }
     });
   } catch (error) {
@@ -124,4 +124,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
     console.error('Error creating pass:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
+}
+
+export default function GET(req: NextRequest, res: NextResponse) {
+  return NextResponse.json({ error: 'Method Not Allowed' }, { status: 405 });
 }
