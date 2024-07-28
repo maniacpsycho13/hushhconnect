@@ -67,7 +67,7 @@ export const getUserbyIdSocial = async (id : string )=>{
 
 import  { generate }   from "referral-codes";
 import { UpdateUser } from "../Validations/PostValidation";
-import { SocialMedia } from "@prisma/client";
+import { SocialMedia, User } from "@prisma/client";
 
 function generateReferralCode({username }: { username: string }) {
     
@@ -539,4 +539,72 @@ export async function updateProfile(values: z.infer<typeof UpdateUser>) {
         console.log(error);
         return {error:"Something went wrong"}
     }
+}
+
+export async function updateUserLocation(userId: string, latitude: number, longitude: number) {
+   
+    try {
+      const updatedUser = await db.user.update({
+        where: { id: userId },
+        data: { latitude, longitude },
+      });
+      return { success: "Location updated successfully", user: updatedUser };
+    } catch (error) {
+      console.error("Error updating user location:", error);
+      return { error: "Failed to update location" };
+    }
+}
+
+
+
+
+
+export async function findNearbyUsers(userId: string, radiusInKm: number, limit = 50) {
+  try {
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      select: { latitude: true, longitude: true },
+    });
+
+    if (!user || user.latitude === null || user.longitude === null) {
+      return { error: "User location not set" };
+    }
+
+    // Earth's radius in kilometers
+    const earthRadiusKm = 6371;
+
+    const nearbyUsers = await db.$queryRaw`
+      SELECT * FROM (
+        SELECT 
+          id, 
+          name, 
+          username, 
+          image,
+          latitude,
+          longitude,
+          ${earthRadiusKm} * acos(
+            cos(radians(${user.latitude})) * 
+            cos(radians(latitude)) * 
+            cos(radians(longitude) - radians(${user.longitude})) + 
+            sin(radians(${user.latitude})) * 
+            sin(radians(latitude))
+          ) AS distance
+        FROM "User"
+        WHERE 
+          id != ${userId}
+          AND latitude IS NOT NULL 
+          AND longitude IS NOT NULL
+      ) AS distances
+      WHERE distance <= ${radiusInKm}
+      ORDER BY distance
+      LIMIT ${limit}
+    `;
+
+    return { success: "Nearby users found", users: nearbyUsers };
+  } catch (error) {
+    console.error("Error finding nearby users:", error);
+    return { error: "Failed to find nearby users" };
+  } finally {
+    await db.$disconnect();
+  }
 }
