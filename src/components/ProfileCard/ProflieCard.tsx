@@ -75,8 +75,10 @@ const ProfileCard = (props: any) => {
     youtube,
   };
 
+
   const handleNfcShare = async () => {
     if ('NDEFReader' in window) {
+     
       try {
         const ndef = new (window as any).NDEFReader();
         await ndef.write({
@@ -85,17 +87,19 @@ const ProfileCard = (props: any) => {
             data: path
           }]
         });
-        console.log("NFC message sent.");
+        alert("NFC message sent.");
       } catch (error) {
-        console.error("Error writing NFC message:", error);
+        console.error("Error writing NFC message:");
       }
     } else {
-      alert("nfc is not working in your mobile")
+      console.log("NFC is not supported on your device.");
     }
   };
+  
 
   return (
     <div className=''>
+     
       <div className='bg-zinc-100 px-6 py-4 h-full'>
         <div className='flex justify-between items-center'>
           <div className="bg-clip-text text-transparent bg-gradient-to-l from-[#E54D60] to-[#A342FF] text-xl font-semibold ">Hushh Connect</div>
@@ -151,9 +155,9 @@ const ProfileCard = (props: any) => {
             <p className='text-center text-[#171717] text-[12px] font-medium'>{props.bio}</p>
           </div> 
 
-          <button onClick={handleNfcShare} className="bg-blue-500 text-white py-2 px-4 rounded mt-4">
+          {/* <button onClick={handleNfcShare} className="bg-blue-500 text-white py-2 px-4 rounded mt-4">
             Share via NFC
-          </button>
+          </button> */}
 
           {/* Tabs section */}
           <div className='mt-[16.14px]'>
