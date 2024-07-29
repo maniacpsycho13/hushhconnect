@@ -1,11 +1,15 @@
 import React from 'react'
 import DashboardPage from '../../dashboard/page'
+import DiscoveryHome from '@/components/Discovery/DiscoveryHome'
 
 const Page = () => {
   return (
-    <div className=' py-6'>
+    <div className=''>
         
-       <DashboardPage/>  
+       {/* <DashboardPage/>   */}
+       <DiscoveryHome></DiscoveryHome>
+
+
        
     </div>
   )
