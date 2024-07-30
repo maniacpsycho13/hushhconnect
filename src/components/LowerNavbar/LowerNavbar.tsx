@@ -172,7 +172,7 @@ const LowerNavbar = () => {
   return (
     <div>
       <div className='h-full max-w-[460px]'>
-        <div className='w-full flex flex-col fixed bottom-0 z-20 bg-black'>
+        <div className='w-full flex flex-col fixed bottom-0 z-[100] bg-black'>
           <div className='flex justify-between px-6 py-4'>
             <div>
               <Image src={NewHome} alt='home' height={28} width={28} ></Image>
