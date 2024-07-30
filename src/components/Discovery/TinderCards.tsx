@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, useRef } from 'react';
+"use client";
+import React, { useState, useRef, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
 import Image from 'next/image';
 import Testing2 from '../../../public/Testing/Testing2.jpg';
@@ -17,38 +17,65 @@ const TinderCards = () => {
         { name: 'Dani Daniels', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
     ]);
 
+    const [currentIndex, setCurrentIndex] = useState(() => people.length - 1);
     const [swipeInfo, setSwipeInfo] = useState(null);
+    const [leftIcon, setLeftIcon] = useState(NewCross);
+    const [rightIcon, setRightIcon] = useState(NewHeart);
+    const tinderCardRefs = useRef([]);
+
+    useEffect(() => {
+        // Reset currentIndex if people array changes
+        setCurrentIndex(people.length - 1);
+    }, [people]);
 
     const handleSwipe = (direction, name) => {
         if (direction === 'right') {
             setSwipeInfo({ direction: 'LIKE', name });
+            setRightIcon(NewReload);
         } else if (direction === 'left') {
             setSwipeInfo({ direction: 'NOPE', name });
+            setLeftIcon(NewReload);
         } else {
             setSwipeInfo(null);
         }
+
+        // Decrement the currentIndex
+        setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : people.length - 1));
+
+        setTimeout(() => {
+            setLeftIcon(NewCross);
+            setRightIcon(NewHeart);
+        }, 1000);
     };
 
     const handleCardLeftScreen = (name) => {
         setSwipeInfo(null);
     };
 
+    const swipe = (dir) => {
+        if (tinderCardRefs.current.length > 0) {
+            const cardToSwipe = tinderCardRefs.current[currentIndex];
+            if (cardToSwipe) {
+                cardToSwipe.swipe(dir);
+            }
+        }
+    };
+
     return (
         <div className='relative w-screen h-screen max-w-[460px]'>
             <div className='fixed bottom-12 w-full flex justify-between px-7 py-4 z-[100]'>
-            
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl'onClick={() => window.location.reload()}>
+                <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => window.location.reload()}>
                     <Image src={NewReload} alt='reload' height={28} width={28} />
                 </div>
                 
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
-                    <Image src={NewCross} alt='cross' height={28} width={28} />
+                <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('left')}>
+                    <Image src={leftIcon} alt='cross' height={28} width={28} />
                 </div>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
                     <Image src={NewSuper} alt='super' height={28} width={28} />
                 </div>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
-                    <Image src={NewHeart} alt='heart' height={28} width={28} />
+                <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('right')}>
+                    <Image src={rightIcon} alt='heart' height={28} width={28} />
                 </div>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
                     <Image src={NewExport} alt='export' height={24} width={24} />
@@ -62,6 +89,7 @@ const TinderCards = () => {
                     preventSwipe={['down', 'up']}
                     onSwipe={(dir) => handleSwipe(dir, person.name)}
                     onCardLeftScreen={() => handleCardLeftScreen(person.name)}
+                    ref={(el) => (tinderCardRefs.current[index] = el)}
                 >
                     <div className='relative w-full h-[80%]'>
                         <Image
@@ -72,7 +100,7 @@ const TinderCards = () => {
                             className='absolute top-0 left-0'
                         />
                         {swipeInfo && swipeInfo.name === person.name && (
-                            <div className={`absolute top-20 left-1/2 transform -translate-x-1/2 text-white text-4xl font-bold`}>
+                            <div className='absolute top-20 left-1/2 transform -translate-x-1/2 text-white text-4xl font-bold'>
                                 {swipeInfo.direction}
                             </div>
                         )}
