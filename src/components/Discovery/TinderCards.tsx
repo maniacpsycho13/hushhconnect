@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import TinderCard from 'react-tinder-card';
 import Image from 'next/image';
 import Testing2 from '../../../public/Testing/Testing2.jpg';
@@ -23,11 +23,6 @@ const TinderCards = () => {
     const [rightIcon, setRightIcon] = useState(NewHeart);
     const tinderCardRefs = useRef([]);
 
-    useEffect(() => {
-        // Reset currentIndex if people array changes
-        setCurrentIndex(people.length - 1);
-    }, [people]);
-
     const handleSwipe = (direction, name) => {
         if (direction === 'right') {
             setSwipeInfo({ direction: 'LIKE', name });
@@ -39,10 +34,8 @@ const TinderCards = () => {
             setSwipeInfo(null);
         }
 
-        // Decrement the currentIndex
-        setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : people.length - 1));
-
         setTimeout(() => {
+            setPeople((prevPeople) => prevPeople.filter(person => person.name !== name));
             setLeftIcon(NewCross);
             setRightIcon(NewHeart);
         }, 1000);
@@ -63,11 +56,13 @@ const TinderCards = () => {
 
     return (
         <div className='relative w-screen h-screen max-w-[460px]'>
+            <div className='bg-black px-6 pt-4 pb-2'>
+                <h1 className='text-base text-red-600 font-bold'>HUSHH CONNECT</h1>
+            </div>
             <div className='fixed bottom-12 w-full flex justify-between px-7 py-4 z-[100]'>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => window.location.reload()}>
                     <Image src={NewReload} alt='reload' height={28} width={28} />
                 </div>
-                
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('left')}>
                     <Image src={leftIcon} alt='cross' height={28} width={28} />
                 </div>
@@ -91,7 +86,7 @@ const TinderCards = () => {
                     onCardLeftScreen={() => handleCardLeftScreen(person.name)}
                     ref={(el) => (tinderCardRefs.current[index] = el)}
                 >
-                    <div className='relative w-full h-[80%]'>
+                    <div className='relative w-full h-[75%]'>
                         <Image
                             src={person.image}
                             alt={person.name}
@@ -105,7 +100,7 @@ const TinderCards = () => {
                             </div>
                         )}
                     </div>
-                    <div className='absolute text-white bottom-28 px-6 py-3 bg-gradient-to-t from-black shadow-2xl'>
+                    <div className='absolute text-white bottom-40 px-6 py-3 bg-gradient-to-t from-black shadow-2xl'>
                         <h3 className='text-base font-bold mb-2'>{person.name}</h3>
                         <p className='text-xs'>{person.bio}</p>
                     </div>
@@ -117,6 +112,7 @@ const TinderCards = () => {
 
 const App = () => {
     const carouselRef = useRef(null);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 1 },
@@ -132,11 +128,19 @@ const App = () => {
         },
         {
             id: 2,
-            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>hii</div>
+            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>2</div>
         },
         {
             id: 3,
-            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>hello</div>
+            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>3</div>
+        },
+        {
+            id: 4,
+            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>4</div>
+        },
+        {
+            id: 5,
+            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>5</div>
         }
     ];
 
@@ -152,6 +156,10 @@ const App = () => {
         }
     };
 
+    const onAfterChange = (index) => {
+        setCurrentSlide(index);
+    };
+
     return (
         <div className='relative w-full h-screen'>
             <Carousel 
@@ -160,8 +168,8 @@ const App = () => {
                 arrows={false} 
                 swipeable={false} 
                 draggable={false}
-                showDots={false} 
-                afterChange={(index) => console.log('Current index:', index)} 
+                showDots={false}
+                afterChange={(previousSlide, { currentSlide }) => onAfterChange(currentSlide)}
             >
                 {CarouselImages.map((item) => (
                     <div key={item.id} className="w-full h-full">
@@ -171,15 +179,24 @@ const App = () => {
             </Carousel>
 
             <div 
-                className='absolute top-0 left-0 w-1/6 h-[70%] cursor-pointer '
+                className='absolute top-0 left-0 w-1/6 h-[70%] cursor-pointer'
                 onClick={handleLeftClick}
                 aria-label="Previous Slide"
             />
             <div 
-                className='absolute top-0 right-0 w-1/6 h-[70%] cursor-pointer '
+                className='absolute top-0 right-0 w-1/6 h-[70%] cursor-pointer'
                 onClick={handleRightClick}
                 aria-label="Next Slide"
             />
+
+            <div className='flex absolute z-[100] h-2 top-14 w-full gap-1 px-4'>
+                {CarouselImages.map((item, index) => (
+                    <div 
+                        key={item.id} 
+                        className={`h-2 text-white rounded-full ${currentSlide === index ? 'bg-white w-[20%]' : 'bg-gray-700 w-[20%]'}`}
+                    ></div>
+                ))}
+            </div>
         </div>
     );
 };
