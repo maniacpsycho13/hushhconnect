@@ -25,10 +25,13 @@ import { toast } from "sonner";
 import { z } from "zod";
 import ErrorForm from "@/components/ui/Error";
 import Link from "next/link";
+import AudioRecorder from "../AudioRecoder";
+import { Textarea } from "../ui/textarea";
+ // Adjust the import path as necessary
 
 function CreatePage() {
   const router = useRouter();
-  const mount = useMount();
+  // const mount = useMount();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<z.infer<typeof CreatePost>>({
     resolver: zodResolver(CreatePost),
@@ -39,19 +42,23 @@ function CreatePage() {
   });
   const fileUrl = form.watch("fileUrl");
 
+  const setCaption = (caption: string) => form.setValue("caption", caption);
+  const setFileUrl = (url: string) => form.setValue("fileUrl", url);
+
   const handleSubmit = async (values: z.infer<typeof CreatePost>) => {
+    console.log(values);
+    
     setIsSubmitting(true);
     const res = await createPost(values);
     if (res) {
       toast.error(<ErrorForm res={res} />);
     } else {
       toast.success("Post created successfully!");
-      router.push("/"); // Redirect to another page after successful post creation
+      router.push("/home/thread"); // Redirect to another page after successful post creation
     }
     setIsSubmitting(false);
   };
 
-  if (!mount) return null;
 
   return (
     <div className="px-6 py-4">
@@ -111,26 +118,28 @@ function CreatePage() {
                     />
                   )}
                 </FormControl>
-                <FormDescription>
-                  Upload a picture to post (Optional).
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+            <div className="mt-6">
+              <h2 className="text-sm font-semibold mb-2 text-center">Generate Post with the help of AI</h2>
+                <AudioRecorder setCaption={setCaption} setFileUrl={setFileUrl} />
+              </div>
 
           <FormField
             control={form.control}
             name="caption"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="caption">About thread</FormLabel>
+                <p className="text-center text-sm font-semibold">Generate Post Manually</p>
                 <FormControl>
-                  <Input
-                    type="text"
+                  <Textarea
                     id="caption"
-                    placeholder="Title"
-                    className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
+                    placeholder="Caption"
+                    rows={6}
+                    className="w-full px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
                     {...field}
                     required
                   />
@@ -138,13 +147,6 @@ function CreatePage() {
                 <FormMessage />
               </FormItem>
             )}
-          />
-          <Input
-            type="text"
-            id="caption"
-            placeholder="Thread Content"
-            className="h-14 px-4 py-[18px] bg-white rounded-[10px] border border-zinc-300 justify-end items-center gap-2.5 inline-flex text-black text-base font-normal leading-tight placeholder:opacity-50"
-            required
           />
         </form>
       </Form>

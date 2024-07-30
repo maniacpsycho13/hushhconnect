@@ -62,8 +62,9 @@ export const handleError = (error: unknown) => {
 type KnownFileType = 'image' | 'video' | 'audio' | 'document' | 'unknown';
 
 export function getFileTypeFromUrl(url: string): KnownFileType {
-  // Step 1: Extract file extension from URL
-  const fileExtension = url.split('.').pop()?.toLowerCase();
+  // Step 1: Extract the file name from the URL
+  const urlWithoutQuery = url.split('?')[0];
+  const fileExtension = urlWithoutQuery.split('.').pop()?.toLowerCase();
 
   // Step 2: Define known file types and their extensions
   const knownFileTypes: Record<KnownFileType, string[]> = {
@@ -75,9 +76,11 @@ export function getFileTypeFromUrl(url: string): KnownFileType {
   };
 
   // Step 3: Match the file extension against known types
-  for (const [type, extensions] of Object.entries(knownFileTypes)) {
-    if (extensions.includes(fileExtension!)) {
-      return type as KnownFileType;
+  if (fileExtension) {
+    for (const [type, extensions] of Object.entries(knownFileTypes)) {
+      if (extensions.includes(fileExtension)) {
+        return type as KnownFileType;
+      }
     }
   }
 

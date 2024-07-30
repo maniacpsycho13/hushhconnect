@@ -58,7 +58,8 @@ async function Post({ post }: { post: PostWithExtras }) {
   const user = await getUserbyId(userId);
 
   return (
-    <div className="flex flex-col space-y-2.5 w-full ">
+    <div>
+      <div className="flex flex-col space-y-2.5 w-full mt-4">
       <div className="flex items-center justify-between px-3 sm:px-0">
         <div className="flex space-x-3 items-center">
           <UserAvatar user={post.user} />
@@ -116,7 +117,11 @@ async function Post({ post }: { post: PostWithExtras }) {
       )}
 
       <Comments postId={post.id} comments={post.comments} user={user} />
+      </div>
+
     </div>
+
+    
   );
 }
 

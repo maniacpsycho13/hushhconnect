@@ -109,10 +109,10 @@ export function ProfilePicForm({ id ,user }: { id: string ,user:UserWithExtras} 
       {isPending && <Loader />}
 
       <div className="flex justify-between">
-        <Link href={'yourself'}>
+        <Link href={'social'}>
           <div className=" px-2.5 py-[3px] bg-white rounded-[51px] border border-neutral-200 justify-start items-center gap-1 inline-flex">
             <Image src={arrowleft} alt="back"></Image>
-            <div className="text-black text-[13px] font-normal leading-snug">Yourself</div>
+            <div className="text-black text-[13px] font-normal leading-snug">Social</div>
           </div>
         </Link>
 

@@ -1,7 +1,7 @@
 export const profileTabs = [
-  { value: "", label: "Profile",  },
-    { value: "threads", label: "Threads",  },
+  { value: "threads", label: "Threads",  },
     { value: "products", label: "Products",  },
+    { value: "meeting", label: "Schedule meet",  },
 
    
   ];

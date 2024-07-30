@@ -31,6 +31,7 @@ import { FormSuccess } from "./form-success"
 import { socialupdate } from "@/lib/Actions/user.action"
 import { Insta, TemplateButton, linkedin, twitter, urlImage, youtube } from "../../../../public/Social"
 import Link from "next/link"
+import { arrowleft } from "../../../../public/signup"
 
 export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
 
@@ -87,6 +88,20 @@ export function SocialForm({id ,isEditing}:{id:string ,isEditing:boolean}) {
             <Link href={'thanks'}><Image src={backicon} alt="backicon" ></Image></Link>
             <Link href={'profilepic'}><p className="text-center text-gray-900 text-[15px] font-medium">Skip</p></Link>
           </div> */}
+
+        <div className="flex justify-between">
+           <Link href={'template'}>
+              <div className=" px-2.5 py-[3px] bg-white rounded-[51px] border border-neutral-200 justify-start items-center gap-1 inline-flex">
+            <Image src={arrowleft} alt="back"></Image>
+            <div className="text-black text-[13px] font-normal leading-snug">Template</div>
+          </div>
+        </Link>
+
+        <div className="">
+          <button type="submit" disabled={isPending} className="text-center text-gray-900 text-[15px] font-medium">Skip</button>
+        </div>
+      
+      </div>
 
           <div className="text-center text-gray-900 text-xl font-bold mt-3 ">Let &apos;s make it yours</div>
           <div className=" mt-[8px] text-center text-neutral-500 text-sm font-normal  leading-tight">Add your own content below. You can also further customize your links and appearance later.</div>

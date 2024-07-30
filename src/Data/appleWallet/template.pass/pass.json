@@ -1,0 +1,39 @@
+{
+  "passTypeIdentifier": "pass.com.hushhconnect.ai",
+  "formatVersion": 1,
+  "serialNumber": "123456",
+  "teamIdentifier": "Technology",
+  "organizationName": "Hushh AI",
+  "description": "Hushh Connect Pass",
+  "backgroundColor": "rgb(0, 56, 253)",
+  "labelColor": "rgb(255, 255, 255)",
+  "logoText": "Hushh Connect",
+  "foregroundColor": "rgb(0, 0, 0)",
+  "storeCard": {}, 
+  "barcode": {
+    "format": "PKBarcodeFormatQR",
+    "message": "https://hushhconnect.vercel.app/profile/user-id/threads",
+    "messageEncoding": "iso-8859-1"
+  },
+  "primaryFields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "value": "Jane Doe"
+    }
+  ],
+  "secondaryFields": [
+    {
+      "key": "points",
+      "label": "Points",
+      "value": "1234"
+    },
+    {
+      "key": "contacts",
+      "label": "Contacts",
+      "value": "20"
+    }
+  ],
+  "icon": "icon.png",
+  "logo": "logo.png"
+}

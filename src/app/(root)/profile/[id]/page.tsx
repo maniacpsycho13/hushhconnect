@@ -49,7 +49,7 @@ export default async function page( {params}:{params : {id : string}} ) {
     if(!session || !session.userId )return <ProfileLoginCard {...userdetails}/> ;
   return (
     <div>
-      <ProfileCard2 {...userdetails}/>
+      {/* <ProfileCard2 {...userdetails}/> */}
 
       {/* {posts?.map((post:any) => (
         <Post key={post.id} post={post} />
