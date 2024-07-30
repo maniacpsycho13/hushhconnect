@@ -163,23 +163,36 @@
 
 
 
-
+"use client"
 import Image from 'next/image'
 import React from 'react'
 import { NewChat, NewCommunity, NewHome, NewProfile, NewStar } from '../../../public/newNavbar'
+import Link from 'next/link'
+import { coloredhome, coloredmeet } from '../../../public/profile'
+import { usePathname } from 'next/navigation'
 
 const LowerNavbar = () => {
+
+  const pathname = usePathname();
+  const getIcon = (basepath: string, defaultIcon: any, activeIcon: any) => {
+         return pathname.startsWith(basepath) ? activeIcon : defaultIcon;
+       }
+
   return (
     <div>
       <div className='h-full max-w-[460px]'>
         <div className='w-full flex flex-col fixed bottom-0 z-[100] bg-black'>
           <div className='flex justify-between px-6 py-4'>
+           <Link href={'/home/thread'}>
             <div>
-              <Image src={NewHome} alt='home' height={28} width={28} ></Image>
-            </div>
-            <div>
-              <Image src={NewCommunity} alt='community' height={28} width={28} ></Image>
-            </div>
+                <Image src={getIcon('/home',NewHome,coloredhome)} alt='home' height={28} width={28} ></Image>
+              </div>
+           </Link>
+           <Link href={'/allcomm'}>
+              <div>
+                <Image src={getIcon('/allcomm', NewCommunity, coloredmeet)} alt='community' height={28} width={28} ></Image>
+              </div>
+           </Link>
             <div>
               <Image src={NewStar} alt='star' height={28} width={38} ></Image>
             </div>

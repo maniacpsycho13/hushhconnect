@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import TinderCard from 'react-tinder-card';
 import Image from 'next/image';
 import Testing2 from '../../../public/Testing/Testing2.jpg';
@@ -8,6 +8,7 @@ import Testing4 from '../../../public/Testing/Testing4.jpg';
 import { NewCross, NewExport, NewHeart, NewReload, NewSuper } from '../../../public/NewHome';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Link from 'next/link';
 
 const TinderCards = () => {
     const [people, setPeople] = useState([
@@ -34,10 +35,12 @@ const TinderCards = () => {
 
     return (
         <div className='relative w-screen h-screen max-w-[460px]'>
-            <div className='fixed bottom-12 w-full flex justify-between px-7 py-4 z-20'>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
+            <div className='fixed bottom-12 w-full flex justify-between px-7 py-4 z-[100]'>
+            
+                <div className='bg-gray-600 rounded-full p-2 shadow-xl'onClick={() => window.location.reload()}>
                     <Image src={NewReload} alt='reload' height={28} width={28} />
                 </div>
+                
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
                     <Image src={NewCross} alt='cross' height={28} width={28} />
                 </div>
@@ -85,6 +88,8 @@ const TinderCards = () => {
 }
 
 const App = () => {
+    const carouselRef = useRef(null);
+
     const responsive = {
         superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 1 },
         desktop: { breakpoint: { max: 1024, min: 768 }, items: 1 },
@@ -107,18 +112,47 @@ const App = () => {
         }
     ];
 
+    const handleLeftClick = () => {
+        if (carouselRef.current) {
+            carouselRef.current.previous();
+        }
+    };
+
+    const handleRightClick = () => {
+        if (carouselRef.current) {
+            carouselRef.current.next();
+        }
+    };
+
     return (
-        <Carousel 
-            responsive={responsive}
-            arrows={true}
-            swipeable={false}
-            draggable={false}>
-            {CarouselImages.map((item) => (
-                <div key={item.id} className="w-full h-full">
-                    {item.content()}
-                </div>
-            ))}
-        </Carousel>
+        <div className='relative w-full h-screen'>
+            <Carousel 
+                ref={carouselRef}
+                responsive={responsive}
+                arrows={false} 
+                swipeable={false} 
+                draggable={false}
+                showDots={false} 
+                afterChange={(index) => console.log('Current index:', index)} 
+            >
+                {CarouselImages.map((item) => (
+                    <div key={item.id} className="w-full h-full">
+                        {item.content()}
+                    </div>
+                ))}
+            </Carousel>
+
+            <div 
+                className='absolute top-0 left-0 w-1/6 h-[70%] cursor-pointer '
+                onClick={handleLeftClick}
+                aria-label="Previous Slide"
+            />
+            <div 
+                className='absolute top-0 right-0 w-1/6 h-[70%] cursor-pointer '
+                onClick={handleRightClick}
+                aria-label="Next Slide"
+            />
+        </div>
     );
 };
 
