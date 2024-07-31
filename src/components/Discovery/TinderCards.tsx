@@ -17,27 +17,23 @@ const TinderCards = () => {
         { name: 'Dani Daniels', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
     ]);
 
-    const [currentIndex, setCurrentIndex] = useState(() => people.length - 1);
+    const [currentIndex, setCurrentIndex] = useState(people.length - 1);
     const [swipeInfo, setSwipeInfo] = useState(null);
-    const [leftIcon, setLeftIcon] = useState(NewCross);
-    const [rightIcon, setRightIcon] = useState(NewHeart);
     const tinderCardRefs = useRef([]);
 
     const handleSwipe = (direction, name) => {
         if (direction === 'right') {
             setSwipeInfo({ direction: 'LIKE', name });
-            setRightIcon(NewReload);
         } else if (direction === 'left') {
             setSwipeInfo({ direction: 'NOPE', name });
-            setLeftIcon(NewReload);
         } else {
             setSwipeInfo(null);
         }
 
         setTimeout(() => {
             setPeople((prevPeople) => prevPeople.filter(person => person.name !== name));
-            setLeftIcon(NewCross);
-            setRightIcon(NewHeart);
+            setSwipeInfo(null);
+            setCurrentIndex((prevIndex) => prevIndex - 1);
         }, 1000);
     };
 
@@ -46,7 +42,7 @@ const TinderCards = () => {
     };
 
     const swipe = (dir) => {
-        if (tinderCardRefs.current.length > 0) {
+        if (currentIndex >= 0 && currentIndex < tinderCardRefs.current.length) {
             const cardToSwipe = tinderCardRefs.current[currentIndex];
             if (cardToSwipe) {
                 cardToSwipe.swipe(dir);
@@ -64,13 +60,13 @@ const TinderCards = () => {
                     <Image src={NewReload} alt='reload' height={28} width={28} />
                 </div>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('left')}>
-                    <Image src={leftIcon} alt='cross' height={28} width={28} />
+                    <Image src={swipeInfo && swipeInfo.direction === 'NOPE' ? NewReload : NewCross} alt='cross' height={28} width={28} />
                 </div>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
                     <Image src={NewSuper} alt='super' height={28} width={28} />
                 </div>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('right')}>
-                    <Image src={rightIcon} alt='heart' height={28} width={28} />
+                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? NewReload : NewHeart} alt='heart' height={28} width={28} />
                 </div>
                 <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
                     <Image src={NewExport} alt='export' height={24} width={24} />
@@ -109,6 +105,7 @@ const TinderCards = () => {
         </div>
     );
 }
+
 
 const App = () => {
     const carouselRef = useRef(null);
