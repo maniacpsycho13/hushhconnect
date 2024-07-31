@@ -461,11 +461,12 @@
 import Image from 'next/image'
 import React from 'react'
 import { NewChat, NewCommunity, NewHome, NewProfile, NewStar } from '../../../public/newNavbar'
+import { UserWithExtras } from '@/lib/Validations/definitions'
 import Link from 'next/link'
 import { coloredhome, coloredmeet } from '../../../public/profile'
 import { usePathname } from 'next/navigation'
 
-const LowerNavbar = () => {
+const LowerNavbar = ({ id, communityid, profile }: { id: string | null , communityid?:string ,profile?:UserWithExtras | null }) => {
 
   const pathname = usePathname();
   const getIcon = (basepath: string, defaultIcon: any, activeIcon: any) => {
@@ -494,7 +495,9 @@ const LowerNavbar = () => {
               <Image src={NewChat} alt='chat' height={28} width={28} ></Image>
             </div>
             <div>
-              <Image src={NewProfile} alt='profile' height={28}  ></Image>
+              <Link href={`/profile/${profile?.username}/threads`}>
+                <Image src={NewProfile} alt='profile' height={28}  ></Image>
+              </Link>
             </div>
           </div>
         </div>
