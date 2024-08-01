@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Testing2 from '../../../public/Testing/Testing2.jpg';
 import Testing3 from '../../../public/Testing/Testing3.jpg';
 import Testing4 from '../../../public/Testing/Testing4.jpg';
-import { ColoredNewCross, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
+import { ColoredNewCross, ColoredNewHeart, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
 
 interface Person {
     name: string;
@@ -26,7 +26,7 @@ const TinderCards: React.FC = () => {
     const [people, setPeople] = useState<Person[]>([
         { name: 'Alia', image: Testing2, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
         { name: 'kiara', image: Testing3, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
-        { name: 'Kriti', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
+        { name: 'Rashmika', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
     ]);
 
     const [currentIndex, setCurrentIndex] = useState(people.length - 1);
@@ -88,7 +88,7 @@ const TinderCards: React.FC = () => {
                     <Image src={NewSuper} alt='super' height={46} width={46} />
                 </div>
                 <div className='' onClick={() => swipe('right')}>
-                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? NewReload : NewHeart} alt='heart' height={57} width={57} />
+                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? ColoredNewHeart : NewHeart} alt='heart' height={57} width={57} />
                 </div>
                 <div className=''>
                     <Image src={NewExport} alt='export' height={44} width={44} />

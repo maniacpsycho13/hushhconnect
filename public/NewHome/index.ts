@@ -7,6 +7,7 @@ import connectLogo from "./connectLogo.svg"
 import NewSearch from "./NewSearch.svg"
 import NewNotification from "./NewNotification.svg"
 import ColoredNewCross from "./ColoredNewCross.svg"
+import ColoredNewHeart from "./ColoredNewHeart.svg"
 
 export {
     NewCross,
@@ -17,5 +18,6 @@ export {
     connectLogo,
     NewSearch,
     NewNotification,
-    ColoredNewCross
+    ColoredNewCross,
+    ColoredNewHeart
 }
