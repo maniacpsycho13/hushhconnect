@@ -6,22 +6,34 @@ import Testing2 from '../../../public/Testing/Testing2.jpg';
 import Testing3 from '../../../public/Testing/Testing3.jpg';
 import Testing4 from '../../../public/Testing/Testing4.jpg';
 import { ColoredNewCross, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import Link from 'next/link';
 
-const TinderCards = () => {
-    const [people, setPeople] = useState([
+interface Person {
+    name: string;
+    image: StaticImageData;
+    bio: string;
+}
+
+interface SwipeInfo {
+    direction: 'LIKE' | 'NOPE';
+    name: string;
+}
+
+type TinderCardType = {
+    swipe: (dir: string) => void;
+};
+
+const TinderCards: React.FC = () => {
+    const [people, setPeople] = useState<Person[]>([
         { name: 'Alia', image: Testing2, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
         { name: 'kiara', image: Testing3, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
         { name: 'Kriti', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
     ]);
 
     const [currentIndex, setCurrentIndex] = useState(people.length - 1);
-    const [swipeInfo, setSwipeInfo] = useState(null);
-    const tinderCardRefs = useRef([]);
+    const [swipeInfo, setSwipeInfo] = useState<SwipeInfo | null>(null);
+    const tinderCardRefs = useRef<(TinderCardType | null)[]>([]);
 
-    const handleSwipe = (direction, name) => {
+    const handleSwipe = (direction: string, name: string) => {
         if (direction === 'right') {
             setSwipeInfo({ direction: 'LIKE', name });
         } else if (direction === 'left') {
@@ -37,11 +49,11 @@ const TinderCards = () => {
         }, 1000);
     };
 
-    const handleCardLeftScreen = (name) => {
+    const handleCardLeftScreen = (name: string) => {
         setSwipeInfo(null);
     };
 
-    const swipe = (dir) => {
+    const swipe = (dir: string) => {
         if (currentIndex >= 0 && currentIndex < tinderCardRefs.current.length) {
             const cardToSwipe = tinderCardRefs.current[currentIndex];
             if (cardToSwipe) {
@@ -53,19 +65,17 @@ const TinderCards = () => {
     return (
         <div className='relative w-screen h-screen max-w-[460px]'>
             <div className='bg-black px-6 pt-4 pb-3 flex justify-between items-center'>
-              <div>
-                <Image src={connectLogo} alt='logo'>
-                </Image>
-              </div>
-
-              <div className='flex gap-4 items-center'>
                 <div>
-                    <Image src={NewSearch} alt='search'></Image>
+                    <Image src={connectLogo} alt='logo' />
                 </div>
-                <div className=''>
-                    <Image src={NewNotification} alt='notification'></Image>
+                <div className='flex gap-4 items-center'>
+                    <div>
+                        <Image src={NewSearch} alt='search' />
+                    </div>
+                    <div className=''>
+                        <Image src={NewNotification} alt='notification' />
+                    </div>
                 </div>
-              </div>
             </div>
             <div className='fixed bottom-12 w-full flex items-center justify-between px-7 py-2 z-[100]'>
                 <div className='' onClick={() => window.location.reload()}>
@@ -118,96 +128,4 @@ const TinderCards = () => {
     );
 }
 
-
-const App = () => {
-    const carouselRef = useRef(null);
-    const [currentSlide, setCurrentSlide] = useState(0);
-
-    const responsive = {
-        superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 1 },
-        desktop: { breakpoint: { max: 1024, min: 768 }, items: 1 },
-        tablet: { breakpoint: { max: 768, min: 464 }, items: 1 },
-        mobile: { breakpoint: { max: 464, min: 0 }, items: 1 }
-    };
-
-    const CarouselImages = [
-        {
-            id: 1,
-            content: () => <TinderCards />
-        },
-        {
-            id: 2,
-            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>2</div>
-        },
-        {
-            id: 3,
-            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>3</div>
-        },
-        {
-            id: 4,
-            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>4</div>
-        },
-        {
-            id: 5,
-            content: () => <div className='flex items-center justify-center w-full h-full text-white text-6xl'>5</div>
-        }
-    ];
-
-    const handleLeftClick = () => {
-        if (carouselRef.current) {
-            carouselRef.current.previous();
-        }
-    };
-
-    const handleRightClick = () => {
-        if (carouselRef.current) {
-            carouselRef.current.next();
-        }
-    };
-
-    const onAfterChange = (index) => {
-        setCurrentSlide(index);
-    };
-
-    return (
-        <div className='relative w-full h-screen'>
-            <Carousel 
-                ref={carouselRef}
-                responsive={responsive}
-                arrows={false} 
-                swipeable={false} 
-                draggable={false}
-                showDots={false}
-                afterChange={(previousSlide, { currentSlide }) => onAfterChange(currentSlide)}
-            >
-                {CarouselImages.map((item) => (
-                    <div key={item.id} className="w-full h-full">
-                        {item.content()}
-                    </div>
-                ))}
-            </Carousel>
-
-            <div 
-                className='absolute top-14 left-0 w-1/6 h-[70%] cursor-pointer '
-                onClick={handleLeftClick}
-                aria-label="Previous Slide"
-            />
-            <div 
-                className='absolute top-14 right-0 w-1/6 h-[70%] cursor-pointer '
-                onClick={handleRightClick}
-                aria-label="Next Slide"
-            />
-
-            <div className='flex absolute z-[100] h-2 top-16 w-full gap-1 px-4'>
-                {CarouselImages.map((item, index) => (
-                    <div 
-                        key={item.id} 
-                        className={`h-2 text-white rounded-full ${currentSlide === index ? 'bg-white w-[20%]' : 'bg-gray-700 w-[20%]'}`}
-                    ></div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-export default App;
+export default TinderCards;
