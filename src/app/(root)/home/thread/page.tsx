@@ -1,13 +1,13 @@
 import React from 'react'
 import DashboardPage from '../../dashboard/page'
-import DiscoveryHome from '@/components/Discovery/DiscoveryHome'
+import DiscoveryHome from '@/components/discovery/DiscoveryHome'
 
 const Page = () => {
   return (
     <div className=''>
         
        {/* <DashboardPage/>   */}
-       <DiscoveryHome></DiscoveryHome>
+       <DiscoveryHome/>
 
 
        

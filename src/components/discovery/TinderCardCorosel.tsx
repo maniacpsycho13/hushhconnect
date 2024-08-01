@@ -1,10 +1,11 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import TinderCards from './TinderCards';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Person } from './DiscoveryHome';
 
-const App: React.FC = () => {
+const App = ({person}:{person:Person[]}) => {
     const carouselRef = useRef<Carousel>(null);
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -18,7 +19,7 @@ const App: React.FC = () => {
     const CarouselImages = [
         {
             id: 1,
-            content: () => <TinderCards />
+            content: () => <TinderCards person={person} />
         },
         {
             id: 2,
