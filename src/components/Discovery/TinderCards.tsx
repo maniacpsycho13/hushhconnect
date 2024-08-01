@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Testing2 from '../../../public/Testing/Testing2.jpg';
 import Testing3 from '../../../public/Testing/Testing3.jpg';
 import Testing4 from '../../../public/Testing/Testing4.jpg';
-import { NewCross, NewExport, NewHeart, NewReload, NewSuper } from '../../../public/NewHome';
+import { ColoredNewCross, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Link from 'next/link';
@@ -52,24 +52,36 @@ const TinderCards = () => {
 
     return (
         <div className='relative w-screen h-screen max-w-[460px]'>
-            <div className='bg-black px-6 pt-4 pb-2'>
-                <h1 className='text-base text-red-600 font-bold'>HUSHH CONNECT</h1>
+            <div className='bg-black px-6 pt-4 pb-3 flex justify-between items-center'>
+              <div>
+                <Image src={connectLogo} alt='logo'>
+                </Image>
+              </div>
+
+              <div className='flex gap-4 items-center'>
+                <div>
+                    <Image src={NewSearch} alt='search'></Image>
+                </div>
+                <div className=''>
+                    <Image src={NewNotification} alt='notification'></Image>
+                </div>
+              </div>
             </div>
-            <div className='fixed bottom-12 w-full flex justify-between px-7 py-4 z-[100]'>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => window.location.reload()}>
-                    <Image src={NewReload} alt='reload' height={28} width={28} />
+            <div className='fixed bottom-12 w-full flex items-center justify-between px-7 py-2 z-[100]'>
+                <div className='' onClick={() => window.location.reload()}>
+                    <Image src={NewReload} alt='reload' height={46} width={48} />
                 </div>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('left')}>
-                    <Image src={swipeInfo && swipeInfo.direction === 'NOPE' ? NewReload : NewCross} alt='cross' height={28} width={28} />
+                <div className='' onClick={() => swipe('left')}>
+                    <Image src={swipeInfo && swipeInfo.direction === 'NOPE' ? ColoredNewCross : NewCross} alt='cross' height={57} width={57} />
                 </div>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
-                    <Image src={NewSuper} alt='super' height={28} width={28} />
+                <div className=''>
+                    <Image src={NewSuper} alt='super' height={46} width={46} />
                 </div>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl' onClick={() => swipe('right')}>
-                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? NewReload : NewHeart} alt='heart' height={28} width={28} />
+                <div className='' onClick={() => swipe('right')}>
+                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? NewReload : NewHeart} alt='heart' height={57} width={57} />
                 </div>
-                <div className='bg-gray-600 rounded-full p-2 shadow-xl'>
-                    <Image src={NewExport} alt='export' height={24} width={24} />
+                <div className=''>
+                    <Image src={NewExport} alt='export' height={44} width={44} />
                 </div>
             </div>
 
@@ -88,7 +100,7 @@ const TinderCards = () => {
                             alt={person.name}
                             layout='fill'
                             objectFit='cover'
-                            className='absolute top-0 left-0'
+                            className='absolute top-0 left-0 rounded-xl'
                         />
                         {swipeInfo && swipeInfo.name === person.name && (
                             <div className='absolute top-20 left-1/2 transform -translate-x-1/2 text-white text-4xl font-bold'>
@@ -176,17 +188,17 @@ const App = () => {
             </Carousel>
 
             <div 
-                className='absolute top-0 left-0 w-1/6 h-[70%] cursor-pointer'
+                className='absolute top-14 left-0 w-1/6 h-[70%] cursor-pointer '
                 onClick={handleLeftClick}
                 aria-label="Previous Slide"
             />
             <div 
-                className='absolute top-0 right-0 w-1/6 h-[70%] cursor-pointer'
+                className='absolute top-14 right-0 w-1/6 h-[70%] cursor-pointer '
                 onClick={handleRightClick}
                 aria-label="Next Slide"
             />
 
-            <div className='flex absolute z-[100] h-2 top-14 w-full gap-1 px-4'>
+            <div className='flex absolute z-[100] h-2 top-16 w-full gap-1 px-4'>
                 {CarouselImages.map((item, index) => (
                     <div 
                         key={item.id} 
