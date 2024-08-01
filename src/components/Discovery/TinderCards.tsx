@@ -12,9 +12,9 @@ import Link from 'next/link';
 
 const TinderCards = () => {
     const [people, setPeople] = useState([
-        { name: 'Lana Rodes', image: Testing2, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
-        { name: 'Leah Gotti', image: Testing3, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
-        { name: 'Dani Daniels', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
+        { name: 'Alia', image: Testing2, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
+        { name: 'kiara', image: Testing3, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
+        { name: 'Kriti', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
     ]);
 
     const [currentIndex, setCurrentIndex] = useState(people.length - 1);
