@@ -23,14 +23,12 @@ export type Person = {
 
 const DiscoveryHome = async() => {
 
-  const Id=await getUserId();
-  const person=await getAllUsersSortedByProximity(Id);
-  console.log(person);
+  
   
 
   return (
     <div className='bg-black'>
-      <TinderCardCorosel person={person.users}/>
+      <TinderCardCorosel />
     </div>
   )
 }

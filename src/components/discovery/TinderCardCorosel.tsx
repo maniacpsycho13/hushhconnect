@@ -5,7 +5,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Person } from './DiscoveryHome';
 
-const App = ({person}:{person:Person[]}) => {
+const App = () => {
     const carouselRef = useRef<Carousel>(null);
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -19,7 +19,7 @@ const App = ({person}:{person:Person[]}) => {
     const CarouselImages = [
         {
             id: 1,
-            content: () => <TinderCards person={person} />
+            content: () => <TinderCards />
         },
         {
             id: 2,

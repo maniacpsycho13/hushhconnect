@@ -609,62 +609,21 @@ export async function findNearbyUsers(userId: string, radiusInKm: number, limit 
   }
 }
 
-export async function getAllUsersSortedByProximity(referenceUserId: string | null) {
-    if (!referenceUserId) return { error: "Not Logged In" };
+export async function getRandomUsers(userId:string,limit = 10) {
     try {
-        const referenceUser = await db.user.findUnique({
-            where: { id: referenceUserId },
-            select: { latitude: true, longitude: true },
-        });
-
-        if (!referenceUser) {
-            return { error: "Reference user not found" };
-        }
-
-        const earthRadiusKm = 6371;
-
-        const allUsers = await db.$queryRaw`
-            SELECT 
-                id, 
-                name, 
-                username, 
-                image,
-                latitude,
-                longitude,
-                bio,
-                CASE
-                    WHEN latitude IS NOT NULL AND longitude IS NOT NULL THEN
-                        ${earthRadiusKm} * acos(
-                            cos(radians(${referenceUser.latitude ?? 0})) * 
-                            cos(radians(latitude)) * 
-                            cos(radians(longitude) - radians(${referenceUser.longitude ?? 0})) + 
-                            sin(radians(${referenceUser.latitude ?? 0})) * 
-                            sin(radians(latitude))
-                        )
-                    ELSE NULL
-                END AS distance,
-                CASE
-                    WHEN latitude IS NULL OR longitude IS NULL THEN RANDOM()
-                    ELSE 0
-                END AS random_order
-            FROM "User"
-            WHERE id != ${referenceUserId}
-            ORDER BY 
-                CASE
-                    WHEN latitude IS NOT NULL AND longitude IS NOT NULL THEN 0
-                    ELSE 1
-                END,
-                distance ASC NULLS LAST,
-                random_order
-            LIMIT 10
+        const randomUsers = await db.$queryRaw`
+            SELECT * FROM "User"
+            WHERE 
+                id!=${userId}
+            ORDER BY RANDOM()
+            LIMIT ${limit}
         `;
 
-        return { success: "All users retrieved and sorted", users: allUsers };
+        return { success: "Random users fetched successfully", users: randomUsers };
     } catch (error) {
-        console.error("Error retrieving and sorting users:", error);
-        return { error: "Failed to retrieve and sort users" };
+        console.error("Error fetching random users:", error);
+        return { error: "Failed to fetch random users" };
     } finally {
         await db.$disconnect();
     }
 }
-

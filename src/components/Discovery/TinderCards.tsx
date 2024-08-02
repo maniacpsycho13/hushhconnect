@@ -6,9 +6,9 @@ import Testing2 from '../../../public/Testing/Testing2.jpg';
 import Testing3 from '../../../public/Testing/Testing3.jpg';
 import Testing4 from '../../../public/Testing/Testing4.jpg';
 import { ColoredNewCross, ColoredNewHeart, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
-import { Person } from './DiscoveryHome';
+import { findNearbyUsers, getRandomUsers, getUserId } from '@/lib/Actions/user.action';
 
-interface person {
+interface Person {
     name: string;
     image: string | StaticImageData;
     bio: string;
@@ -23,19 +23,45 @@ type TinderCardType = {
     swipe: (dir: string) => void;
 };
 
-const TinderCards = ({ person }: { person: Person[] }) => {
-    const [people, setPeople] = useState<person[]>([
-        { name: 'Alia', image: Testing2, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
-        { name: 'Kiara', image: Testing3, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' },
-        { name: 'Kriti', image: Testing4, bio: 'Frontend developer specializing in React and UI/UX design. Passionate about crafting intuitive, high-performance web applications and innovative user interfaces.' }
-    ]);
+interface UserResponse {
+    id: string;
+    name: string;
+    image: string;
+    bio: string;
+}
+
+interface ProximityResponse {
+    success?: string;
+    users?: UserResponse[];
+    error?: string;
+}
+
+const TinderCards = () => {
+    const [people, setPeople] = useState<Person[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setPeople((prevPeople) => [
-            ...prevPeople,
-            ...person.map((user) => ({ name: user.name, image: user.image, bio: user.bio }))
-        ]);
-    }, [person]);
+        const fetchPersons = async () => {
+            try {
+                const Id = await getUserId();
+                if(!Id) return;
+                const personData: any = await getRandomUsers(Id);
+
+                if (personData.users) {
+                    setPeople(
+                        personData.users?.map((user:any) => ({ name: user.name, image: user.image, bio: user.bio })) ?? []
+                    );
+                    setLoading(false);
+                } else {
+                    console.error(personData.error);
+                }
+            } catch (error) {
+                console.error('Failed to fetch users:', error);
+            }
+        };
+
+        fetchPersons();
+    }, []);
 
     const [currentIndex, setCurrentIndex] = useState(people.length - 1);
     const [swipeInfo, setSwipeInfo] = useState<SwipeInfo | null>(null);
@@ -44,6 +70,25 @@ const TinderCards = ({ person }: { person: Person[] }) => {
     useEffect(() => {
         setCurrentIndex(people.length - 1);
     }, [people]);
+
+    const fetchMorePersons = async () => {
+        try {
+            const Id = await getUserId();
+            if(!Id) return;
+            const personData: any = await getRandomUsers(Id);
+
+            if (personData.users) {
+                setPeople((prevPeople) => [
+                    ...prevPeople,
+                    ...personData.users?.map((user:any) => ({ name: user.name, image: user.image, bio: user.bio })) ?? []
+                ]);
+            } else {
+                console.error(personData.error);
+            }
+        } catch (error) {
+            console.error('Failed to fetch more users:', error);
+        }
+    };
 
     const handleSwipe = (direction: string, name: string) => {
         if (direction === 'right') {
@@ -57,7 +102,13 @@ const TinderCards = ({ person }: { person: Person[] }) => {
         setTimeout(() => {
             setPeople((prevPeople) => prevPeople.filter(person => person.name !== name));
             setSwipeInfo(null);
-            setCurrentIndex((prevIndex) => prevIndex - 1);
+            setCurrentIndex((prevIndex) => {
+                const newIndex = prevIndex - 1;
+                if (newIndex < 7) { // Threshold to load more users
+                    fetchMorePersons();
+                }
+                return newIndex;
+            });
         }, 1000);
     };
 
@@ -73,6 +124,10 @@ const TinderCards = ({ person }: { person: Person[] }) => {
             }
         }
     };
+
+    if (loading) {
+        return <div className='flex justify-center items-center h-screen'>Loading...</div>;
+    }
 
     return (
         <div className='relative w-screen h-screen max-w-[460px]'>
