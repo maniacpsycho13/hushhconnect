@@ -96,17 +96,21 @@ export function BasicDetails({id}:{id:string}) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 bg-[#21262E] h-screen">
+        <div className="flex pt-4">
+          <div className="bg-gradient-to-l from-rose-500 to-purple-500 h-[10px] w-[10%]"></div>
+          <div className="h-[10px bg-white/20 w-[90%]"></div>
+        </div>
 
-        <div  className='bg-white px-6 pt-4'>
+        <div  className=' px-6 '>
           <div >
             <Link href={'username'}><Image src={backicon} alt="backicon" ></Image></Link>
           </div>
-            <div className='mt-[28px]'>
+            <div className='mt-[20px]'>
               <Image src={detail} alt="lock" ></Image>
 
-              <div className="text-gray-900 text-xl font-bold mt-[10px]">Basic Details</div>
-              <div className=" text-neutral-500 text-[15px] font-normal leading-tight mt-[12px]">Hushh Connect: Network, Business, Community, and Commerce - Seamlessly Integrated, Effortlessly Yours!</div>
+              <div className="text-[#e9ebee] text-xl font-bold mt-[10px]">Basic Details</div>
+              <div className=" text-[#939ba7] text-[15px] font-normal leading-tight mt-[12px]">Hushh Connect: Network, Business, Community, and Commerce - Seamlessly Integrated, Effortlessly Yours!</div>
             </div> 
               
           </div>
@@ -209,8 +213,8 @@ export function BasicDetails({id}:{id:string}) {
         </div>
         <FormError message={error} />
         <FormSuccess message={success} />
-        <div className="px-6 pt-[88px]">
-          <Button type="submit" disabled={isPending} className=" h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[10px] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight">Continue</Button>
+        <div className="px-6 pt-8">
+          <Button type="submit" disabled={isPending} className=" h-14  py-[17px] bg-gradient-to-l from-rose-500 to-purple-500 rounded-[1.375rem] justify-center items-center gap-2.5 inline-flex w-full text-center text-white text-base font-semibold leading-tight">Continue</Button>
         </div>
       </form>
     </Form>

@@ -5,9 +5,8 @@ import Image, { StaticImageData } from 'next/image';
 import Testing2 from '../../../public/Testing/Testing2.jpg';
 import Testing3 from '../../../public/Testing/Testing3.jpg';
 import Testing4 from '../../../public/Testing/Testing4.jpg';
-import { ColoredNewCross, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
+import { ColoredNewCross, ColoredNewHeart, connectLogo, NewCross, NewExport, NewHeart, NewNotification, NewReload, NewSearch, NewSuper } from '../../../public/NewHome';
 import { Person } from './DiscoveryHome';
-import { unknown } from 'zod';
 
 interface person {
     name: string;
@@ -32,21 +31,19 @@ const TinderCards = ({ person }: { person: Person[] }) => {
     ]);
 
     useEffect(() => {
-        
-            
-            person.map((user) =>{
-                setPeople((prevPeople) => [...prevPeople, { name: user.name, image: user.image, bio: user.bio }]);
-            })
-            
-    
+        setPeople((prevPeople) => [
+            ...prevPeople,
+            ...person.map((user) => ({ name: user.name, image: user.image, bio: user.bio }))
+        ]);
     }, [person]);
-
-    console.log(people);
-    
 
     const [currentIndex, setCurrentIndex] = useState(people.length - 1);
     const [swipeInfo, setSwipeInfo] = useState<SwipeInfo | null>(null);
     const tinderCardRefs = useRef<(TinderCardType | null)[]>([]);
+
+    useEffect(() => {
+        setCurrentIndex(people.length - 1);
+    }, [people]);
 
     const handleSwipe = (direction: string, name: string) => {
         if (direction === 'right') {
@@ -103,7 +100,7 @@ const TinderCards = ({ person }: { person: Person[] }) => {
                     <Image src={NewSuper} alt='super' height={46} width={46} />
                 </div>
                 <div className='' onClick={() => swipe('right')}>
-                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? NewReload : NewHeart} alt='heart' height={57} width={57} />
+                    <Image src={swipeInfo && swipeInfo.direction === 'LIKE' ? ColoredNewHeart : NewHeart} alt='heart' height={57} width={57} />
                 </div>
                 <div className=''>
                     <Image src={NewExport} alt='export' height={44} width={44} />
@@ -133,9 +130,9 @@ const TinderCards = ({ person }: { person: Person[] }) => {
                             </div>
                         )}
                     </div>
-                    <div className='absolute text-white bottom-40 px-6 py-3 bg-gradient-to-t from-black shadow-2xl'>
+                    <div className='absolute text-white bottom-40 px-6 py-3 bg-gradient-to-t from-black shadow-2xl w-full'>
                         <h3 className='text-base font-bold mb-2'>{person.name}</h3>
-                        <p className='text-xs'>{person.bio}</p>
+                        <p className='text-xs w-full'>{person.bio}</p>
                     </div>
                 </TinderCard>
             ))}
